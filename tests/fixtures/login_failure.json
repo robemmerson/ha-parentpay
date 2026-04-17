@@ -1,0 +1,8 @@
+{
+  "_note": "Captured 2026-04-16 from a deliberately wrong-password attempt.",
+  "_response_status": "HTTP/2 400 Bad Request",
+  "_response_headers": {
+    "Content-Type": "application/json; charset=utf-8"
+  },
+  "message": "Authentication failed."
+}

@@ -1,0 +1,2294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head id="head1"><meta charset="utf-8" /><meta http-equiv="X-UA-Compatible" content="IE=edge" /><meta name="viewport" content="width=device-width, initial-scale=1" /><span id="tagManagerElement"><script>
+                 (function(w, d, s, l, i) {
+                     w[l] = w[l] || []; w[l].push({
+                         'gtm.start':
+                         new Date().getTime(), event: 'gtm.js'
+                     }); var f = d.getElementsByTagName(s)[0],
+                         j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                         'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);}
+)(window, document, 'script', 'dataLayer', 'GTM-KCDW8LR');
+</script>
+</span><title>
+	Home | ParentPay Payer
+</title>
+    
+
+    <link rel="icon" type="image/png" href="https://app.parentpay.com/V3Payer4W3/favicon.png" />
+
+    <span id="googleAnalytics"></span>
+
+    <!-- OLD CSS FILES - REMOVE COMMENTED OUT FILES WHEN WE FINISH -->
+
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css" />
+    <script type="text/javascript" src="https://app.parentpay.com/V3Payer4W3/ClientScripts/bootstrap-fallback.min.js"></script>
+    <script>
+        LoadBootstrapFallbackCss("https://app.parentpay.com/V3Payer4W3/new-styles/css/bootstrap.min.css");
+    </script>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900" type="text/css" />
+    <link rel="stylesheet" href="https://app.parentpay.com/V3Payer4W3/new-styles/css/kendo.common.core.min.css" type="text/css" />
+    <link rel="stylesheet" href="https://app.parentpay.com/V3Payer4W3/new-styles/css/kendo.bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="https://app.parentpay.com/V3Payer4W3/new-styles/css/vendor.css?v=4.210.5297.0" />
+    <link rel="stylesheet" href="https://app.parentpay.com/V3Payer4W3/new-styles/css/styles.css?v=4.210.5297.0" />
+
+    <!-- OLD CSS FILES - REMOVE COMMENTED OUT FILES WHEN WE FINISH -->
+    
+
+    <!--[if IE]>
+        <link rel="shortcut icon" href="../Masters/favicon.ico" />
+    <![endif]-->
+
+    
+
+        <script type="text/javascript">
+            var globalWebServiceUrl = "https://app.parentpay.com/V3Payer4W3/Handlers/WebService.asmx";
+            var errorUrl = "https://app.parentpay.com/V3Payer4W3/Home/Error.aspx";
+            var logoutUrl = "https://app.parentpay.com/AUTH/UI/Logout.aspx";
+        </script>
+
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script>
+            window.jQuery || document.write('<script src="https://app.parentpay.com/V3Payer4W3/ClientScripts/jquery-1.11.3.min.js"><\/script>')
+        </script>
+        
+        <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script>
+            $.fn.modal || document.write('<script src="https://app.parentpay.com/V3Payer4W3/ClientScripts/bootstrap.min.js"><\/script>')
+        </script>
+
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
+        <script>
+            window.ko || document.write('<script src="https://app.parentpay.com/V3Payer4W3/ClientScripts/knockout-3.4.2.js"><\/script>')
+        </script>
+
+        <script type="text/javascript" src="https://app.parentpay.com/V3Payer4W3/ClientScripts/jquery.confirm.js"></script>
+        <script type="text/javascript" src="https://app.parentpay.com/V3Payer4W3/ClientScripts/toastr.min.js"></script>
+        <script type="text/javascript">
+            toastr.options = {
+                "closeButton": false,
+                "debug": false,
+                "newestOnTop": true,
+                "progressBar": true,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "3000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
+        </script>
+        
+        
+            <script src="https://app.parentpay.com/V3Payer4W3/ClientScripts/TagManagerTool.js?v=20260416" type="text/javascript"></script>
+        
+
+        <script type="text/javascript" src="https://app.parentpay.com/V3Payer4W3/ClientScripts/PayerMaster.js?v=1.1"></script>
+        <script type="text/javascript" src="https://app.parentpay.com/V3Payer4W3/ClientScripts/jquery.tablesorter.min.js"></script>
+        <script type="text/javascript" src="https://app.parentpay.com/V3Payer4W3/ClientScripts/jquery.blockUI.min.js"></script>
+        <script type="text/javascript" src="https://app.parentpay.com/V3Payer4W3/ClientScripts/Kendo/kendo.core.min.js?v=1.0"></script>
+        <script type="text/javascript" src="https://app.parentpay.com/V3Payer4W3/ClientScripts/Kendo/kendo.calendar.min.js?v=1.0"></script>
+        <script type="text/javascript" src="https://app.parentpay.com/V3Payer4W3/ClientScripts/Kendo/kendo.popup.min.js?v=1.0"></script>
+        <script type="text/javascript" src="https://app.parentpay.com/V3Payer4W3/ClientScripts/Kendo/kendo.datepicker.min.js?v=1.0"></script>
+        <script type="text/javascript" src="https://app.parentpay.com/V3Payer4W3/ClientScripts/knockout-3.4.2.js"></script>
+
+        <script type="text/javascript" src="https://app.parentpay.com/AUTH/JS/json2.js"></script>
+        <script type="text/javascript" src="https://app.parentpay.com/AUTH/JS/tls-alert.js"></script>
+        <script type="text/javascript" src="https://app.parentpay.com/AUTH/JS/js-cookie.js"></script>
+        <script type="text/javascript" src="https://app.parentpay.com/AUTH/JS/jquery.storageapi.min.js"></script>
+        <script type="text/javascript" src="https://app.parentpay.com/AUTH/JS/pp2-token-keepalive.js"></script>
+        <script type="text/javascript" src="https://app.parentpay.com/V3Payer4W3/ClientScripts/spin.min.js"></script>
+
+        <script type="text/javascript">
+            $(function () {
+                $('body').on('click', function (e) {
+                    $('[data-toggle="popover"]').each(function () {
+                        //the 'is' for buttons that trigger popups
+                        //the 'has' for icons within a button that triggers a popup
+                        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+                            $(this).popover('hide');
+                        }
+                    });
+                });
+
+                $(function () {
+                    $('#hamburger').on('click', function () {
+                        $(this).toggleClass('change');
+                        $("#bodyNav_payerSideNav_divMenu").toggleClass("slide-in");
+                        $(".nav-overlay").toggleClass("is-active");
+                        $("body").toggleClass("no-scroll");
+                        $(window).scrollTop(0);
+                    });
+                });
+
+                $(window).resize(function () {
+                    if ($(window).width() < 992 && $('#hamburger').hasClass('change')) {
+                        $(window).scrollTop(0);
+                    }
+                }).resize();
+
+                $('.nav-overlay').click(function () {
+                    $('#hamburger').trigger('click');
+                });
+
+                $('#bodyNav_payerSideNav_divMenu li.active').each(function () {
+                    $(this).parent().parent().removeClass('collapse');
+                });
+
+                //Bootstrap javascript addons
+                $('[data-toggle="popover"]').popover();
+                  
+                $("[id*=aNavLink]").each(function () {
+                    if ($(this).attr('target') == "_blank") {
+                        $(this).find('.glyphicons-new-window-alt').show();
+                    } else {
+                        $(this).find('.glyphicons-new-window-alt').hide();
+                    }
+                });
+            });
+        </script>
+        <script type="text/javascript">
+            $(function () {
+                function TriggerPp2TokenRefresh() {$.sessionTimeout({ debugOutput: true, logoutURL: "https://app.parentpay.com/public/client/security/#/logout" });}
+TriggerPp2TokenRefresh();
+            });
+        </script>
+        
+    
+    <script type="text/javascript">
+        $(function () {
+            // Hide badge if no unread payments
+            $('.js-unreadPayments').each(function () {
+                if ($(this).text() === "0") {
+                    $(this).closest('.payment-badge').hide();
+                };
+            });
+        });
+        $(document).on('click', '.childLink', function (e) {
+            e.preventDefault();
+            if ((!e.target.getAttribute("class").includes("glyphicons")) && (e.target.nodeName != "BUTTON")) {
+                window.location = this.href;
+            }
+        });
+
+        const localAtuDetailKey = "AtuUpdated";
+        const localAtuStatusText = "AtuStatusText";
+        (function () {
+            window.onpageshow = function (event) {
+                var $hiddenEnableLocalStorage = $("#hdEnableLocalStorage").val();
+                if ($hiddenEnableLocalStorage !== null && $hiddenEnableLocalStorage.toLowerCase() === 'true') {
+                    const currentValue = localStorage.getItem(localAtuDetailKey);
+                    var currencySymbol = "&pound;";
+                    var actualChildSpanIdToUpdate = "";
+                    if (currentValue !== null) {
+                        if (currentValue == "true") {
+                            $("#dvChild span").each(function () {
+                                var $spanId = $(this).attr("id");
+                                var $spanName = $("span[name='" + $spanId + "']").attr("name");
+                                if (localStorage.getItem($spanId) !== null) {
+                                    $('#' + $spanId).html(currencySymbol + localStorage.getItem($spanId));
+                                    localStorage.removeItem($spanId);
+                                    actualChildSpanIdToUpdate = $spanId;
+                                }
+                                if (localStorage.getItem(localAtuStatusText) !== null && $spanId == actualChildSpanIdToUpdate) {
+                                    var isAtuAvailable = localStorage.getItem(localAtuStatusText) == "available";
+                                    var statusText = isAtuAvailable ? "Set up Auto top-up" : "Auto top-up " + localStorage.getItem(localAtuStatusText);
+                                    var classStatusText = isAtuAvailable ? "badge ATU-badge available ATU-badge-txt" : "badge ATU-badge ATU-badge-txt " + localStorage.getItem(localAtuStatusText);
+                                    $("span[name='" + $spanName + "']").html(statusText);
+                                    $("span[name='" + $spanName + "']").removeClass().addClass(classStatusText);
+                                    if (isAtuAvailable) {
+                                        $("span[name='lbl_" + $spanName + "']").attr("data-content", $("#hdAtuAvailableContent").val());
+                                        $("span[name='lbl_" + $spanName + "']").show();
+                                    }
+                                    else {
+                                        $("span[name='lbl_" + $spanName + "']").hide();
+                                    }
+                                    localStorage.removeItem(localAtuStatusText);
+                                }
+                            });
+                        }
+                        localStorage.removeItem(localAtuDetailKey);
+                    }
+                }
+            };
+        })();
+    </script>
+
+</head>
+<body>
+<form method="post" action="./Default.aspx" id="form1">
+<div class="aspNetHidden">
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['form1'];
+if (!theForm) {
+    theForm = document.form1;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<link rel='stylesheet' href='https://app.parentpay.com/V3Payer4W3/new-styles/Css/BaseFrameworkControl.css' type='text/css' media='screen, projection' />
+        <div id="ppSpinner" style="background: black; display: none; position: fixed; width: 100%; height: 100%; z-index: 11; opacity: 0.3;">
+        </div>
+        <!-- PPAdmin navigation when impersonating user -->
+        
+        <!-- end -->
+
+        <nav class="navbar navbar-default hidden-print">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="sr-only sr-only-focusable" href="#mainContent" tabindex="1">Skip to main content</a>
+                    <!-- ParentPay logo -->
+                    <a class="navbar-brand" href="https://app.parentpay.com/V3Payer4W3/Payer/Default.aspx" tabindex="2">
+                        <img src="https://app.parentpay.com/V3Payer4W3/images/logo_22.svg" alt="Parentpay logo" />
+                    </a>
+                    <a id="cmdLogout" tabindex="4" class="btn btn-default navbar-btn pull-right" href="javascript:__doPostBack(&#39;ctl00$ctl00$cmdLogout&#39;,&#39;&#39;)">Logout <span class="glyphicons glyphicons-log-out"></span></a>
+                    
+
+<!-- Desktop top nav -->
+<ul class="nav navbar-nav hidden-sm hidden-xs">
+    
+            <li class=" active">
+                <a href="https://app.parentpay.com/V3Payer4W3/Payer/Default.aspx" id="HeaderNavigation_lvTopNav_aNavLink_0" class="gtm-navigation" data-gtm-location="Header" data-gtm-category="click" tabindex="3" data-gtm-label="Home">
+                    Home<span class="glyphicons glyphicons-new-window-alt"></span>
+                </a>
+            </li>
+        
+            <li class="">
+                <a href="https://app.parentpay.com/V3Payer4W3/MyAccount/Statements/Statements.aspx" id="HeaderNavigation_lvTopNav_aNavLink_1" class="gtm-navigation" data-gtm-location="Header" data-gtm-category="click" tabindex="3" data-gtm-label="Parent Account">
+                    Parent Account<span class="glyphicons glyphicons-new-window-alt"></span>
+                </a>
+            </li>
+        
+            <li class="">
+                <a href="https://app.parentpay.com/V3Payer4W3/Payer/Communications.aspx" id="HeaderNavigation_lvTopNav_aNavLink_2" class="gtm-navigation" data-gtm-location="Header" data-gtm-category="click" tabindex="3" data-gtm-label="Communication">
+                    Communication<span class="glyphicons glyphicons-new-window-alt"></span>
+                </a>
+            </li>
+        
+            <li class="">
+                <a href="/public/client/payer/#/profile-settings" id="HeaderNavigation_lvTopNav_aNavLink_3" class="gtm-navigation" data-gtm-location="Header" data-gtm-category="click" tabindex="3" data-gtm-label="Profile Settings">
+                    Profile Settings<span class="glyphicons glyphicons-new-window-alt"></span>
+                </a>
+            </li>
+        
+            <li class="">
+                <a href="https://parenthelp.parentpaygroup.com/csp?id=ppg_emp_taxonomy_topic_customer&topic_id=0769b1961b1b5a10dffc2f04b24bcb76&in_context=true" id="HeaderNavigation_lvTopNav_aNavLink_4" class="gtm-navigation" data-gtm-location="Header" data-gtm-category="click" tabindex="3" data-gtm-label="Help" target="_blank">
+                    Help<span class="glyphicons glyphicons-new-window-alt"></span>
+                </a>
+            </li>
+        
+</ul>
+
+                </div>
+            </div>
+        </nav>
+        <div class="welcome-bar hidden-print">
+            <div class="container-fluid">
+                <!-- mobile parent account balance -->
+                
+                
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <!-- welcome message -->
+                            <p class="hidden-xs welcome-message">
+                                Welcome,
+                                        <span class="username">
+                                            Test User
+                                            <span class="hidden-sm">(user@example.com)</span></span>
+                            </p>
+                            <!-- hamburger icon -->
+                               <button class="navbar-toggle" id="hamburger" type="button" data-target="#bodyNav_payerSideNav_divMenu" aria-expanded="false">
+                                <span class="sr-only">Secondary menu</span>
+                                <div class="burger">
+                                    <div class="bar1"></div>
+                                    <div class="bar2"></div>
+                                    <div class="bar3"></div>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="pull-right">
+                                <!-- dropdown basket -->
+                                
+
+                                <!-- link to basket page -->
+                                
+                                    <div class="parent-account-credit">
+                                        
+                                    </div>
+                                    
+
+<span class="confirmvalue-notes">
+    <input type="hidden" name="ctl00$ctl00$StandardBasket$ConfirmMandateCreation$modalConfirmNotes" id="StandardBasket_ConfirmMandateCreation_modalConfirmNotes" />
+</span>
+<span class="confirmvalue-consent">
+    <input type="hidden" name="ctl00$ctl00$StandardBasket$ConfirmMandateCreation$modalConfirmConsent" id="StandardBasket_ConfirmMandateCreation_modalConfirmConsent" />
+</span>
+<span class="confirmvalue-amountPence">
+    <input type="hidden" name="ctl00$ctl00$StandardBasket$ConfirmMandateCreation$modalConfirmAmountPence" id="StandardBasket_ConfirmMandateCreation_modalConfirmAmountPence" />
+</span>
+<span class="confirmvalue-quantity">
+    <input type="hidden" name="ctl00$ctl00$StandardBasket$ConfirmMandateCreation$modalConfirmQuantity" id="StandardBasket_ConfirmMandateCreation_modalConfirmQuantity" />
+</span>
+<span class="confirmvalue-serviceId">
+    <input type="hidden" name="ctl00$ctl00$StandardBasket$ConfirmMandateCreation$modalConfirmServiceId" id="StandardBasket_ConfirmMandateCreation_modalConfirmServiceId" />
+</span>
+<span class="confirmvalue-consumerId">
+    <input type="hidden" name="ctl00$ctl00$StandardBasket$ConfirmMandateCreation$modalConfirmConsumerId" id="StandardBasket_ConfirmMandateCreation_modalConfirmConsumerId" />
+</span>
+<span class="confirmvalue-ismealevent">
+    <input type="hidden" name="ctl00$ctl00$StandardBasket$ConfirmMandateCreation$modalConfirmMealEvent" id="StandardBasket_ConfirmMandateCreation_modalConfirmMealEvent" />
+</span>
+<span class="confirmvalue-isbanktransferparentaccounttopup">
+	<input type="hidden" name="ctl00$ctl00$StandardBasket$ConfirmMandateCreation$modalConfirmIsBankTransferParentAccountTopup" id="StandardBasket_ConfirmMandateCreation_modalConfirmIsBankTransferParentAccountTopup" />
+</span>
+
+<span class="confirmmandateinfomodal-continuebutton">
+	<input type="hidden" name="ctl00$ctl00$StandardBasket$ConfirmMandateCreation$btnContinueClientId" id="StandardBasket_ConfirmMandateCreation_btnContinueClientId" value="ctl00$ctl00$StandardBasket$ConfirmMandateCreation$setupBankTransfer" />
+</span>
+
+
+
+    <div class="modal fade" id="confirmMandateOverlay" role="dialog" aria-labelledby="ddModalLabel" aria-hidden="true" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="ddModalLabel">Set up Direct Debit</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Bank Transfer allows you to pay directly from your bank account using the Direct Debit service.</p>
+                    <p><strong>New Direct Debit mandates may take up to 3 working days to be approved.  After approval it may take a further 4 working days before any funds are debited from your account.</strong></p>
+                    <span> </span>
+                    <p>ParentPay will treat Bank Transfer payments as received instantly, however please note that your school may choose not to supply goods and services while payments are ‘pending’ and yet to be collected from your bank account.</p>
+                    <p>To use Bank Transfer, you need to set up a Direct Debit.</p>
+                    <p>You will need:</p>
+                    <div id="modalBody">
+                        <ul>
+                            <li>Name of account holder</li>
+                            <li>Account number</li>
+                            <li>Sort code</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="modal-footer full-width-btn" id="confirmationButtons">
+                    <button onclick="__doPostBack('ctl00$ctl00$StandardBasket$ConfirmMandateCreation$setupBankTransfer','')" id="StandardBasket_ConfirmMandateCreation_setupBankTransfer" class="btn btn-primary pull-right gtm-navigation" data-gtm-category="click" data-gtm-label="Continue" data-gtm-location="popup" type="button">Continue</button>
+                    <button id="cancel" type="button" class="btn btn-link gtm-navigation" data-gtm-category="click" data-gtm-label="Cancel" data-gtm-location="popup" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        function openModal() {
+            document.getElementById("confirmMandateOverlay").focus();
+        }        
+    </script>
+
+
+
+
+<script type="text/javascript">
+    var hasActiveBankAccount = "True"
+</script>
+
+<div class="basket">
+    <div type="button" class="btn btn-link btn-basket pull-right gtm-interaction" data-gtm-category="interact_click" id="basket-dropdown-toggle" data-gtm-label="Basket">
+        
+        <a class="pull-right" href="/V3Payer4W3/Home/Basket.aspx">
+            <span class="sr-only">Basket</span>
+            <span class="glyphicons glyphicons-shopping-cart vb-shopping-cart"></span>
+            <div class="basket-badge" data-bind="visible: items().length > 0" style="display: none">
+                <span data-bind="attr: { title: itemCountText() }, text: items().length"></span>
+            </div>
+        </a>
+    </div>
+</div>
+
+<script>
+    function StandardBasket() {
+        function ViewModel() {
+            var thisObject = this;
+            this.items = ko.observableArray([]);         
+            this.itemCountText = ko.computed(function () {
+                return thisObject.items().length + " item" + (thisObject.items().length === 1 ? "" : "s") + " in basket";
+            });
+        }
+
+        var viewModel = new ViewModel();
+
+        function update(data) {
+            viewModel.items(data.items);
+        }
+
+        function refresh() {
+            // call api to retrieve basket
+            $.ajax({
+                type: "GET",
+                url: "/V3Payer4W3/Handlers/WebService.asmx/GetStandardBasket",
+                dataType: "json",
+                contentType: "application/json",
+                cache: false
+            }).done(function (response) {
+                update(JSON.parse(response.d));
+            });
+        }
+
+        this.initialise = function () {
+            $('.basket').on('basket-update', function () {
+                refresh();
+            });
+            ko.applyBindings(viewModel);
+            refresh();
+        }
+    }
+
+    var isStandardBasketInitialized = false;
+
+    $(window).on('pageshow', function (event) {
+        if (!isStandardBasketInitialized) {
+            var standardBasket = new StandardBasket();
+            standardBasket.initialise();
+            isStandardBasketInitialized = true;//prevent multiple initialize
+        }
+
+        if (event.originalEvent && event.originalEvent.persisted) {
+            $('.basket').trigger('basket-update');
+        }
+    });
+
+</script>
+
+<script type='text/javascript' src='../ClientScripts/V2/PayerClubsBasketItemInfo.js'></script>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row">
+                <!-- side nav desktop -->
+                    
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Mobile hamburger JS
+            $('.mobile-subcategory-items, .mobile-thirdcategory-items, .back-button').hide(); // Set initial state, only show the back btn on second and third level items
+            localStorage.setItem('selectedSubcategory', '0'); // '0' is the top level (main-nav-item)
+
+            $('.js-toggle-mobile-subcategory').click(function () {
+                var subcategoryName = $(this).data('subcategory');
+                var parentCategoryName = $(this).data('parentcategory');
+                localStorage.setItem('subcategoryParent', parentCategoryName);
+                localStorage.setItem('selectedSubcategory', subcategoryName);
+
+                $('.' + subcategoryName).show();
+                if (subcategoryName === 'Consumer') {
+                    // the js-set-consumer-data function will open the consumer navlinks
+                    $('.nonConsumerTertiaryNavItems').hide();
+                } else {
+                    $('.nonConsumerTertiaryNavItems').show();
+                    $('.consumerTertiaryNavItems').hide();
+                }
+
+                $('.main-mobile-nav-item').hide();
+                $('.' + parentCategoryName).hide();
+                $('.back-button').show();
+            });
+
+            // '0' in local storage is the top level (main-mobile-nav-item)
+            // else we're looking for the second level item to go back to
+            $('.back-button').click(function () {
+                var parentCategoryName = localStorage.getItem('subcategoryParent');
+                if (parentCategoryName === '0') {
+                    $('.mobile-subcategory-items, .mobile-thirdcategory-items, .back-button').hide();
+                    $('.main-mobile-nav-item').show();
+                } else {
+                    localStorage.setItem('subcategoryParent', '0');
+                    $('.mobile-thirdcategory-items').hide();
+                    $('.' + parentCategoryName).show();
+                }
+            });
+
+            $('.js-set-consumer-data').click(function () {
+                var consumerData = $(this).data('consumer-data');
+                var consumerId = consumerData.id;
+                $('.ci_' + consumerId).show();
+            });
+
+            // Desktop side nav JS
+            $('a[aria-expanded]').each(function () {
+                const isExpanded = $(this).attr('aria-expanded') === 'true';
+                $(this).find('.js-plus').toggle(!isExpanded);
+                $(this).find('.js-negative').toggle(isExpanded);
+            }).on('click', function () {
+                const isExpanded = $(this).attr('aria-expanded') === 'true';
+                $(this).find('.js-plus').toggle(isExpanded);
+                $(this).find('.js-negative').toggle(!isExpanded);
+            });
+
+            //Adding or removing active class when sub navigation is selected
+            $('a.linkTagButton').click(function () {
+                if (!$(this).attr('target')) {
+                    $(this).parent().removeClass("active");
+                    $(this).parent().addClass("active");
+                }
+            });
+
+            $('a.linkTagButton').each(function () {
+                const isBlankTarget = $(this).attr('target') == "_blank";
+                $(this).find('.js-no-window').toggle(!isBlankTarget);
+                $(this).find('.js-new-window').toggle(isBlankTarget);
+            });
+
+        });
+
+    </script>
+
+    <span class="hidden">
+        Home</span>
+
+    <div class="col-md-3">
+        <nav class="secondary-nav">
+            <!-- child circles -->
+            <div class="row hidden-xs hidden-sm">
+                
+                        <div class="col-xs-4 text-center">
+                            <a href="https://app.parentpay.com/V3Payer4W3/Home/ChildSummary.aspx?ConsumerId=11111111" class="gtm-navigation" data-gtm-category="click" data-gtm-label="Child" data-gtm-location="Navbar" title="Alice">
+                                <img src="https://app.parentpay.com/V3Payer4W3/images/child-silhouette.jpg" id="bodyNav_payerSideNav_lvChildCircles_imgSilhouette_0" class="img-responsive img-circle center-block" height="46" width="46" alt="child icon" />
+                                <span class="center-block desktop-child-text">Alice</span></a>
+                        </div>
+                    
+                        <div class="col-xs-4 text-center">
+                            <a href="https://app.parentpay.com/V3Payer4W3/Home/ChildSummary.aspx?ConsumerId=22222222" class="gtm-navigation" data-gtm-category="click" data-gtm-label="Child" data-gtm-location="Navbar" title="Bob">
+                                <img src="https://app.parentpay.com/V3Payer4W3/images/child-silhouette.jpg" id="bodyNav_payerSideNav_lvChildCircles_imgSilhouette_1" class="img-responsive img-circle center-block" height="46" width="46" alt="child icon" />
+                                <span class="center-block desktop-child-text">Bob</span></a>
+                        </div>
+                    <div id="bodyNav_payerSideNav_divAddChild" class="col-xs-4 text-center">
+                    <a href="https://app.parentpay.com/V3Payer4W3/Payer/AddChild.aspx" class="gtm-navigation" data-gtm-category="click" data-gtm-label="Add child" data-gtm-location="Navbar">
+                        <img src="https://app.parentpay.com/V3Payer4W3/images/add-child-on.jpg" class="img-responsive img-circle center-block" height="46" width="46" alt="add icon" /><span>Add a child</span></a>
+                </div>
+            </div>
+
+            <!-- Show this version on desktop -->
+            <div class="secondary-nav-links hidden-xs hidden-sm">
+                
+                        <div id="bodyNav_payerSideNav_lvSideNavItems_divNoChildNavPanelHeading_0">
+                                <a href="https://app.parentpay.com/V3Payer4W3/Home/PaymentItems/PaymentItems.aspx" id="bodyNav_payerSideNav_lvSideNavItems_linkTag_0" class="linkTagButton gtm-navigation" data-gtm-category="click" data-gtm-location="Navbar" data-gtm-label="Active Payment items">
+                                    <span class=""></span><span id="bodyNav_payerSideNav_lvSideNavItems_snPayerSideNavItemName_0" class="payersidenav">Active Payment items</span>
+                                    <span class="halflings halflings-chevron-right pull-right"></span>
+                                </a>
+                            </div>
+                        
+                    
+                        <div id="bodyNav_payerSideNav_lvSideNavItems_divNoChildNavPanelHeading_1">
+                                <a href="https://app.parentpay.com/V3Payer4W3/Home/PaymentItems/PaymentItems.aspx?state=2" id="bodyNav_payerSideNav_lvSideNavItems_linkTag_1" class="linkTagButton gtm-navigation" data-gtm-category="click" data-gtm-location="Navbar" data-gtm-label="Historical Payment items">
+                                    <span class=""></span><span id="bodyNav_payerSideNav_lvSideNavItems_snPayerSideNavItemName_1" class="payersidenav">Historical Payment items</span>
+                                    <span class="halflings halflings-chevron-right pull-right"></span>
+                                </a>
+                            </div>
+                        
+                    
+                        
+                        
+                            <div id="collapseListGroupHeading3">
+                                <a class="js-collapse gtm-navigation" data-gtm-category="click" role="button" data-toggle="collapse" href="#collapseListGroup3" aria-expanded="false" aria-controls="collapseListGroup3" data-gtm-label="Transaction history" data-gtm-location="Navbar">
+                                    <span class=""></span>Transaction history
+                                    <span class="halflings halflings-plus pull-right js-plus"></span>
+                                    <span class="halflings halflings-minus pull-right js-negative"></span>
+                                </a>
+                            </div>
+                            <div id="collapseListGroup3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="collapseListGroupHeading3" aria-expanded="true">
+                                <ul class="list-unstyled">
+                                    
+                                            <li class="">
+                                                <a href="https://app.parentpay.com/V3Payer4VBW3/Consumer/MS_Archive.aspx" class="linkTagButton gtm-navigation" data-gtm-category="click" target="" data-gtm-label="Payment history" data-gtm-location="Navbar">
+                                                    <span>Payment history </span>
+                                                    <span class="halflings halflings-chevron-right pull-right js-no-window"></span>
+                                                    <span class="halflings halflings-new-window pull-right js-new-window"></span>
+                                                </a>
+                                            </li>
+                                        
+                                            <li class="">
+                                                <a href="https://app.parentpay.com/V3Payer4VBW3/Consumer/MS_Statement.aspx" class="linkTagButton gtm-navigation" data-gtm-category="click" target="" data-gtm-label="Balance history" data-gtm-location="Navbar">
+                                                    <span>Balance history </span>
+                                                    <span class="halflings halflings-chevron-right pull-right js-no-window"></span>
+                                                    <span class="halflings halflings-new-window pull-right js-new-window"></span>
+                                                </a>
+                                            </li>
+                                        
+                                </ul>
+                            </div>
+                        
+                    
+                        <div id="bodyNav_payerSideNav_lvSideNavItems_divNoChildNavPanelHeading_3">
+                                <a href="https://app.parentpay.com/V3Payer4W3/Payer/AddChild.aspx" id="bodyNav_payerSideNav_lvSideNavItems_linkTag_3" class="linkTagButton gtm-navigation" data-gtm-category="click" data-gtm-location="Navbar" data-gtm-label="Add a child">
+                                    <span class=""></span><span id="bodyNav_payerSideNav_lvSideNavItems_snPayerSideNavItemName_3" class="payersidenav">Add a child</span>
+                                    <span class="halflings halflings-chevron-right pull-right"></span>
+                                </a>
+                            </div>
+                        
+                    
+                        
+                        
+                            <div id="collapseListGroupHeading5">
+                                <a class="js-collapse gtm-navigation" data-gtm-category="click" role="button" data-toggle="collapse" href="#collapseListGroup5" aria-expanded="false" aria-controls="collapseListGroup5" data-gtm-label="View school and caterer" data-gtm-location="Navbar">
+                                    <span class=""></span>View school and caterer
+                                    <span class="halflings halflings-plus pull-right js-plus"></span>
+                                    <span class="halflings halflings-minus pull-right js-negative"></span>
+                                </a>
+                            </div>
+                            <div id="collapseListGroup5" class="panel-collapse collapse" role="tabpanel" aria-labelledby="collapseListGroupHeading5" aria-expanded="true">
+                                <ul class="list-unstyled">
+                                    
+                                            <li class="">
+                                                <a href="https://app.parentpay.com/V3Payer4W3/Payer/SchoolSummary.aspx?id=99999" class="linkTagButton gtm-navigation" data-gtm-category="click" target="" data-gtm-label="Test School" data-gtm-location="Navbar">
+                                                    <span>Test School </span>
+                                                    <span class="halflings halflings-chevron-right pull-right js-no-window"></span>
+                                                    <span class="halflings halflings-new-window pull-right js-new-window"></span>
+                                                </a>
+                                            </li>
+                                        
+                                            <li class="">
+                                                <a href="https://app.parentpay.com/V3Payer4W3/Payer/LeaSummary.aspx?id=4190" class="linkTagButton gtm-navigation" data-gtm-category="click" target="" data-gtm-label="Sutton" data-gtm-location="Navbar">
+                                                    <span>Sutton </span>
+                                                    <span class="halflings halflings-chevron-right pull-right js-no-window"></span>
+                                                    <span class="halflings halflings-new-window pull-right js-new-window"></span>
+                                                </a>
+                                            </li>
+                                        
+                                </ul>
+                            </div>
+                        
+                    
+                        
+                        
+                            <div id="collapseListGroupHeading6">
+                                <a class="js-collapse gtm-navigation" data-gtm-category="click" role="button" data-toggle="collapse" href="#collapseListGroup6" aria-expanded="false" aria-controls="collapseListGroup6" data-gtm-label="ParentPay support" data-gtm-location="Navbar">
+                                    <span class=""></span>ParentPay support
+                                    <span class="halflings halflings-plus pull-right js-plus"></span>
+                                    <span class="halflings halflings-minus pull-right js-negative"></span>
+                                </a>
+                            </div>
+                            <div id="collapseListGroup6" class="panel-collapse collapse" role="tabpanel" aria-labelledby="collapseListGroupHeading6" aria-expanded="true">
+                                <ul class="list-unstyled">
+                                    
+                                            <li class="">
+                                                <a href="https://app.parentpay.com/V3Payer4W3/PostLogin/Guidance.aspx" class="linkTagButton gtm-navigation" data-gtm-category="click" target="" data-gtm-label="Take the tour" data-gtm-location="Navbar">
+                                                    <span>Take the tour </span>
+                                                    <span class="halflings halflings-chevron-right pull-right js-no-window"></span>
+                                                    <span class="halflings halflings-new-window pull-right js-new-window"></span>
+                                                </a>
+                                            </li>
+                                        
+                                            <li class="">
+                                                <a href="https://parenthelp.parentpaygroup.com/csp?id=ppg_emp_taxonomy_topic_customer&topic_id=0769b1961b1b5a10dffc2f04b24bcb76&in_context=true" class="linkTagButton gtm-navigation" data-gtm-category="click" target="_blank" data-gtm-label="Help and support" data-gtm-location="Navbar">
+                                                    <span>Help and support </span>
+                                                    <span class="halflings halflings-chevron-right pull-right js-no-window"></span>
+                                                    <span class="halflings halflings-new-window pull-right js-new-window"></span>
+                                                </a>
+                                            </li>
+                                        
+                                </ul>
+                            </div>
+                        
+                    
+            </div>
+          
+
+        </nav>
+    </div>
+    <!-- End desktop version -->
+    <!-- Show this version on mobile -->
+    <div id="bodyNav_payerSideNav_divMenu" class="col-xs-12 hidden-print hidden-md hidden-lg slide-nav">
+        <nav class="secondary-nav">
+            <div class="secondary-nav-links">
+                            <a class="back-button secondary-nav"><span class="halflings halflings-chevron-left"></span>
+                                Back
+                            </a>
+                <ul class="list-unstyled">
+                    
+                            <li>
+                                <div id="liTopLevelItem" class="main-mobile-nav-item">
+                                    <a href="https://app.parentpay.com/V3Payer4W3/Payer/Default.aspx" id="bodyNav_payerSideNav_topLevelMobileItems_aTopLevel_0" class="gtm-navigation" data-gtm-category="click" data-parentcategory="0" data-subcategory="DefaultPage">
+                                        Home
+                                        
+                                    </a>
+                                </div>
+                            </li>
+                        
+                            <li>
+                                <div id="liTopLevelItem" class="main-mobile-nav-item">
+                                    <a id="bodyNav_payerSideNav_topLevelMobileItems_aTopLevel_1" class="js-toggle-mobile-subcategory" data-gtm-category="click" data-parentcategory="0" data-subcategory="Home">
+                                        Payer Dashboard
+                                        <span id="bodyNav_payerSideNav_topLevelMobileItems_spanTopChevron_1" class="halflings halflings-chevron-right pull-right"></span>
+                                    </a>
+                                </div>
+                            </li>
+                        
+                            <li>
+                                <div id="liTopLevelItem" class="main-mobile-nav-item">
+                                    <a id="bodyNav_payerSideNav_topLevelMobileItems_aTopLevel_2" class="js-toggle-mobile-subcategory" data-gtm-category="click" data-parentcategory="0" data-subcategory="ParentAccount">
+                                        Parent Account
+                                        <span id="bodyNav_payerSideNav_topLevelMobileItems_spanTopChevron_2" class="halflings halflings-chevron-right pull-right"></span>
+                                    </a>
+                                </div>
+                            </li>
+                        
+                            <li>
+                                <div id="liTopLevelItem" class="main-mobile-nav-item">
+                                    <a id="bodyNav_payerSideNav_topLevelMobileItems_aTopLevel_3" class="js-toggle-mobile-subcategory" data-gtm-category="click" data-parentcategory="0" data-subcategory="Communication">
+                                        Communication
+                                        <span id="bodyNav_payerSideNav_topLevelMobileItems_spanTopChevron_3" class="halflings halflings-chevron-right pull-right"></span>
+                                    </a>
+                                </div>
+                            </li>
+                        
+                            <li>
+                                <div id="liTopLevelItem" class="main-mobile-nav-item">
+                                    <a id="bodyNav_payerSideNav_topLevelMobileItems_aTopLevel_4" class="js-toggle-mobile-subcategory" data-gtm-category="click" data-parentcategory="0" data-subcategory="ProfileSettings">
+                                        Profile Settings
+                                        <span id="bodyNav_payerSideNav_topLevelMobileItems_spanTopChevron_4" class="halflings halflings-chevron-right pull-right"></span>
+                                    </a>
+                                </div>
+                            </li>
+                        
+                            <li>
+                                <div id="liTopLevelItem" class="main-mobile-nav-item">
+                                    <a id="bodyNav_payerSideNav_topLevelMobileItems_aTopLevel_5" class="js-toggle-mobile-subcategory" data-gtm-category="click" data-parentcategory="0" data-subcategory="Help">
+                                        Help
+                                        <span id="bodyNav_payerSideNav_topLevelMobileItems_spanTopChevron_5" class="halflings halflings-chevron-right pull-right"></span>
+                                    </a>
+                                </div>
+                            </li>
+                        
+                </ul>
+
+                <ul class="list-unstyled">
+                    
+                            <div id="liSecondLevelItem" class="Home mobile-subcategory-items">
+                                <li>
+                                    
+                                </li>
+                                <li>
+                                    
+                                            <div id="bodyNav_payerSideNav_secondLevelMobileItems_lvMobileConsumerLines_0_consumerNavItems_0">
+                                                <a class="gtm-navigation js-toggle-mobile-subcategory js-set-consumer-data" data-gtm-category="click" data-subcategory="Consumer" data-consumer-data='{"id":"11111111", "name":"Alice"}' data-current-id="11111111" data-current-consumer-name="Alice" data-parentcategory="Home" data-gtm-label="Child" data-gtm-location="Navbar">
+                                                    <span id="bodyNav_payerSideNav_secondLevelMobileItems_lvMobileConsumerLines_0_spanIcon_0" class="halflings halflings-user"></span>
+                                                    <span class="mobile-child-text">
+                                                        Alice
+                                                    </span>
+                                                    <span class="halflings halflings-chevron-right pull-right"></span>
+                                                </a>
+                                            </div>
+                                        
+                                            <div id="bodyNav_payerSideNav_secondLevelMobileItems_lvMobileConsumerLines_0_consumerNavItems_1">
+                                                <a class="gtm-navigation js-toggle-mobile-subcategory js-set-consumer-data" data-gtm-category="click" data-subcategory="Consumer" data-consumer-data='{"id":"22222222", "name":"Bob"}' data-current-id="22222222" data-current-consumer-name="Bob" data-parentcategory="Home" data-gtm-label="Child" data-gtm-location="Navbar">
+                                                    <span id="bodyNav_payerSideNav_secondLevelMobileItems_lvMobileConsumerLines_0_spanIcon_1" class="halflings halflings-user"></span>
+                                                    <span class="mobile-child-text">
+                                                        Bob
+                                                    </span>
+                                                    <span class="halflings halflings-chevron-right pull-right"></span>
+                                                </a>
+                                            </div>
+                                        
+                                </li>
+                            </div>
+                        
+                            <div id="liSecondLevelItem" class="Home mobile-subcategory-items">
+                                <li>
+                                    <div id="bodyNav_payerSideNav_secondLevelMobileItems_nonConsumerSecondaryNavItems_1">
+                                        <a href="https://app.parentpay.com/V3Payer4W3/Home/PaymentItems/PaymentItems.aspx" id="bodyNav_payerSideNav_secondLevelMobileItems_aSecondLevel_1" data-subcategory="ActivePaymentItems" data-parentcategory="Home">
+                                            Active Payment items
+                                            
+                                            
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    
+                                </li>
+                            </div>
+                        
+                            <div id="liSecondLevelItem" class="Home mobile-subcategory-items">
+                                <li>
+                                    <div id="bodyNav_payerSideNav_secondLevelMobileItems_nonConsumerSecondaryNavItems_2">
+                                        <a href="https://app.parentpay.com/V3Payer4W3/Home/PaymentItems/PaymentItems.aspx?state=2" id="bodyNav_payerSideNav_secondLevelMobileItems_aSecondLevel_2" data-subcategory="HistoricPaymentItems" data-parentcategory="Home">
+                                            Historical Payment items
+                                            
+                                            
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    
+                                </li>
+                            </div>
+                        
+                            <div id="liSecondLevelItem" class="Home mobile-subcategory-items">
+                                <li>
+                                    <div id="bodyNav_payerSideNav_secondLevelMobileItems_nonConsumerSecondaryNavItems_3">
+                                        <a id="bodyNav_payerSideNav_secondLevelMobileItems_aSecondLevel_3" data-subcategory="TransactionHistory" data-parentcategory="Home" class="js-toggle-mobile-subcategory">
+                                            Transaction History
+                                            <span id="bodyNav_payerSideNav_secondLevelMobileItems_secondLevelChevron_3" class="halflings halflings-chevron-right pull-right"></span>
+                                            
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    
+                                </li>
+                            </div>
+                        
+                            <div id="liSecondLevelItem" class="Home mobile-subcategory-items">
+                                <li>
+                                    <div id="bodyNav_payerSideNav_secondLevelMobileItems_nonConsumerSecondaryNavItems_4">
+                                        <a href="https://app.parentpay.com/V3Payer4W3/Payer/AddChild.aspx" id="bodyNav_payerSideNav_secondLevelMobileItems_aSecondLevel_4" data-subcategory="AddConsumer" data-parentcategory="Home">
+                                            Add a child
+                                            
+                                            
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    
+                                </li>
+                            </div>
+                        
+                            <div id="liSecondLevelItem" class="Home mobile-subcategory-items">
+                                <li>
+                                    <div id="bodyNav_payerSideNav_secondLevelMobileItems_nonConsumerSecondaryNavItems_5">
+                                        <a id="bodyNav_payerSideNav_secondLevelMobileItems_aSecondLevel_5" data-subcategory="ViewSchoolAndCaterer" data-parentcategory="Home" class="js-toggle-mobile-subcategory">
+                                            View school and caterer
+                                            <span id="bodyNav_payerSideNav_secondLevelMobileItems_secondLevelChevron_5" class="halflings halflings-chevron-right pull-right"></span>
+                                            
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    
+                                </li>
+                            </div>
+                        
+                            <div id="liSecondLevelItem" class="Help mobile-subcategory-items">
+                                <li>
+                                    <div id="bodyNav_payerSideNav_secondLevelMobileItems_nonConsumerSecondaryNavItems_6">
+                                        <a href="https://app.parentpay.com/V3Payer4W3/PostLogin/Guidance.aspx" id="bodyNav_payerSideNav_secondLevelMobileItems_aSecondLevel_6" data-subcategory="TakeTheTour" data-parentcategory="Help">
+                                            Take the tour
+                                            
+                                            
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    
+                                </li>
+                            </div>
+                        
+                            <div id="liSecondLevelItem" class="Help mobile-subcategory-items">
+                                <li>
+                                    <div id="bodyNav_payerSideNav_secondLevelMobileItems_nonConsumerSecondaryNavItems_7">
+                                        <a href="https://parenthelp.parentpaygroup.com/csp?id=ppg_emp_taxonomy_topic_customer&topic_id=0769b1961b1b5a10dffc2f04b24bcb76&in_context=true" id="bodyNav_payerSideNav_secondLevelMobileItems_aSecondLevel_7" data-subcategory="BrowseHelpTopics" data-parentcategory="Help" target="_blank">
+                                            Help and support
+                                            
+                                            <span id="bodyNav_payerSideNav_secondLevelMobileItems_spanHelpNewTab_7" class="halflings halflings-new-window pull-right"></span>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    
+                                </li>
+                            </div>
+                        
+                            <div id="liSecondLevelItem" class="ParentAccount mobile-subcategory-items">
+                                <li>
+                                    <div id="bodyNav_payerSideNav_secondLevelMobileItems_nonConsumerSecondaryNavItems_8">
+                                        <a href="https://app.parentpay.com/V3Payer4W3/MyAccount/Statements/Statements.aspx" id="bodyNav_payerSideNav_secondLevelMobileItems_aSecondLevel_8" data-subcategory="Statements" data-parentcategory="ParentAccount">
+                                            Statements
+                                            
+                                            
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    
+                                </li>
+                            </div>
+                        
+                            <div id="liSecondLevelItem" class="ParentAccount mobile-subcategory-items">
+                                <li>
+                                    <div id="bodyNav_payerSideNav_secondLevelMobileItems_nonConsumerSecondaryNavItems_9">
+                                        <a href="/public/client/payer/#/parent-account/bank-transfer-mandate-process" id="bodyNav_payerSideNav_secondLevelMobileItems_aSecondLevel_9" data-subcategory="BankAccounts" data-parentcategory="ParentAccount">
+                                            Bank accounts
+                                            
+                                            
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    
+                                </li>
+                            </div>
+                        
+                            <div id="liSecondLevelItem" class="ParentAccount mobile-subcategory-items">
+                                <li>
+                                    <div id="bodyNav_payerSideNav_secondLevelMobileItems_nonConsumerSecondaryNavItems_10">
+                                        <a href="https://app.parentpay.com/V3Payer4W3/MyAccount/StoredCards/StoredCards.aspx" id="bodyNav_payerSideNav_secondLevelMobileItems_aSecondLevel_10" data-subcategory="StoredCards" data-parentcategory="ParentAccount">
+                                            Stored cards
+                                            
+                                            
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    
+                                </li>
+                            </div>
+                        
+                            <div id="liSecondLevelItem" class="Communication mobile-subcategory-items">
+                                <li>
+                                    <div id="bodyNav_payerSideNav_secondLevelMobileItems_nonConsumerSecondaryNavItems_11">
+                                        <a href="https://app.parentpay.com/V3Payer4W3/Payer/Communications.aspx" id="bodyNav_payerSideNav_secondLevelMobileItems_aSecondLevel_11" data-subcategory="CommunicationHistory" data-parentcategory="Communication">
+                                            Communication history
+                                            
+                                            
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    
+                                </li>
+                            </div>
+                        
+                            <div id="liSecondLevelItem" class="Communication mobile-subcategory-items">
+                                <li>
+                                    <div id="bodyNav_payerSideNav_secondLevelMobileItems_nonConsumerSecondaryNavItems_12">
+                                        <a href="https://app.parentpay.com/V3Payer4VBW3/Consumer/MS_Message.aspx" id="bodyNav_payerSideNav_secondLevelMobileItems_aSecondLevel_12" data-subcategory="ContactSchools" data-parentcategory="Communication">
+                                            Contact schools
+                                            
+                                            
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    
+                                </li>
+                            </div>
+                        
+                            <div id="liSecondLevelItem" class="Communication mobile-subcategory-items">
+                                <li>
+                                    <div id="bodyNav_payerSideNav_secondLevelMobileItems_nonConsumerSecondaryNavItems_13">
+                                        <a href="https://app.parentpay.com/V3Payer4W3/Communication/TextMessageBalance.aspx" id="bodyNav_payerSideNav_secondLevelMobileItems_aSecondLevel_13" data-subcategory="TextMessageBalance" data-parentcategory="Communication">
+                                            Text message balance
+                                            
+                                            
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    
+                                </li>
+                            </div>
+                        
+                            <div id="liSecondLevelItem" class="Communication mobile-subcategory-items">
+                                <li>
+                                    <div id="bodyNav_payerSideNav_secondLevelMobileItems_nonConsumerSecondaryNavItems_14">
+                                        <a href="https://app.parentpay.com/V3Payer4VBW3/Consumer/MS_MyAlerts.aspx" id="bodyNav_payerSideNav_secondLevelMobileItems_aSecondLevel_14" data-subcategory="MyAlerts" data-parentcategory="Communication">
+                                            Alert settings
+                                            
+                                            
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    
+                                </li>
+                            </div>
+                        
+                            <div id="liSecondLevelItem" class="ProfileSettings mobile-subcategory-items">
+                                <li>
+                                    <div id="bodyNav_payerSideNav_secondLevelMobileItems_nonConsumerSecondaryNavItems_15">
+                                        <a href="/public/client/payer/#/profile-settings/personal-details" id="bodyNav_payerSideNav_secondLevelMobileItems_aSecondLevel_15" data-subcategory="PersonalDetails" data-parentcategory="ProfileSettings">
+                                            Personal details
+                                            
+                                            
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    
+                                </li>
+                            </div>
+                        
+                            <div id="liSecondLevelItem" class="ProfileSettings mobile-subcategory-items">
+                                <li>
+                                    <div id="bodyNav_payerSideNav_secondLevelMobileItems_nonConsumerSecondaryNavItems_16">
+                                        <a href="/public/client/payer/#/profile-settings/email-addresses" id="bodyNav_payerSideNav_secondLevelMobileItems_aSecondLevel_16" data-subcategory="EmailAddresses" data-parentcategory="ProfileSettings">
+                                            Email addresses
+                                            
+                                            
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    
+                                </li>
+                            </div>
+                        
+                            <div id="liSecondLevelItem" class="ProfileSettings mobile-subcategory-items">
+                                <li>
+                                    <div id="bodyNav_payerSideNav_secondLevelMobileItems_nonConsumerSecondaryNavItems_17">
+                                        <a href="/public/client/payer/#/profile-settings/telephone-numbers" id="bodyNav_payerSideNav_secondLevelMobileItems_aSecondLevel_17" data-subcategory="TelephoneNumbers" data-parentcategory="ProfileSettings">
+                                            Telephone numbers
+                                            
+                                            
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    
+                                </li>
+                            </div>
+                        
+                            <div id="liSecondLevelItem" class="ProfileSettings mobile-subcategory-items">
+                                <li>
+                                    <div id="bodyNav_payerSideNav_secondLevelMobileItems_nonConsumerSecondaryNavItems_18">
+                                        <a href="/public/client/payer/#/profile-settings/change-username" id="bodyNav_payerSideNav_secondLevelMobileItems_aSecondLevel_18" data-subcategory="UserName" data-parentcategory="ProfileSettings">
+                                            Login details
+                                            
+                                            
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    
+                                </li>
+                            </div>
+                        
+                            <div id="liSecondLevelItem" class="ProfileSettings mobile-subcategory-items">
+                                <li>
+                                    <div id="bodyNav_payerSideNav_secondLevelMobileItems_nonConsumerSecondaryNavItems_19">
+                                        <a href="/public/client/payer/#/profile-settings/change-password" id="bodyNav_payerSideNav_secondLevelMobileItems_aSecondLevel_19" data-subcategory="Password" data-parentcategory="ProfileSettings">
+                                            Password
+                                            
+                                            
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    
+                                </li>
+                            </div>
+                        
+                            <div id="liSecondLevelItem" class="ProfileSettings mobile-subcategory-items">
+                                <li>
+                                    <div id="bodyNav_payerSideNav_secondLevelMobileItems_nonConsumerSecondaryNavItems_20">
+                                        <a href="/public/client/payer/#/profile-settings/account-recovery" id="bodyNav_payerSideNav_secondLevelMobileItems_aSecondLevel_20" data-subcategory="AccountRecovery" data-parentcategory="ProfileSettings">
+                                            Account recovery
+                                            
+                                            
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    
+                                </li>
+                            </div>
+                        
+                            <div id="liSecondLevelItem" class="ProfileSettings mobile-subcategory-items">
+                                <li>
+                                    <div id="bodyNav_payerSideNav_secondLevelMobileItems_nonConsumerSecondaryNavItems_21">
+                                        <a href="/public/client/payer/#/profile-settings/mfa" id="bodyNav_payerSideNav_secondLevelMobileItems_aSecondLevel_21" data-subcategory="Mfa" data-parentcategory="ProfileSettings">
+                                            Multi-factor authentication
+                                            
+                                            
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    
+                                </li>
+                            </div>
+                        
+                </ul>
+
+                <ul class="list-unstyled">
+                    
+                            <div id="liThirdLevelItem" class="TransactionHistory mobile-thirdcategory-items">
+                                <li>
+                                    <div class="nonConsumerTertiaryNavItems">
+                                        <a href="https://app.parentpay.com/V3Payer4VBW3/Consumer/MS_Archive.aspx" class="linkTagButton gtm-navigation" data-gtm-category="click">
+                                            <span class="PaymentHistory" data-consumer-url="https://app.parentpay.com/V3Payer4VBW3/Consumer/MS_Archive.aspx" data-data-item-id="PaymentHistory">
+                                                <span class="consumerName_PaymentHistory"></span>Payment history
+                                            </span>
+                                        </a>
+                                    </div>
+                                </li>
+                            </div>
+                        
+                            <div id="liThirdLevelItem" class="TransactionHistory mobile-thirdcategory-items">
+                                <li>
+                                    <div class="nonConsumerTertiaryNavItems">
+                                        <a href="https://app.parentpay.com/V3Payer4VBW3/Consumer/MS_Statement.aspx" class="linkTagButton gtm-navigation" data-gtm-category="click">
+                                            <span class="BalanceHistory" data-consumer-url="https://app.parentpay.com/V3Payer4VBW3/Consumer/MS_Statement.aspx" data-data-item-id="BalanceHistory">
+                                                <span class="consumerName_BalanceHistory"></span>Balance history
+                                            </span>
+                                        </a>
+                                    </div>
+                                </li>
+                            </div>
+                        
+                            <div id="liThirdLevelItem" class="ViewSchoolAndCaterer mobile-thirdcategory-items">
+                                <li>
+                                    <div class="nonConsumerTertiaryNavItems">
+                                        <a href="https://app.parentpay.com/V3Payer4W3/Payer/SchoolSummary.aspx?id=99999" class="linkTagButton gtm-navigation" data-gtm-category="click">
+                                            <span class="SchoolSummary" data-consumer-url="https://app.parentpay.com/V3Payer4W3/Payer/SchoolSummary.aspx?id=99999" data-data-item-id="SchoolSummary">
+                                                <span class="consumerName_SchoolSummary"></span>Test School
+                                            </span>
+                                        </a>
+                                    </div>
+                                </li>
+                            </div>
+                        
+                            <div id="liThirdLevelItem" class="ViewSchoolAndCaterer mobile-thirdcategory-items">
+                                <li>
+                                    <div class="nonConsumerTertiaryNavItems">
+                                        <a href="https://app.parentpay.com/V3Payer4W3/Payer/LeaSummary.aspx?id=4190" class="linkTagButton gtm-navigation" data-gtm-category="click">
+                                            <span class="LeaSummary" data-consumer-url="https://app.parentpay.com/V3Payer4W3/Payer/LeaSummary.aspx?id=4190" data-data-item-id="LeaSummary">
+                                                <span class="consumerName_LeaSummary"></span>Sutton
+                                            </span>
+                                        </a>
+                                    </div>
+                                </li>
+                            </div>
+                        
+                </ul>
+
+                <ul class="list-unstyled">
+                    
+                            <li>
+                                <div id="bodyNav_payerSideNav_consumerLevelMobileItems_divConsumerUrl_0" class="mobile-thirdcategory-items consumerTertiaryNavItems ci_11111111">
+                                    <a href="https://app.parentpay.com/V3Payer4W3/Home/ChildSummary.aspx?ConsumerId=11111111" id="bodyNav_payerSideNav_consumerLevelMobileItems_aConsumerLevel_0" class="linkTagButton">
+                                        Alice's Page
+                                        
+                                    </a>
+                                </div>
+                            </li>
+                        
+                            <li>
+                                <div id="bodyNav_payerSideNav_consumerLevelMobileItems_divConsumerUrl_1" class="mobile-thirdcategory-items consumerTertiaryNavItems ci_11111111">
+                                    <a href="https://app.parentpay.com/V3Payer4W3/Home/Child/ChildDetails/ChildDetails.aspx?ConsumerId=11111111" id="bodyNav_payerSideNav_consumerLevelMobileItems_aConsumerLevel_1" class="linkTagButton">
+                                        Alice's Details
+                                        
+                                    </a>
+                                </div>
+                            </li>
+                        
+                            <li>
+                                <div id="bodyNav_payerSideNav_consumerLevelMobileItems_divConsumerUrl_2" class="mobile-thirdcategory-items consumerTertiaryNavItems ci_11111111">
+                                    <a href="https://app.parentpay.com/V3Payer4W3/Payer/MenusAndChoices.aspx?ConsumerId=11111111" id="bodyNav_payerSideNav_consumerLevelMobileItems_aConsumerLevel_2" class="linkTagButton">
+                                        View taken meals and menus
+                                        
+                                    </a>
+                                </div>
+                            </li>
+                        
+                            <li>
+                                <div id="bodyNav_payerSideNav_consumerLevelMobileItems_divConsumerUrl_3" class="mobile-thirdcategory-items consumerTertiaryNavItems ci_22222222">
+                                    <a href="https://app.parentpay.com/V3Payer4W3/Home/ChildSummary.aspx?ConsumerId=22222222" id="bodyNav_payerSideNav_consumerLevelMobileItems_aConsumerLevel_3" class="linkTagButton">
+                                        Bob's Page
+                                        
+                                    </a>
+                                </div>
+                            </li>
+                        
+                            <li>
+                                <div id="bodyNav_payerSideNav_consumerLevelMobileItems_divConsumerUrl_4" class="mobile-thirdcategory-items consumerTertiaryNavItems ci_22222222">
+                                    <a href="https://app.parentpay.com/V3Payer4W3/Home/Child/ChildDetails/ChildDetails.aspx?ConsumerId=22222222" id="bodyNav_payerSideNav_consumerLevelMobileItems_aConsumerLevel_4" class="linkTagButton">
+                                        Bob's Details
+                                        
+                                    </a>
+                                </div>
+                            </li>
+                        
+                            <li>
+                                <div id="bodyNav_payerSideNav_consumerLevelMobileItems_divConsumerUrl_5" class="mobile-thirdcategory-items consumerTertiaryNavItems ci_22222222">
+                                    <a href="https://app.parentpay.com/V3Payer4W3/Payer/MenusAndChoices.aspx?ConsumerId=22222222" id="bodyNav_payerSideNav_consumerLevelMobileItems_aConsumerLevel_5" class="linkTagButton">
+                                        View taken meals and menus
+                                        
+                                    </a>
+                                </div>
+                            </li>
+                        
+                </ul>
+            </div>
+          
+
+        </nav>
+    </div>
+
+
+
+
+
+
+
+                    
+                <div id="nav-overlay" class="nav-overlay"></div>
+                <!-- main content -->
+                <div class="col-xs-12 col-md-9" id="mainContent">
+                    
+    
+
+    <input name="ctl00$ctl00$body$body$hdEnableLocalStorage" type="hidden" id="hdEnableLocalStorage" value="false" />
+
+    
+    <div class="hidden-xs hidden-sm">
+        
+
+    </div>
+
+    
+    <div class="hidden-md hidden-lg">
+        
+
+    </div>
+
+    <!-- Alerts and warning banners -->
+    
+
+    
+		<div class="alert alert-light" 
+            id="notice5219">
+			<center>
+<a class="hidden-xs hidden-sm" href="https://www.surveymonkey.com/r/PPGParentPaySurvey26" target="_blank"><img src="https://5964770.fs1.hubspotusercontent-na1.net/hubfs/5964770/Parent%20Survey%202026/Parent%20Survey%202026%20Deskktop.png" alt=" ParentPay Parent Survey 2026" class="img-responsive" /></a>
+<a class="visible-xs visible-sm" href="https://www.surveymonkey.com/r/PPGParentPaySurvey26" target="_blank"><img src="https://5964770.fs1.hubspotusercontent-na1.net/hubfs/5964770/Parent%20Survey%202026/Parent%20Survey%202026%20Deskktop.png" alt="ParentPay Parent Survey 2026" class="img-responsive" /></a>
+            
+            <p>
+			    <a onclick="clearMessage(5219); return false;" id="clearLink" href="javascript:__doPostBack(&#39;ctl00$ctl00$body$body$ctl02$lvNotificationMessages$ctrl0$clearLink&#39;,&#39;&#39;)">Do not show this again</a>
+            </p>
+		</div>
+	
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+
+    
+    
+    <!-- End -->
+
+    
+    <script src="https://app.parentpay.com/V3Payer4W3/ClientScripts/linkify.min.js"></script>
+    <script src="https://app.parentpay.com/V3Payer4W3/ClientScripts/linkify-jquery.min.js"></script>    
+    <script src="https://app.parentpay.com/V3Payer4W3/ClientScripts/V2/PayerPayForItems2.js?v=20260416" type="text/javascript"></script>
+
+
+<span class="confirmvalue-basketItemId">
+    <input type="hidden" name="ctl00$ctl00$body$body$payForItemsOverlay$confirmBasketItemId" id="body_body_payForItemsOverlay_confirmBasketItemId" />
+</span>
+<span class="confirmvalue-serviceId">
+    <input type="hidden" name="ctl00$ctl00$body$body$payForItemsOverlay$confirmServiceId" id="body_body_payForItemsOverlay_confirmServiceId" />
+</span>
+<span class="confirmvalue-consumerId">
+    <input type="hidden" name="ctl00$ctl00$body$body$payForItemsOverlay$confirmConsumerId" id="body_body_payForItemsOverlay_confirmConsumerId" />
+</span>
+<span class="confirmvalue-serviceName">
+    <input type="hidden" name="ctl00$ctl00$body$body$payForItemsOverlay$confirmServiceName" id="body_body_payForItemsOverlay_confirmServiceName" />
+</span>
+<span class="confirmvalue-consumerName">
+    <input type="hidden" name="ctl00$ctl00$body$body$payForItemsOverlay$confirmConsumerName" id="body_body_payForItemsOverlay_confirmConsumerName" />
+</span>
+<span class="confirmvalue-amountPence">
+    <input type="hidden" name="ctl00$ctl00$body$body$payForItemsOverlay$confirmAmountPence" id="body_body_payForItemsOverlay_confirmAmountPence" />
+</span>
+<span class="confirmvalue-quantity">
+    <input type="hidden" name="ctl00$ctl00$body$body$payForItemsOverlay$confirmQuantity" id="body_body_payForItemsOverlay_confirmQuantity" />
+</span>
+<span class="confirmvalue-notes">
+    <input type="hidden" name="ctl00$ctl00$body$body$payForItemsOverlay$confirmNotes" id="body_body_payForItemsOverlay_confirmNotes" />
+</span>
+<span class="confirmvalue-consent">
+    <input type="hidden" name="ctl00$ctl00$body$body$payForItemsOverlay$confirmConsent" id="body_body_payForItemsOverlay_confirmConsent" />
+</span>
+<span class="confirmvalue-pay">
+    <input type="hidden" name="ctl00$ctl00$body$body$payForItemsOverlay$confirmPay" id="body_body_payForItemsOverlay_confirmPay" />
+</span>
+<span class="confirmvalue-notAvailable">
+    <input type="hidden" name="ctl00$ctl00$body$body$payForItemsOverlay$notAvailableReason" id="body_body_payForItemsOverlay_notAvailableReason" />
+</span>
+<span class="confirmvalue-topup">
+    <input type="hidden" name="ctl00$ctl00$body$body$payForItemsOverlay$confirmTopup" id="body_body_payForItemsOverlay_confirmTopup" />
+</span>
+<span class="makebookings-consumerId">
+    <input type="hidden" name="ctl00$ctl00$body$body$payForItemsOverlay$makeBookingsConsumerId" id="body_body_payForItemsOverlay_makeBookingsConsumerId" />
+</span>
+<input type="hidden" name="ctl00$ctl00$body$body$payForItemsOverlay$iUserID" id="iUserID" value="88888888" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="modal fade" id="payForItemOverlay" role="dialog" aria-label="modalLabel" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div id="loadingHeader">
+                        <p class="modal-title">Loading, please wait...</p>
+                    </div>
+                    <div id="loadedHeader">
+                        <h4 id="modalLabel" class="modal-title"><span id="consumerName"></span>- <span id="paymentItemName"></span></h4>
+                        <p id="pBalance" class="text-center no-mg-bt">
+                            <strong>Balance:</strong> <span id="balanceCurrency">&pound;</span><span id="balance"></span>
+                        </p>
+                        <p id="pLowBalLinkPopup" class="text-center">
+                            <small><a href="https://app.parentpay.com/V3Payer4VBW3/Consumer/MS_MyAlerts.aspx"><span id="setupEditAlerts"></span></a></small>
+                        </p>
+                        <p id="autoTopupPanel" class="text-center mg-top">
+                            <span id="autoTopupStatus">&nbsp;</span>
+                            <a href="#" class="autoTopupStatusText" aria-label="onClickAutoTopupStatusLink" onclick="onClickAutoTopupStatus()"><span id="autoTopupText"></span></a>
+                            <span id="autoTopupStatusDescription" class="text-primary glyphicons glyphicons-info-sign glyphicons-lg" data-toggle="popover" data-placement="bottom" data-trigger="click" data-html="true"
+                                data-content="" onfocus="return false;"></span>
+                        </p>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <p id="loadingBody">
+                        <img src="https://app.parentpay.com/V3Payer4W3/images/icons/ajax-loader.gif" width="16" height="16" alt="Spinner icon" />
+                        Loading...</p>
+                    <div id="loadedBody">
+                        <div class="alert alert-danger js-hide">
+                            <ul>
+                                <li id="body_body_payForItemsOverlay_amountLi" class="amountLI js-hide"><span class="glyphicons glyphicons-remove"></span>Please enter an amount</li><li id="body_body_payForItemsOverlay_amountOverUnderLi" class="amountOverUnderLI js-hide"><span class="glyphicons glyphicons-remove"></span>Please enter an amount between min & max</li>
+                                <li id="amountOverBankTransferLimitMessage" class="amountOverBankTransferLimitMessage js-hide"><span class="glyphicons glyphicons-remove"></span>Sorry, you have exceeded the limit of
+                                    £9,999.99
+                                    for One-click payments. Please enter a lower amount.</li>
+                                <li id="amountOverBankTransferLimitForFixedMessage" class="amountOverBankTransferLimitForFixedMessage js-hide"><span class="glyphicons glyphicons-remove"></span>Sorry, you cannot pay for this item with One-click payments as the cost exceeds the limit of
+                                    £9,999.99
+                                    for One-click payments. Please use another method of payment.</li>
+                                <li id="body_body_payForItemsOverlay_consentLi" class="consentLI js-hide"><span class="glyphicons glyphicons-remove"></span>Please tick the consent box</li><li id="body_body_payForItemsOverlay_noteLi" class="notesLI js-hide"><span class="glyphicons glyphicons-remove"></span>Please enter notes into the box</li><li id="body_body_payForItemsOverlay_quantityLi" class="quantityLI js-hide"><span class="glyphicons glyphicons-remove"></span>Invalid quantity amount, please enter whole number between the Min/Max amounts</li>
+                                <li id="unavailableQuantityLi" class="quantityLI js-hide"><span class="glyphicons glyphicons-remove"></span><span id="unavailableQuantityText"></span></li>
+                            </ul>
+                        </div>
+                        <p class="truncate" id="descriptionPara">
+                            <span id="paymentItemDescription"></span>
+                        </p>
+                        <p class="text-left" id="descriptionShowMorePara">
+                            <span><a href="#" onclick="DescriptionShowMoreClick()">View more...</a></span>
+                        </p>
+                        <p class="collapse" id="providedByPara">
+                            <strong>Provided by:</strong> <span id="providerName"></span>
+                        </p>
+                        <p id="pCost" class="text-primary">
+                            <strong>Cost:</strong> &pound;<span id="fixedCost"></span>
+                        </p>
+                        <p id="pAlreadyPaid">
+                            <strong>Amount paid:</strong> &pound;<span id="amountPaid"></span>
+                        </p>
+                        <p id="pRemainingToPay" class="text-primary">
+                            <strong>Remaining to pay:</strong> &pound;<span id="amountRemainingToPay"></span>
+                        </p>
+                        <p id="pBookingCost" class="text-primary">Cost of unpaid bookings: &pound;<span id="bookingCost"></span></p>
+                        <p id="pMinAmount">Minimum amount: &pound;<span id="minimumAmount"></span></p>
+                        <fieldset>
+                            <legend class="sr-only">Payment item options</legend>
+                            <div class="form-group" id="pQuantity">
+                                <label id="quantityLabel" class="control-label">How many would you like to buy?</label>
+                                <input type="number" aria-label="eidtQuantityInput" id="quantity" name="quantity" class="form-control" min="1" step="1" />
+                                <span class="help-block">Min - <span id="minQuantity"></span>/ Max - <span id="maxQuantity"></span></span>
+                            </div>
+                            <div class="form-group" id="pStaticQuantity">
+                                <label id="staticQuantityLabel" for="staticQuantity" class="control-label">Quantity: </label>
+                                <span id="staticQuantity" class="form-control-static"></span>
+                            </div>
+                            <div class="form-group" id="pAmount">
+                                <label class="control-label" for="edit-amount"><strong><span id="editAmountNormalLabel">How much would you like to pay?</span><span id="editAmountBookingLabel">How much bookings balance would you like to add?</span></strong></label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">&pound;</span>
+                                    <input aria-label="editAmountInput" data-displayvalue='amountToPay' data-numericinput="true" autocomplete="off" type="text" id="edit-amount" name="edit-amount" class="form-control" />
+                                </div>
+                                <span class="help-block">Min: &pound;<span id="minAmountTopup"></span> / Max - &pound;<span id="maxAmount"></span> (set by school)</span>
+                            </div>
+                            <div class="form-group" id="stockRemainingContainer">
+                                <label class="control-label">Limited availability:</label>
+                                <span id="remainingStock" class="form-control-static"></span> remaining
+                            </div>
+                            <div>
+                                <p id="pMultipleCost" class="large text-primary"><strong>Total cost:</strong> &pound;<span id="fixedMultipleCost"></span></p>
+                            </div>
+                            <div class="form-group" id="pNotes">
+                                <label for="add-notes" id="managerNotesText" class="control-label"></label>
+                                <textarea class="form-control" aria-label="addNotes" rows="2" cols="50" id="add-notes" name="add-notes" placeholder="Add answer here" maxlength="250" onkeydown="if(value.length>250)value=value.substr(0,250); if(value.length===250)if ((window.event != null)&&(window.event.keyCode>46 && window.event.keyCode<112 || window.event.keyCode>123))return false;"></textarea>
+                            </div>
+                            <div id="pAmountSummary">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <p class="small"><strong>To clear the Parent Account debt this amount has been added to the total amount to pay.</strong></p>
+                                    </div>
+                                </div>
+                                <dl>
+                                    <dt>Parent Account credit:</dt>
+                                    <dd>&pound;<span data-summaryvalue="parentAccount"></span></dd>
+                                    <dt>Item:</dt>
+                                    <dd>&pound;<span data-summaryvalue="item"></span></dd>
+                                    <dt>Amount to Pay:</dt>
+                                    <dd><strong>&pound;<span data-summaryvalue="total"></span></strong></dd>
+                                </dl>
+                            </div>
+                            <div class="checkbox">
+                                <div class="form-group" id="pConsent">
+                                    <label class="control-label">
+                                        <input type="checkbox" name="consent" aria-label="consentBox" id="consent">Consent
+                                    </label>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="alert alert-warning js-hide alert-dismissible" id="divBankTransferPaymentsUnavailable">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        One-click payments are currently unavailable. Please try again later.</div>
+                </div>
+                <div class="modal-footer modal-payment">
+                    <div class="payment-options">
+                        <div class="btn-payment-help">
+                            
+                                <div id="pBankTransfer" class="btn-spacing">
+                                    
+
+<button type="button"
+    id="BankTransferTrigger"
+    class="btn btn-primary triggerBankTransfer  gtm-interaction"
+    name="bank-transfer-Trigger"
+    is-basket-payment="False"
+    data-container="body" data-trigger="manual" data-placement="top" data-toggle="popover"
+    data-content="You do not have enough funds in your Parent Account to pay for these items. Please add the item to your basket."
+    data-gtm-url=""
+    data-gtm-category="interact_click"
+    data-gtm-label="Pay by One-click payments">
+    Pay by One-click payments
+</button>
+<div class="row">
+    <div class="col-xs-12 text-muted ">
+        <p>
+            <strong>Direct Debit from:</strong> XXXX0662 04-00-04
+        </p>
+    </div>
+    <div class="col-xs-12 text-muted ">
+    </div>
+</div>
+
+
+<div id="confirmOcpPaymentModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">One-click confirmation</h4>
+            </div>
+
+            <div class="modal-body text-left">
+                <div class="mg-bottom">
+                    <strong>Direct Debit from:</strong>
+                    <div>XXXX0662  04-00-04 </div>
+                </div>
+
+                <div id="dynamicInfo" class="mg-bottom">
+                    <strong>For:</strong>
+                </div>
+
+                <div class="mg-bottom">
+                    <strong>Parent account:</strong>
+                    <div class="pull-right text-nowrap">&pound;<span id="parentAccountBalance"></span></div>
+                </div>
+
+                <hr />
+                <div class="larger">
+                    Total
+                    <span class="pull-right text-nowrap">&pound;<span id="totalCost"></span></span>
+                </div>
+                <hr />
+
+                <p>The payment will be treated as instant, but can take up to 3 days to be debited from your bank.</p>
+                <p>
+                    Your payments are protected by the 
+                    <a href="/public/client/payer/direct-debit-guarantee.html" routerlinkactive="active" target="_blank" class="gtm-navigation" data-gtm-category="click" data-gtm-label="Direct Debit Guarantee">Direct Debit Guarantee 
+                        <span class="glyphicons glyphicons-new-window-alt"></span>
+                    </a>
+                </p>
+            </div>
+
+            <div class="modal-footer no-border full-width-btn">
+                <button type="button"
+                    id="BankTransfer"
+                    class="btn btn-primary pull-right gtm-navigation"
+                    onclick="onClickBankTransfer(true);"
+                    onblur="onBlurBankTransfer();"
+                    name="bank-transfer"
+                    is-basket-payment="False"
+                    data-container="body" data-trigger="manual" data-placement="top" data-toggle="popover"
+                    data-content="You do not have enough funds in your Parent Account to pay for these items. Please add the item to your basket."
+                    data-gtm-url="https://app.parentpay.com/V3Payer4W3/Home/PostPaymentReceipt.aspx"
+                    data-gtm-location="dialog"
+                    data-gtm-label="Pay"
+                    data-gtm-category="click">
+                    Pay
+                </button>
+                <button type="button" class="btn btn-link pull-right gtm-interaction" data-gtm-category="interact_click" data-gtm-label="Cancel" data-gtm-location="dialog" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src='/V3Payer4W3/ClientScripts/Payer/BankTransferSetup.js?v=16042026' type="text/javascript"></script>
+
+                                </div>
+                            
+                        </div>
+                        
+                            <p class="btn-spacing" id="pExpressCheckout">
+                                <button type="button" class="btn btn-primary" id="ExpressCheckout" onclick="onClickExpressCheckout();" onblur="onBlurExpressCheckout();" name="express-checkout"
+                                    data-container="body" data-trigger="manual" data-placement="top" data-toggle="popover"
+                                    data-content="You do not have enough funds in your Parent Account to pay for these items. Please add the item to your basket.">
+                                    Pay by Parent Account
+                                </button>
+                            </p>
+                        
+                        <p>
+                            <button type="button" name="go-to-make-bookings" id="go-to-make-bookings" class="btn btn-contrast js-makebookings-btn js-navigates-away" onclick="onClickBasketMakeBookings()">Make bookings</button></p>
+                        <p>
+                            <button type="button" name="basket-add" id="basket-add" class="btn btn-default" onclick="onClickBasketAdd()">Add to basket</button></p>
+                        <p>
+                            <button type="button" name="basket-update" id="basket-update" class="btn btn-primary hidden" onclick="onClickBasketUpdate()">Update basket</button></p>
+                        <p>
+                            <button type="submit" name="cancel" id="cancelPayNow" onclick="onClickCancelPayNow();" class="btn btn-link" data-dismiss="modal">Cancel</button></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="addingToBasketOverlay" role="dialog" aria-label="myModalLabel5">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="js-adding-to-basket text-center">
+                        <img src="https://app.parentpay.com/V3Payer4W3/images/loading_spinner.gif" alt="adding to basket" width="100px" class="center-block" />
+                        <p><strong>Adding to basket</strong></p>
+                    </div>
+                    <div class="js-added-to-basket collapse">
+                        <p class="text-center"><strong>Item successfully added to basket!</strong></p>
+                        <p class="text-center"><a href='https://app.parentpay.com/V3Payer4W3/Home/Basket.aspx' class="btn btn-default">View basket and pay</a></p>
+                        <a type="submit" id="ContinueShopping" class="btn btn-link center-block" href="javascript:__doPostBack('ContinueShopping')">Continue shopping</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="payConfirmOverlay" role="dialog" aria-label="myModalLabel2">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Payment confirmation</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to pay for <strong><span id="confirmItemName"></span></strong><span id="confirmChildNameForText">for </span><strong><span id="confirmChildName"></span></strong>at a cost of <strong>&pound;<span id="confirmItemCost"></span></strong></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" name="cancel" id="cancel" class="btn cancel underlined-link" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" onclick="alert('payment would now get confirmed');">Confirm payment</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="alreadyInBasketModal" role="dialog" aria-label="myModalLabel2" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Item already in basket</h4>
+                </div>
+                <div class="modal-body">
+                    <p><strong><span id="alreadyInBasketChildName"></span> <span id="alreadyInBasketPaymentItemName"></span></strong> is already in the basket.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" name="cancel" id="cancelAlreadyInBasket" class="btn btn-link" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" onclick="window.location.replace('https://app.parentpay.com/V3Payer4W3/Home/Basket.aspx');">Go to basket</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="payLoading" role="dialog" aria-label="myModalLabel3">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Loading, please wait...</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        <img src="https://app.parentpay.com/V3Payer4W3/images/icons/ajax-loader.gif" width="16" height="16" alt="Loading" />
+                        Loading...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<input type="hidden" name="ctl00$ctl00$body$body$payForItemsOverlay$TriggerPayNowEnabled" id="body_body_payForItemsOverlay_TriggerPayNowEnabled" /><input type="hidden" name="ctl00$ctl00$body$body$payForItemsOverlay$TriggerPayNowServiceId" id="body_body_payForItemsOverlay_TriggerPayNowServiceId" value="0" /><input type="hidden" name="ctl00$ctl00$body$body$payForItemsOverlay$TriggerPayNowConsumerId" id="body_body_payForItemsOverlay_TriggerPayNowConsumerId" value="0" /><input type="hidden" name="ctl00$ctl00$body$body$payForItemsOverlay$TriggerPayNowAmountPence" id="body_body_payForItemsOverlay_TriggerPayNowAmountPence" value="0" /><input type="hidden" name="ctl00$ctl00$body$body$payForItemsOverlay$TriggerPayViewDetailsEnabled" id="body_body_payForItemsOverlay_TriggerPayViewDetailsEnabled" />
+
+    <script>
+        $(function () {
+            if ('' === 'true') {
+                HandleTriggerPayNow(0, 0, 0);
+            }
+            if ('' === 'true') {
+                payNow(0, 0, true);
+            }
+        });
+
+        function doPostback() {
+            __doPostBack();
+        }
+
+        function openModal() {
+            document.getElementById("payForItemOverlay").focus();
+        }
+    </script>
+
+
+
+    <h1 class="sr-only">ParentPay - Home</h1>
+    <div class="row no-mg-bt">
+        <!-- Child tiles -->
+        
+                <div class="col-xs-12 col-sm-12 col-md-6">
+                    <div id="body_body_lvConsumerAreas_divPanel_0" class="panel panel-default tile-flex">
+                        
+                        
+                        <a href="../Home/ChildSummary.aspx?ConsumerId=11111111" aria-label="View summary of child information" class="childLink text-color text-decoration-none gtm-navigation" data-gtm-label="Child" data-gtm-location="Body" data-gtm-category="click">
+                            <p class="padding-desktop">
+                                <div id="dvChild" class="tile-inner-flex">
+                                    <div class="img-wrapper">
+                                        <img src="https://app.parentpay.com/V3Payer4W3/Images/logos/25181_big.png" id="body_body_lvConsumerAreas_imgSilhouette_0" class="img-responsive img-circle img-child-profile" alt="school logo" />
+                                    </div>
+                                    <div class="description-wrapper">
+                                        <h2 class="text-left">Alice</h2>
+                                        <p id="body_body_lvConsumerAreas_pBalance_0">
+                                            Dinner money balance: <span id="11111111" class="large text-primary">&pound;36.06</span>
+                                        </p>
+                                        
+                                        
+                                        
+                                        
+
+                                        
+
+<p id="body_body_lvConsumerAreas_ppAtuStatusBar_0_pAutoTopup_0">
+
+    <input name="ctl00$ctl00$body$body$lvConsumerAreas$ctrl0$ppAtuStatusBar$hdAtuAvailableContent" type="hidden" id="hdAtuAvailableContent" value="This payment item is eligible for automated payment, and can only be made by Direct Debit." />
+
+    <a href="../Home/PaymentItems/PaymentItems.aspx?pId=9000001&cId=11111111" id="body_body_lvConsumerAreas_ppAtuStatusBar_0_linkBtnNavigateToAtuPage_0" class="no-decoration">
+        
+
+        <span id="body_body_lvConsumerAreas_ppAtuStatusBar_0_lblAutoTopupAvailableText_0" data-gtm-label="Auto top-up - set up now" class="badge ATU-badge ATU-badge-txt available gtm-navigation" data-gtm-type="button" data-gtm-category="click" data-gtm-url="https://app.parentpay.com/V3Payer4W3/Home/PaymentItems/PaymentItems.aspx" name="11111111" data-displayvalue="AutoTopupStatusText" data-gtm-eventtype="atu_click">Set up Auto top-up</span>
+    </a>
+</p>
+
+
+
+
+
+                                        
+                                        <p id="body_body_lvConsumerAreas_pAtuAvailableInformaiton_0" class="mg-right">This payment item is eligible for automated payment, and can only be made by Direct Debit. <a href="../Home/PaymentItems/PaymentItems.aspx?pId=9000001&cId=11111111&focusAtuSetup=true" id="body_body_lvConsumerAreas_linkNavigateToAutoTopUpOption_0" class="text-color">Set up now.</a></p>
+
+                                    </div>
+                                </div>
+                            </p>
+                            <div class="button-wrapper">
+                                
+                                
+                                <button id="body_body_lvConsumerAreas_btnPayForMeals_0" type="button" class="btn btn-lg btn-primary btn-block btn-homeTile" onclick="payNow(9000001, 11111111, true, false);return false;">
+                                    <span class="glyphicons glyphicons-cutlery pull-left mgr-n5"></span>Pay for meals
+                                </button>
+                                
+                                
+                                <button class="btn btn-lg btn-default btn-contrast btn-block btn-homeTile gtm-navigation" data-gtm-category="click"
+                                    onclick="window.location.href='../Home/PayForOtherItems.aspx?consumerId=11111111'; return false;;" data-gtm-lable="Pay for other items" data-gtm-location="Body">
+                                    Pay for other items
+                                    
+                                        <span class="payment-badge badge js-unreadPayments" title="Alice has 34 unread payments">34</span>
+                                    
+                                </button>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="col-xs-12 col-sm-12 col-md-6">
+                    <div id="body_body_lvConsumerAreas_divPanel_1" class="panel panel-default tile-flex">
+                        
+                        
+                        <a href="../Home/ChildSummary.aspx?ConsumerId=22222222" aria-label="View summary of child information" class="childLink text-color text-decoration-none gtm-navigation" data-gtm-label="Child" data-gtm-location="Body" data-gtm-category="click">
+                            <p class="padding-desktop">
+                                <div id="dvChild" class="tile-inner-flex">
+                                    <div class="img-wrapper">
+                                        <img src="https://app.parentpay.com/V3Payer4W3/Images/logos/25181_big.png" id="body_body_lvConsumerAreas_imgSilhouette_1" class="img-responsive img-circle img-child-profile" alt="school logo" />
+                                    </div>
+                                    <div class="description-wrapper">
+                                        <h2 class="text-left">Bob</h2>
+                                        <p id="body_body_lvConsumerAreas_pBalance_1">
+                                            Dinner money balance: <span id="22222222" class="large text-primary">&pound;39.37</span>
+                                        </p>
+                                        
+                                        
+                                        
+                                        
+
+                                        
+
+<p id="body_body_lvConsumerAreas_ppAtuStatusBar_1_pAutoTopup_1">
+
+    <input name="ctl00$ctl00$body$body$lvConsumerAreas$ctrl1$ppAtuStatusBar$hdAtuAvailableContent" type="hidden" id="hdAtuAvailableContent" value="This payment item is eligible for automated payment, and can only be made by Direct Debit." />
+
+    <a href="../Home/PaymentItems/PaymentItems.aspx?pId=9000001&cId=22222222" id="body_body_lvConsumerAreas_ppAtuStatusBar_1_linkBtnNavigateToAtuPage_1" class="no-decoration">
+        
+
+        <span id="body_body_lvConsumerAreas_ppAtuStatusBar_1_lblAutoTopupAvailableText_1" data-gtm-label="Auto top-up - set up now" class="badge ATU-badge ATU-badge-txt available gtm-navigation" data-gtm-type="button" data-gtm-category="click" data-gtm-url="https://app.parentpay.com/V3Payer4W3/Home/PaymentItems/PaymentItems.aspx" name="22222222" data-displayvalue="AutoTopupStatusText" data-gtm-eventtype="atu_click">Set up Auto top-up</span>
+    </a>
+</p>
+
+
+
+
+
+                                        
+                                        <p id="body_body_lvConsumerAreas_pAtuAvailableInformaiton_1" class="mg-right">This payment item is eligible for automated payment, and can only be made by Direct Debit. <a href="../Home/PaymentItems/PaymentItems.aspx?pId=9000001&cId=22222222&focusAtuSetup=true" id="body_body_lvConsumerAreas_linkNavigateToAutoTopUpOption_1" class="text-color">Set up now.</a></p>
+
+                                    </div>
+                                </div>
+                            </p>
+                            <div class="button-wrapper">
+                                
+                                
+                                <button id="body_body_lvConsumerAreas_btnPayForMeals_1" type="button" class="btn btn-lg btn-primary btn-block btn-homeTile" onclick="payNow(9000001, 22222222, true, false);return false;">
+                                    <span class="glyphicons glyphicons-cutlery pull-left mgr-n5"></span>Pay for meals
+                                </button>
+                                
+                                
+                                <button class="btn btn-lg btn-default btn-contrast btn-block btn-homeTile gtm-navigation" data-gtm-category="click"
+                                    onclick="window.location.href='../Home/PayForOtherItems.aspx?consumerId=22222222'; return false;;" data-gtm-lable="Pay for other items" data-gtm-location="Body">
+                                    Pay for other items
+                                    
+                                        <span class="payment-badge badge js-unreadPayments" title="Bob has 14 unread payments">14</span>
+                                    
+                                </button>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 mg-bt-mobile-tablet">
+            <a class="btn btn-default btn-lg btn-block gtm-navigation" data-gtm-category="click" href="../Home/PayForOtherItems.aspx" data-gtm-label="View all items" data-gtm-location="Body">View all items <span class="home-payer-icons glyphicons glyphicons-list-alt"></span></a>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <a class="btn btn-default btn-lg btn-block gtm-navigation" href="https://app.parentpay.com/V3Payer4VBW3/Consumer/MS_MyAlerts.aspx" data-gtm-label="Manage alerts" data-gtm-category="click" data-gtm-location="Body">Manage alerts <span class="home-payer-icons glyphicons glyphicons-bell"></span></a>
+        </div>
+    </div>
+    <!-- Lunchtime panel -->
+    <div id="body_body_lunchMealActivity_LunchMealActivity" class="panel panel-default">
+        <div class="panel-heading">
+            <h3>Lunchtime meal activity</h3>
+        </div>
+        <table summary="Lunchtime meal activity" class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col" class="text-nowrap">Child</th>
+                    <th scope="col" class="hidden-xs">Details</th>
+                    <th scope="col" class="text-right text-nowrap">Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                        <tr>
+                            <td class="text-nowrap">15 Apr 26</td>
+                            <td>Alice</td>
+                            <td class="hidden-xs">
+                                <a href="https://app.parentpay.com/V3Payer4W3/Payer/MenusAndChoices.aspx?ConsumerId=11111111&Date=2026-04-15" class="gtm-navigation" data-gtm-category="click" data-gtm-label="Lunch time" data-gtm-location="Body">
+                                    Lunch time
+                                </a>
+                            </td>
+                            <td class="text-right text-nowrap" >
+                                <a href="https://app.parentpay.com/V3Payer4W3/Payer/MenusAndChoices.aspx?ConsumerId=11111111&Date=2026-04-15" class="gtm-navigation" data-gtm-category="click" data-gtm-label="£1.22" data-gtm-location="Body">
+                                    £1.22
+                                </a>
+                            </td>
+                        </tr>
+                    
+                        <tr>
+                            <td class="text-nowrap">15 Apr 26</td>
+                            <td>Bob</td>
+                            <td class="hidden-xs">
+                                <a href="https://app.parentpay.com/V3Payer4W3/Payer/MenusAndChoices.aspx?ConsumerId=22222222&Date=2026-04-15" class="gtm-navigation" data-gtm-category="click" data-gtm-label="Lunch time" data-gtm-location="Body">
+                                    Lunch time
+                                </a>
+                            </td>
+                            <td class="text-right text-nowrap" >
+                                <a href="https://app.parentpay.com/V3Payer4W3/Payer/MenusAndChoices.aspx?ConsumerId=22222222&Date=2026-04-15" class="gtm-navigation" data-gtm-category="click" data-gtm-label="£2.26" data-gtm-location="Body">
+                                    £2.26
+                                </a>
+                            </td>
+                        </tr>
+                    
+                        <tr>
+                            <td class="text-nowrap">14 Apr 26</td>
+                            <td>Alice</td>
+                            <td class="hidden-xs">
+                                <a href="https://app.parentpay.com/V3Payer4W3/Payer/MenusAndChoices.aspx?ConsumerId=11111111&Date=2026-04-14" class="gtm-navigation" data-gtm-category="click" data-gtm-label="Lunch" data-gtm-location="Body">
+                                    Lunch
+                                </a>
+                            </td>
+                            <td class="text-right text-nowrap" >
+                                <a href="https://app.parentpay.com/V3Payer4W3/Payer/MenusAndChoices.aspx?ConsumerId=11111111&Date=2026-04-14" class="gtm-navigation" data-gtm-category="click" data-gtm-label="No meal" data-gtm-location="Body">
+                                    No meal
+                                </a>
+                            </td>
+                        </tr>
+                    
+                        <tr>
+                            <td class="text-nowrap">14 Apr 26</td>
+                            <td>Bob</td>
+                            <td class="hidden-xs">
+                                <a href="https://app.parentpay.com/V3Payer4W3/Payer/MenusAndChoices.aspx?ConsumerId=22222222&Date=2026-04-14" class="gtm-navigation" data-gtm-category="click" data-gtm-label="Lunch time" data-gtm-location="Body">
+                                    Lunch time
+                                </a>
+                            </td>
+                            <td class="text-right text-nowrap" >
+                                <a href="https://app.parentpay.com/V3Payer4W3/Payer/MenusAndChoices.aspx?ConsumerId=22222222&Date=2026-04-14" class="gtm-navigation" data-gtm-category="click" data-gtm-label="£0.86" data-gtm-location="Body">
+                                    £0.86
+                                </a>
+                            </td>
+                        </tr>
+                    
+                        <tr>
+                            <td class="text-nowrap">13 Apr 26</td>
+                            <td>Alice</td>
+                            <td class="hidden-xs">
+                                <a href="https://app.parentpay.com/V3Payer4W3/Payer/MenusAndChoices.aspx?ConsumerId=11111111&Date=2026-04-13" class="gtm-navigation" data-gtm-category="click" data-gtm-label="Lunch time" data-gtm-location="Body">
+                                    Lunch time
+                                </a>
+                            </td>
+                            <td class="text-right text-nowrap" >
+                                <a href="https://app.parentpay.com/V3Payer4W3/Payer/MenusAndChoices.aspx?ConsumerId=11111111&Date=2026-04-13" class="gtm-navigation" data-gtm-category="click" data-gtm-label="£1.22" data-gtm-location="Body">
+                                    £1.22
+                                </a>
+                            </td>
+                        </tr>
+                    
+                        <tr>
+                            <td class="text-nowrap">13 Apr 26</td>
+                            <td>Bob</td>
+                            <td class="hidden-xs">
+                                <a href="https://app.parentpay.com/V3Payer4W3/Payer/MenusAndChoices.aspx?ConsumerId=22222222&Date=2026-04-13" class="gtm-navigation" data-gtm-category="click" data-gtm-label="Lunch time" data-gtm-location="Body">
+                                    Lunch time
+                                </a>
+                            </td>
+                            <td class="text-right text-nowrap" >
+                                <a href="https://app.parentpay.com/V3Payer4W3/Payer/MenusAndChoices.aspx?ConsumerId=22222222&Date=2026-04-13" class="gtm-navigation" data-gtm-category="click" data-gtm-label="£3.17" data-gtm-location="Body">
+                                    £3.17
+                                </a>
+                            </td>
+                        </tr>
+                    
+                        <tr>
+                            <td class="text-nowrap">10 Apr 26</td>
+                            <td>Alice</td>
+                            <td class="hidden-xs">
+                                <a href="https://app.parentpay.com/V3Payer4W3/Payer/MenusAndChoices.aspx?ConsumerId=11111111&Date=2026-04-10" class="gtm-navigation" data-gtm-category="click" data-gtm-label="Lunch" data-gtm-location="Body">
+                                    Lunch
+                                </a>
+                            </td>
+                            <td class="text-right text-nowrap" >
+                                <a href="https://app.parentpay.com/V3Payer4W3/Payer/MenusAndChoices.aspx?ConsumerId=11111111&Date=2026-04-10" class="gtm-navigation" data-gtm-category="click" data-gtm-label="No meal" data-gtm-location="Body">
+                                    No meal
+                                </a>
+                            </td>
+                        </tr>
+                    
+                        <tr>
+                            <td class="text-nowrap">10 Apr 26</td>
+                            <td>Bob</td>
+                            <td class="hidden-xs">
+                                <a href="https://app.parentpay.com/V3Payer4W3/Payer/MenusAndChoices.aspx?ConsumerId=22222222&Date=2026-04-10" class="gtm-navigation" data-gtm-category="click" data-gtm-label="Lunch" data-gtm-location="Body">
+                                    Lunch
+                                </a>
+                            </td>
+                            <td class="text-right text-nowrap" >
+                                <a href="https://app.parentpay.com/V3Payer4W3/Payer/MenusAndChoices.aspx?ConsumerId=22222222&Date=2026-04-10" class="gtm-navigation" data-gtm-category="click" data-gtm-label="No meal" data-gtm-location="Body">
+                                    No meal
+                                </a>
+                            </td>
+                        </tr>
+                    
+                        <tr>
+                            <td class="text-nowrap">09 Apr 26</td>
+                            <td>Alice</td>
+                            <td class="hidden-xs">
+                                <a href="https://app.parentpay.com/V3Payer4W3/Payer/MenusAndChoices.aspx?ConsumerId=11111111&Date=2026-04-09" class="gtm-navigation" data-gtm-category="click" data-gtm-label="Lunch" data-gtm-location="Body">
+                                    Lunch
+                                </a>
+                            </td>
+                            <td class="text-right text-nowrap" >
+                                <a href="https://app.parentpay.com/V3Payer4W3/Payer/MenusAndChoices.aspx?ConsumerId=11111111&Date=2026-04-09" class="gtm-navigation" data-gtm-category="click" data-gtm-label="No meal" data-gtm-location="Body">
+                                    No meal
+                                </a>
+                            </td>
+                        </tr>
+                    
+                        <tr>
+                            <td class="text-nowrap">09 Apr 26</td>
+                            <td>Bob</td>
+                            <td class="hidden-xs">
+                                <a href="https://app.parentpay.com/V3Payer4W3/Payer/MenusAndChoices.aspx?ConsumerId=22222222&Date=2026-04-09" class="gtm-navigation" data-gtm-category="click" data-gtm-label="Lunch" data-gtm-location="Body">
+                                    Lunch
+                                </a>
+                            </td>
+                            <td class="text-right text-nowrap" >
+                                <a href="https://app.parentpay.com/V3Payer4W3/Payer/MenusAndChoices.aspx?ConsumerId=22222222&Date=2026-04-09" class="gtm-navigation" data-gtm-category="click" data-gtm-label="No meal" data-gtm-location="Body">
+                                    No meal
+                                </a>
+                            </td>
+                        </tr>
+                    
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Comms panel-->
+    		
+    <div class="panel panel-default">        
+        <div class="panel-heading">
+            <h3>Alerts &amp; communications</h3>
+        </div>
+        <table summary="Alerts &amp; communications" class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col" >Date</th>
+                    <th scope="col" class="text-center">Type</th>
+                    <th scope="col">Subject</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                    <tr>
+                        <td colspan="3">
+                            <div class="alert alert-danger">
+                                No results have been found
+                            </div>
+                        </td>
+                    </tr>
+                
+            </tbody>
+        </table>
+
+        <div class="panel-footer">
+        <div class="row">
+        <div class="col-xs-12 col-sm-6">
+             <p> Showing max 6 messages from the last 90 days</p>
+           </div>
+            <div class="col-xs-12 col-sm-6 text-right">
+                <p><a href="Communications.aspx">View all alerts &amp; communications</a></p>
+                <p><a href="https://app.parentpay.com/V3Payer4VBW3/Consumer/MS_MyAlerts.aspx">Manage alerts</a></p>
+            </div>
+            </div>
+            
+ </div>
+    </div>
+
+
+
+    <!-- banner ad location mobile-->
+    <div class="visible-xs visible-sm">
+        
+
+    </div>
+    <!-- banner ad location desktop -->
+    <div class="hidden-xs hidden-sm">
+        
+
+    </div>
+    <!-- recent payments panel -->
+    	
+    <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3>Recent payments</h3>
+            </div>
+        <table summary="Recent payments" class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col" class="text-left hidden-xs">Type</th>
+                    <th scope="col" class="text-left">Details</th>
+                    <th scope="col" class="text-right text-nowrap">Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                        <tr>
+                            <td>26 Mar 26</td>
+                            
+                            <td class="text-left hidden-xs">Parent Account</td>
+                            <td>
+                                <div class="text-left text-nowrap ellipsis"><a href=https://app.parentpay.com/V3Payer4VBW3/Consumer/PaymentDetailsViewerFX.aspx?TID=1000000001&U=2000000001 class="gtm-navigation" data-gtm-label="Meals for" data-gtm-location="Body">Meals for</a></div>
+                            </td>
+                            <td class="text-right text-nowrap"><span class="">&pound;50.00</span></td>
+                        </tr>
+                    
+                        <tr class='even'>
+                            <td>09 Feb 26</td>
+                            
+                            <td class="text-left hidden-xs">Parent Account</td>
+                            <td>
+                                <div class="text-left text-nowrap ellipsis"><a href=https://app.parentpay.com/V3Payer4VBW3/Consumer/PaymentDetailsViewerFX.aspx?TID=1000000001&U=2000000001 class="gtm-navigation" data-gtm-label="Year7MedievalH" data-gtm-location="Body">Year7MedievalH</a></div>
+                            </td>
+                            <td class="text-right text-nowrap"><span class="">&pound;3.50</span></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>09 Feb 26</td>
+                            
+                            <td class="text-left hidden-xs">Parent Account</td>
+                            <td>
+                                <div class="text-left text-nowrap ellipsis"><a href=https://app.parentpay.com/V3Payer4VBW3/Consumer/PaymentDetailsViewerFX.aspx?TID=1000000001&U=2000000001 class="gtm-navigation" data-gtm-label="Meals for" data-gtm-location="Body">Meals for</a></div>
+                            </td>
+                            <td class="text-right text-nowrap"><span class="">&pound;12.00</span></td>
+                        </tr>
+                    
+                        <tr class='even'>
+                            <td>09 Feb 26</td>
+                            
+                            <td class="text-left hidden-xs">Parent Account</td>
+                            <td>
+                                <div class="text-left text-nowrap ellipsis"><a href=https://app.parentpay.com/V3Payer4VBW3/Consumer/PaymentDetailsViewerFX.aspx?TID=1000000001&U=2000000001 class="gtm-navigation" data-gtm-label="Meals for" data-gtm-location="Body">Meals for</a></div>
+                            </td>
+                            <td class="text-right text-nowrap"><span class="">&pound;34.00</span></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>19 Dec 25</td>
+                            
+                            <td class="text-left hidden-xs">Parent Account</td>
+                            <td>
+                                <div class="text-left text-nowrap ellipsis"><a href=https://app.parentpay.com/V3Payer4VBW3/Consumer/PaymentDetailsViewerFX.aspx?TID=1000000001&U=2000000001 class="gtm-navigation" data-gtm-label="Meals for" data-gtm-location="Body">Meals for</a></div>
+                            </td>
+                            <td class="text-right text-nowrap"><span class="">&pound;30.00</span></td>
+                        </tr>
+                    
+                        <tr class='even'>
+                            <td>19 Dec 25</td>
+                            
+                            <td class="text-left hidden-xs">Parent Account</td>
+                            <td>
+                                <div class="text-left text-nowrap ellipsis"><a href=https://app.parentpay.com/V3Payer4VBW3/Consumer/PaymentDetailsViewerFX.aspx?TID=1000000001&U=2000000001 class="gtm-navigation" data-gtm-label="Meals for" data-gtm-location="Body">Meals for</a></div>
+                            </td>
+                            <td class="text-right text-nowrap"><span class="">&pound;40.00</span></td>
+                        </tr>
+                    
+            </tbody>
+        </table>		
+        <div class="panel-footer">
+            <p class="text-right">
+                <a href="https://app.parentpay.com/V3Payer4VBW3/Consumer/MS_Archive.aspx" class="gtm-navigation" data-gtm-category="click" data-gtm-label="View payment history" data-gtm-location="Body">View payment history</a>
+            </p>
+            
+        </div>
+    </div>
+
+    <!-- video panel -->
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="panel-group guidance hidden-print">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title text-left">
+                            <span class="glyphicons glyphicons-lightbulb"></span><a data-toggle="collapse" href="#collapsehome" class="accordion-toggle">Help and guidance</a>
+                        </h3>
+                    </div>
+                    <div id="collapsehome" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <p>
+                                <script src="https://fast.wistia.com/embed/medias/i256ib6jp0.jsonp" async></script>
+                                <script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
+                                <span class="wistia_embed wistia_async_i256ib6jp0 popover=true popoverContent=link" style="display: inline; position: relative"><a href="#" class="gtm-navigation" data-gtm-category="click" data-gtm-label="How to add a child" data-gtm-location="Body">How to add a child to my account<span class="glyphicons glyphicons-facetime-video"></span></a></span>
+                            </p>
+                            <p>
+                                <script src="https://fast.wistia.com/embed/medias/ae1fqykk8d.jsonp" async></script>
+                                <script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
+                                <span class="wistia_embed wistia_async_ae1fqykk8d popover=true popoverContent=link" style="display: inline; position: relative"><a href="#" class="gtm-navigation" data-gtm-category="click" data-gtm-label="How to make card payments" data-gtm-location="Body">How to make a payment<span class="glyphicons glyphicons-facetime-video"></span></a></span>
+                            </p>
+                            <p>
+                                <script src="https://fast.wistia.com/embed/medias/kst5q557ok.jsonp" async></script>
+                                <script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
+                                <span class="wistia_embed wistia_async_kst5q557ok popover=true popoverContent=link" style="display: inline; position: relative"><a href="#" class="gtm-navigation" data-gtm-category="click" data-gtm-label="How to view the transaction history" data-gtm-location="Body">How to view my transaction history<span class="glyphicons glyphicons-facetime-video"></span></a></span>
+                            </p>
+                            <p>
+                                <script src="https://fast.wistia.com/embed/medias/qad7ciijp4.jsonp" async></script>
+                                <script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
+                                <span class="wistia_embed wistia_async_qad7ciijp4 popover=true popoverContent=link" style="display: inline; position: relative"><a href="#" class="gtm-navigation" data-gtm-category="click" data-gtm-label="How to view the balance history" data-gtm-location="Body">How to view my balance history<span class="glyphicons glyphicons-facetime-video"></span></a></span>
+                            </p>
+                            <p>
+                                <script src="https://fast.wistia.com/embed/medias/yzwl5hrey3.jsonp" async></script>
+                                <script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
+                                <span class="wistia_embed wistia_async_yzwl5hrey3 popover=true popoverContent=link" style="display: inline; position: relative"><a href="#" class="gtm-navigation" data-gtm-category="click" data-gtm-label="How to contact your school" data-gtm-location="Body">How to contact the school<span class="glyphicons glyphicons-facetime-video"></span></a></span>
+                            </p>
+                            <p>
+                                <span><a href="https://parenthelp.parentpaygroup.com/csp?id=kb_article_view&sysparm_article=KB0010466" target="_blank">How to enable Auto top-up?</a></span>
+                            </p>
+                            <p>
+                                <span><a href="https://parenthelp.parentpaygroup.com/csp?sysparm_article=KB0010526&id=kb_article_view&sysparm_rank=1&sysparm_tsqueryId=064138098326265054c7cdb8beaad345" target="_blank">How to request a refund</a></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <input type="hidden" name="ctl00$ctl00$body$body$iUserID" id="iUserID" />
+
+
+
+                    
+    
+
+                </div>
+            </div>
+        </div>
+
+        <!--Footer -->
+        <footer>
+            <div class="container-fluid">
+                <div class="footer-social hidden-print">
+                    <ul class="list-inline text-center">
+                        <li>
+                            <a target="_blank" href="https://twitter.com/ParentPay">
+                                <img src="https://app.parentpay.com/V3Payer4W3/images/twitter42.png" alt="twitter logo" title="Follow us on Twitter" />
+                            </a>
+                        </li>
+                        <li>
+                            <a target="_blank" href="https://www.facebook.com/ParentPay">
+                                <img src="https://app.parentpay.com/V3Payer4W3/images/facebook42.png" alt="facebook logo" title="Find us on Facebook" />
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="https://www.linkedin.com/company/parentpay-ltd" target="_blank" class="last">
+                                <img src="https://app.parentpay.com/V3Payer4W3/images/linkedin42.png" alt="LinkedIn logo" />
+                            </a>
+                        </li>
+                    </ul>
+
+                </div>
+                <div class="footer-links hidden-print">
+                    <ul class="list-inline text-center">
+                        <li><a href="https://www.parentpay.com/terms-and-conditions" target="_blank">Terms &amp; conditions<span class="glyphicons glyphicons-new-window-alt"></span></a></li>
+                        <li><a href="https://www.parentpay.com/privacy-policy/" target="_blank">Privacy notice<span class="glyphicons glyphicons-new-window-alt"></span></a></li>
+                        <li><a href="https://www.surveymonkey.co.uk/r/JGY5M9H" target="_blank">Leave feedback<span class="glyphicons glyphicons-new-window-alt"></span></a></li>
+                        <li><a href="https://www.parentpay.com/use-of-cookies" target="_blank">Use of cookies<span class="glyphicons glyphicons-new-window-alt"></span></a></li>
+                        <li><a href="https://parenthelp.parentpaygroup.com/csp?id=ppg_emp_taxonomy_topic_customer&topic_id=0769b1961b1b5a10dffc2f04b24bcb76" target="_blank">Support<span class="glyphicons glyphicons-new-window-alt"></span></a></li>
+                    </ul>
+                </div>
+                <div class="copyright">
+                    
+                        <p class="text-center">
+                            &copy; Copyright 2026. ParentPay Limited. All rights reserved. <span>
+                                PPCLVVPPCWWE27 - 4.210.7959.0</span>
+                        </p>
+                    
+                </div>
+            </div>
+        </footer>
+
+
+        
+    
+
+
+    
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="" />
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="" />
+</div></form>
+
+    <div class="overlay-container js-hide" id="loadingOverlay">
+        <div class="overlay form-popup">
+            <img src="https://app.parentpay.com/V3Payer4W3/images/icons/ajax-loader.gif" width="16" height="16" alt="Loading" />
+            Loading...
+        </div>
+    </div>
+    <!-- 4.210.5297.0 -->
+</body>
+</html>

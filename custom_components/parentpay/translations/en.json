@@ -1,0 +1,40 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "ParentPay",
+        "data": {
+          "username": "Email / username",
+          "password": "Password"
+        }
+      },
+      "reauth_confirm": {
+        "title": "Re-enter ParentPay password",
+        "data": {
+          "password": "Password"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "Invalid username or password.",
+      "cannot_connect": "Could not connect to ParentPay."
+    },
+    "abort": {
+      "already_configured": "This account is already configured.",
+      "reauth_successful": "Re-authentication was successful."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "ParentPay options",
+        "data": {
+          "poll_interval_minutes": "Poll interval (minutes)",
+          "poll_window_start": "Poll window start (HH:MM)",
+          "poll_window_end": "Poll window end (HH:MM)",
+          "purchases_list_depth": "Purchases list depth"
+        }
+      }
+    }
+  }
+}

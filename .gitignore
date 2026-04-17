@@ -1,0 +1,28 @@
+.DS_Store
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+*.egg-info/
+dist/
+build/
+
+# Virtual envs
+.venv/
+venv/
+.env.local
+
+# IDE
+.idea/
+.vscode/
+
+# HA runtime (if running HA locally for smoke tests)
+config/
+.claude/

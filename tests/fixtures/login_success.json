@@ -1,0 +1,33 @@
+{
+  "_note": "Captured 2026-04-16. Request/response pair redacted.",
+  "_request": {
+    "method": "POST",
+    "url": "https://app.parentpay.com/public/api/security/authentication/login",
+    "headers": {
+      "Content-Type": "application/x-www-form-urlencoded",
+      "Accept": "application/json, text/plain, */*",
+      "Origin": "https://app.parentpay.com",
+      "Referer": "https://app.parentpay.com/",
+      "X-Xsrf-Token": "<xsrf-token-if-second-attempt-after-get>"
+    },
+    "body": "username=user%40example.com&password=REDACTED"
+  },
+  "_response_status": "HTTP/2 200 OK",
+  "_response_headers": {
+    "Content-Type": "application/json; charset=utf-8",
+    "Set-Cookie": [
+      "ppauth=<redacted>; domain=.app.parentpay.com; path=/; secure; httponly",
+      "XSRF-TOKEN=<uuid>; domain=.app.parentpay.com; path=/; secure",
+      "pp2auth=<redacted>; domain=.app.parentpay.com; path=/; secure; HttpOnly",
+      "bm_sv=<redacted>; Domain=.parentpay.com; Path=/; SameSite=None; Secure"
+    ]
+  },
+  "isActivated": true,
+  "id": "00000000-0000-0000-0000-000000000000",
+  "username": "user@example.com",
+  "userType": "1",
+  "integrationCookieUrl": "https://app.parentpay.com/V3Payer4W3/Payer/Default.aspx",
+  "sessionLifespan": 0,
+  "isImpersonated": false,
+  "isMfaEnabled": false
+}

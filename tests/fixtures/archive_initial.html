@@ -1,0 +1,1348 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="IE-edge" http-equiv="X-UA-compatible"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Transaction history | ParentPay Payer</title>
+<link href="../favicon.png" rel="icon" type="image/png"/>
+</head>
+<body>
+<form action="./MS_Archive.aspx" id="frmMain" method="post">
+<div class="aspNetHidden">
+<input id="__EVENTTARGET" name="__EVENTTARGET" type="hidden" value=""/>
+<input id="__EVENTARGUMENT" name="__EVENTARGUMENT" type="hidden" value=""/>
+<input id="__LASTFOCUS" name="__LASTFOCUS" type="hidden" value=""/>
+<input id="__VIEWSTATE" name="__VIEWSTATE" type="hidden" value=""/>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['frmMain'];
+if (!theForm) {
+    theForm = document.frmMain;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+<script src="/V3Payer4VBW3/WebResource.axd?d=pynGkmcFUV13He1Qd6_TZJai_AecnrVb08unVnNlBc3dwIYwNhWZY38q3gfQ1dy1LRqbpjop6J3U2IXYwy0gXg2&amp;t=638901572248157332" type="text/javascript"></script>
+<span id="ctl00_googleAnalytics"></span>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<link href="https://app.parentpay.com/V3Payer4W3/favicon.png" rel="icon" type="image/png"/>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<script src="https://app.parentpay.com/V3Payer4W3/ClientScripts/bootstrap-fallback.min.js" type="text/javascript"></script>
+<script>
+    LoadBootstrapFallbackCss("https://app.parentpay.com/V3Payer4W3/new-styles/css/bootstrap.min.css");
+</script>
+<link href="https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900" rel="stylesheet" type="text/css"/>
+<link href="https://app.parentpay.com/V3Payer4W3/new-styles/css/vendor.css?v=4.203.2533.0" rel="stylesheet"/>
+<link href="https://app.parentpay.com/V3Payer4W3/new-styles/css/styles.css?v=4.203.2533.0" rel="stylesheet"/>
+<!-- OLD CSS FILES - REMOVE COMMENTED OUT FILES WHEN WE FINISH -->
+<!--[if IE]>
+        <link rel="shortcut icon" href="../favicon.ico" />
+    <![endif]-->
+<script type="text/javascript">var globalWebServiceUrl = "https://app.parentpay.com/V3Payer4W3/Handlers/WebService.asmx";</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/javascript"></script>
+<script>
+        window.jQuery || document.write('<script src="https://app.parentpay.com/V3Payer4W3/ClientScripts/jquery-1.11.3.min.js"><\/script>')
+    </script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="text/javascript"></script>
+<script>
+        $.fn.modal || document.write('<script src="https://app.parentpay.com/V3Payer4W3/ClientScripts/bootstrap.min.js"><\/script>');
+    </script>
+<script src="https://app.parentpay.com/V3Payer4W3/ClientScripts/PayerMaster.js" type="text/javascript"></script>
+<script src="https://app.parentpay.com/V3Payer4W3/ClientScripts/jquery.blockUI.min.js" type="text/javascript"></script>
+<script src="https://app.parentpay.com/AUTH/JS/js-cookie.js" type="text/javascript"></script>
+<script src="https://app.parentpay.com/AUTH/JS/jquery.storageapi.min.js" type="text/javascript"></script>
+<script src="https://app.parentpay.com/AUTH/JS/pp2-token-keepalive.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+        $(document).ready(function () {
+
+            
+
+            $('.menu-no-data').parents('table').css('border-bottom', 'none');
+
+        });
+
+    </script>
+<script type="text/javascript">
+    $(function () {
+        //collapses the side nav into the hamburger for responsive views
+
+        $(function () {
+            $('#hamburger').on('click', function () {
+                $(this).toggleClass('change');
+                $("#ctl00_payerSideNav_nav1").toggleClass("slide-in");
+                $(".nav-overlay").toggleClass("is-active");
+                $("body").toggleClass("no-scroll");
+                $(window).scrollTop(0);
+            });
+        });
+
+        $(window).resize(function () {
+            if ($(window).width() < 992 && $('#hamburger').hasClass('change')) {
+                $(window).scrollTop(0);
+            }
+        }).resize();
+
+        $('.nav-overlay').click(function () {
+            $('#hamburger').trigger('click');
+        });
+
+        $('#side-menu-collapse li.active').each(function () {
+            $(this).parent().parent().removeClass('collapse');
+        });
+
+        $('.navbar-nav li:nth-child(5) a').attr('target', '_blank');
+
+        //Bootstrap javascript addons
+        $('[data-toggle="popover"]').popover();
+
+        $("[class*=aNavLinks]").each(function () {
+            if ($(this).attr('target') == "_blank") {
+                $(this).find('.glyphicons-new-window-alt').show();
+            } else {
+                $(this).find('.glyphicons-new-window-alt').hide();
+            }
+        });
+    });
+</script>
+<nav class="navbar navbar-default">
+<div class="container-fluid">
+<div class="navbar-header">
+<a class="sr-only sr-only-focusable" href="#mainContent" tabindex="1">Skip to main content</a>
+<!--ParentPay logo-->
+<a class="navbar-brand" href="https://app.parentpay.com/V3Payer4W3/Payer/Default.aspx" tabindex="2">
+<img alt="Parentpay logo" src="https://app.parentpay.com/V3Payer4W3/images/logo_22.svg"/></a>
+<a class="btn btn-default navbar-btn pull-right" href='javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions("ctl00$cmdLogout", "", true, "", "", false, true))' id="ctl00_cmdLogout" tabindex="4">Logout <span class="glyphicons glyphicons-log-out"></span></a>
+<ul class="nav navbar-nav hidden-sm hidden-xs">
+<li class="active">
+<a class="aNavLinks" href="https://app.parentpay.com/V3Payer4W3/Payer/Default.aspx" tabindex="3">Home
+                                <span class="glyphicons glyphicons-new-window-alt"></span>
+</a></li>
+<li class="">
+<a class="aNavLinks" href="https://app.parentpay.com/V3Payer4W3/MyAccount/Statements/Statements.aspx" tabindex="3">Parent Account
+                                <span class="glyphicons glyphicons-new-window-alt"></span>
+</a></li>
+<li class="">
+<a class="aNavLinks" href="https://app.parentpay.com/V3Payer4W3/Payer/Communications.aspx" tabindex="3">Communication
+                                <span class="glyphicons glyphicons-new-window-alt"></span>
+</a></li>
+<li class="">
+<a class="aNavLinks" href="/public/client/payer/#/profile-settings" tabindex="3">Profile Settings
+                                <span class="glyphicons glyphicons-new-window-alt"></span>
+</a></li>
+<li class="">
+<a class="aNavLinks" href="https://parenthelp.parentpaygroup.com/csp?id=ppg_emp_taxonomy_topic_customer&amp;topic_id=0769b1961b1b5a10dffc2f04b24bcb76&amp;in_context=true" tabindex="3">Help
+                                <span class="glyphicons glyphicons-new-window-alt"></span>
+</a></li>
+</ul>
+</div>
+</div>
+</nav>
+<div class="welcome-bar">
+<div class="container-fluid">
+<!-- mobile parent account balance -->
+<div class="row">
+<div class="col-xs-6">
+<!--welcome message -->
+<p class="hidden-xs welcome-message">
+                    Welcome,
+					<span class="username">
+                        Test User<span class="hidden-sm"> (user@example.com)</span></span>
+</p>
+<!-- hamburger icon -->
+<button aria-expanded="false" class="navbar-toggle" data-target="#ctl00_payerSideNav_nav1" id="hamburger" type="button">
+<span class="sr-only">Secondary menu</span>
+<div class="burger">
+<div class="bar1"></div>
+<div class="bar2"></div>
+<div class="bar3"></div>
+</div>
+</button>
+</div>
+<div class="col-xs-6">
+<div class="pull-right">
+<!--link to basket page-->
+<div class="parent-account-credit">
+</div>
+<div class="basket">
+<a class="pull-right btn-basket" href="https://app.parentpay.com/V3Payer4W3/Home/Basket.aspx">
+<span class="sr-only">Basket</span>
+<span class="glyphicons glyphicons-shopping-cart vb-shopping-cart"></span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="container-fluid">
+<div class="row">
+<!-- side nav desktop -->
+<div id="outAreapayerSideNav">
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('.mobile-subcategory-items, .mobile-thirdcategory-items, .back-button').hide(); // Set initial state, only show the back btn on second and third level items
+        localStorage.setItem('selectedSubcategory', '0'); // '0' is the top level (main-nav-item)
+
+        $('.js-toggle-mobile-subcategory').click(function () {
+            var subcategoryName = $(this).data('subcategory');
+
+            var parentCategoryName = $(this).data('parentcategory');
+            localStorage.setItem('subcategoryParent', parentCategoryName);
+            localStorage.setItem('selectedSubcategory', subcategoryName);
+
+
+            $('.' + subcategoryName).show();
+            if (subcategoryName === 'Consumer') {
+                // the js-set-consumer-data function will open the consumer navlinks
+                $('.nonConsumerTertiaryNavItems').hide();
+            } else {
+                $('.nonConsumerTertiaryNavItems').show();
+                $('.consumerTertiaryNavItems').hide();
+            }
+
+            $('.main-mobile-nav-item').hide();
+            $('.' + parentCategoryName).hide();
+            $('.back-button').show();
+        });
+
+        // '0' in local storage is the top level (main-mobile-nav-item)
+        // else we're looking for the second level item to go back to
+        $('.back-button').click(function () {
+            var parentCategoryName = localStorage.getItem('subcategoryParent');
+            if (parentCategoryName === '0') {
+                $('.mobile-subcategory-items').hide();
+                $('.mobile-thirdcategory-items').hide();
+                $('.back-button').hide();
+                $('.main-mobile-nav-item').show();
+            } else {
+                localStorage.setItem('subcategoryParent', '0');
+                $('.mobile-thirdcategory-items').hide();
+                $('.' + parentCategoryName).show();
+            }
+        });
+
+        $('.js-set-consumer-data').click(function () {
+            var consumerData = $(this).data('consumer-data');
+            var consumerId = consumerData.id;
+            $('.ci_' + consumerId).show();
+        });
+
+        // Desktop side nav JS
+        $('a[aria-expanded]').each(function () {
+            const isExpanded = $(this).attr('aria-expanded') === 'true';
+            $(this).find('.js-plus').toggle(!isExpanded);
+            $(this).find('.js-negative').toggle(isExpanded);
+        }).on('click', function () {
+            const isExpanded = $(this).attr('aria-expanded') === 'true';
+            $(this).find('.js-plus').toggle(isExpanded);
+            $(this).find('.js-negative').toggle(!isExpanded);
+        });
+
+        $('a.linkTagButton').each(function () {
+            const isBlankTarget = $(this).attr('target') == "_blank";
+            $(this).find('.js-no-window').toggle(!isBlankTarget);
+            $(this).find('.js-new-window').toggle(isBlankTarget);
+        });
+
+    });
+</script>
+<span class="hidden">
+    Home</span>
+<div class="col-md-3">
+<nav class="secondary-nav" id="side-menu-collapse">
+<!-- child circles -->
+<div class="row hidden-xs hidden-sm">
+<div class="col-xs-4 text-center">
+<a href="https://app.parentpay.com/V3Payer4W3/Home/ChildSummary.aspx?ConsumerId=11111111" title="Alice">
+<img alt="child icon" class="img-responsive img-circle center-block &lt;%# BindConsumerSelectedClass(Container.DataItem) %&gt;" height="46" id="ctl00_payerSideNav_rptChildCircles_ctl00_imgSilhouette" src="https://app.parentpay.com/V3Payer4W3/images/child-silhouette.jpg" width="46"/>
+<span class="center-block desktop-child-text">Alice</span>
+</a>
+</div>
+<div class="col-xs-4 text-center">
+<a href="https://app.parentpay.com/V3Payer4W3/Home/ChildSummary.aspx?ConsumerId=22222222" title="Bob">
+<img alt="child icon" class="img-responsive img-circle center-block &lt;%# BindConsumerSelectedClass(Container.DataItem) %&gt;" height="46" id="ctl00_payerSideNav_rptChildCircles_ctl01_imgSilhouette" src="https://app.parentpay.com/V3Payer4W3/images/child-silhouette.jpg" width="46"/>
+<span class="center-block desktop-child-text">Bob</span>
+</a>
+</div>
+<div class="col-xs-4 text-center" id="ctl00_payerSideNav_divAddChild">
+<a href="https://app.parentpay.com/V3Payer4W3/Payer/AddChild.aspx">
+<img alt="add icon" class="img-responsive img-circle center-block" height="46" src="https://app.parentpay.com/V3Payer4W3/images/add-child-on.jpg" width="46"/><span>Add child</span></a>
+</div>
+</div>
+<!-- original layout to use for desktop -->
+<div class="secondary-nav-links hidden-sm hidden-xs">
+<div id="ctl00_payerSideNav_rptSideNav_ctl00_pnlDoesntHaveChildNavItems">
+<div class="">
+<a href="https://app.parentpay.com/V3Payer4W3/Home/PaymentItems/PaymentItems.aspx">
+<span class=""></span>
+<span>Active Payment items
+                                </span>
+<span class="halflings halflings-chevron-right pull-right"></span></a>
+</div>
+</div>
+<div id="ctl00_payerSideNav_rptSideNav_ctl01_pnlDoesntHaveChildNavItems">
+<div class="">
+<a href="https://app.parentpay.com/V3Payer4W3/Home/PaymentItems/PaymentItems.aspx?state=2">
+<span class=""></span>
+<span>Historical Payment items
+                                </span>
+<span class="halflings halflings-chevron-right pull-right"></span></a>
+</div>
+</div>
+<div id="ctl00_payerSideNav_rptSideNav_ctl02_pnlHasChildNavItems">
+<div id="collapseListGroupHeading3">
+<a aria-controls="collapseListGroup3" aria-expanded="false" class="js-collapse" data-toggle="collapse" href="#collapseListGroup3" role="button">
+<span class=""></span>Transaction history
+                                <span class="halflings halflings-plus pull-right js-plus"></span>
+<span class="halflings halflings-minus pull-right js-negative"></span>
+</a>
+</div>
+<div aria-expanded="true" aria-labelledby="collapseListGroupHeading3" class="panel-collapse collapse" id="collapseListGroup3" role="tabpanel">
+<ul class="list-unstyled">
+<li class="active">
+<a class="linkTagButton" href="https://app.parentpay.com/V3Payer4VBW3/Consumer/MS_Archive.aspx" target="">
+<span>Payment history</span>
+<span class="halflings halflings-chevron-right pull-right js-no-window"></span>
+<span class="halflings halflings-new-window pull-right js-new-window"></span>
+</a></li>
+<li class="">
+<a class="linkTagButton" href="https://app.parentpay.com/V3Payer4VBW3/Consumer/MS_Statement.aspx" target="">
+<span>Balance history</span>
+<span class="halflings halflings-chevron-right pull-right js-no-window"></span>
+<span class="halflings halflings-new-window pull-right js-new-window"></span>
+</a></li>
+</ul>
+</div>
+</div>
+<div id="ctl00_payerSideNav_rptSideNav_ctl03_pnlDoesntHaveChildNavItems">
+<div class="">
+<a href="https://app.parentpay.com/V3Payer4W3/Payer/AddChild.aspx">
+<span class=""></span>
+<span>Add a child
+                                </span>
+<span class="halflings halflings-chevron-right pull-right"></span></a>
+</div>
+</div>
+<div id="ctl00_payerSideNav_rptSideNav_ctl04_pnlHasChildNavItems">
+<div id="collapseListGroupHeading5">
+<a aria-controls="collapseListGroup5" aria-expanded="false" class="js-collapse" data-toggle="collapse" href="#collapseListGroup5" role="button">
+<span class=""></span>View school and caterer
+                                <span class="halflings halflings-plus pull-right js-plus"></span>
+<span class="halflings halflings-minus pull-right js-negative"></span>
+</a>
+</div>
+<div aria-expanded="true" aria-labelledby="collapseListGroupHeading5" class="panel-collapse collapse" id="collapseListGroup5" role="tabpanel">
+<ul class="list-unstyled">
+<li class="">
+<a class="linkTagButton" href="https://app.parentpay.com/V3Payer4W3/Payer/SchoolSummary.aspx?id=99999" target="">
+<span>Test School</span>
+<span class="halflings halflings-chevron-right pull-right js-no-window"></span>
+<span class="halflings halflings-new-window pull-right js-new-window"></span>
+</a></li>
+<li class="">
+<a class="linkTagButton" href="https://app.parentpay.com/V3Payer4W3/Payer/LeaSummary.aspx?id=4190" target="">
+<span>Sutton</span>
+<span class="halflings halflings-chevron-right pull-right js-no-window"></span>
+<span class="halflings halflings-new-window pull-right js-new-window"></span>
+</a></li>
+</ul>
+</div>
+</div>
+<div id="ctl00_payerSideNav_rptSideNav_ctl05_pnlHasChildNavItems">
+<div id="collapseListGroupHeading6">
+<a aria-controls="collapseListGroup6" aria-expanded="false" class="js-collapse" data-toggle="collapse" href="#collapseListGroup6" role="button">
+<span class=""></span>ParentPay support
+                                <span class="halflings halflings-plus pull-right js-plus"></span>
+<span class="halflings halflings-minus pull-right js-negative"></span>
+</a>
+</div>
+<div aria-expanded="true" aria-labelledby="collapseListGroupHeading6" class="panel-collapse collapse" id="collapseListGroup6" role="tabpanel">
+<ul class="list-unstyled">
+<li class="">
+<a class="linkTagButton" href="https://app.parentpay.com/V3Payer4W3/PostLogin/Guidance.aspx" target="">
+<span>Take the tour</span>
+<span class="halflings halflings-chevron-right pull-right js-no-window"></span>
+<span class="halflings halflings-new-window pull-right js-new-window"></span>
+</a></li>
+<li class="">
+<a class="linkTagButton" href="https://parenthelp.parentpaygroup.com/csp?id=ppg_emp_taxonomy_topic_customer&amp;topic_id=0769b1961b1b5a10dffc2f04b24bcb76&amp;in_context=true" target="_blank">
+<span>Help and support</span>
+<span class="halflings halflings-chevron-right pull-right js-no-window"></span>
+<span class="halflings halflings-new-window pull-right js-new-window"></span>
+</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outAreanimblAdvertSideNav"></div>
+</nav>
+</div>
+<!-- end desktop version -->
+<!-- mobile layout with new data -->
+<div class="col-xs-12 hidden-print hidden-md hidden-lg slide-nav" id="ctl00_payerSideNav_nav1">
+<nav class="secondary-nav">
+<div class="secondary-nav-links hidden-lg hidden-md">
+<a class="back-button secondary-nav"><span class="halflings halflings-chevron-left"></span>
+                            Back</a>
+<ul class="list-unstyled">
+<li>
+<div class="main-mobile-nav-item" id="liTopLevelItem">
+<a data-parentcategory="0" data-subcategory="DefaultPage" href="https://app.parentpay.com/V3Payer4W3/Payer/Default.aspx" id="ctl00_payerSideNav_topLevelMobileItems_ctrl0_aTopLevel">Home
+                                    
+                                </a>
+</div>
+</li>
+<li>
+<div class="main-mobile-nav-item" id="liTopLevelItem">
+<a class="js-toggle-mobile-subcategory" data-parentcategory="0" data-subcategory="Home" id="ctl00_payerSideNav_topLevelMobileItems_ctrl1_aTopLevel">Payer Dashboard
+                                    <span class="halflings halflings-chevron-right pull-right" id="ctl00_payerSideNav_topLevelMobileItems_ctrl1_spanTopChevron"></span>
+</a>
+</div>
+</li>
+<li>
+<div class="main-mobile-nav-item" id="liTopLevelItem">
+<a class="js-toggle-mobile-subcategory" data-parentcategory="0" data-subcategory="ParentAccount" id="ctl00_payerSideNav_topLevelMobileItems_ctrl2_aTopLevel">Parent Account
+                                    <span class="halflings halflings-chevron-right pull-right" id="ctl00_payerSideNav_topLevelMobileItems_ctrl2_spanTopChevron"></span>
+</a>
+</div>
+</li>
+<li>
+<div class="main-mobile-nav-item" id="liTopLevelItem">
+<a class="js-toggle-mobile-subcategory" data-parentcategory="0" data-subcategory="Communication" id="ctl00_payerSideNav_topLevelMobileItems_ctrl3_aTopLevel">Communication
+                                    <span class="halflings halflings-chevron-right pull-right" id="ctl00_payerSideNav_topLevelMobileItems_ctrl3_spanTopChevron"></span>
+</a>
+</div>
+</li>
+<li>
+<div class="main-mobile-nav-item" id="liTopLevelItem">
+<a class="js-toggle-mobile-subcategory" data-parentcategory="0" data-subcategory="ProfileSettings" id="ctl00_payerSideNav_topLevelMobileItems_ctrl4_aTopLevel">Profile Settings
+                                    <span class="halflings halflings-chevron-right pull-right" id="ctl00_payerSideNav_topLevelMobileItems_ctrl4_spanTopChevron"></span>
+</a>
+</div>
+</li>
+<li>
+<div class="main-mobile-nav-item" id="liTopLevelItem">
+<a class="js-toggle-mobile-subcategory" data-parentcategory="0" data-subcategory="Help" id="ctl00_payerSideNav_topLevelMobileItems_ctrl5_aTopLevel">Help
+                                    <span class="halflings halflings-chevron-right pull-right" id="ctl00_payerSideNav_topLevelMobileItems_ctrl5_spanTopChevron"></span>
+</a>
+</div>
+</li>
+</ul>
+<ul class="list-unstyled">
+<div class="Home mobile-subcategory-items" id="liSecondLevelMobileItems">
+<li>
+</li>
+<li>
+<div id="ctl00_payerSideNav_secondLevelMobileItems_ctrl0_lvMobileConsumerLines_ctrl0_consumerNavItems">
+<a class="js-toggle-mobile-subcategory js-set-consumer-data" data-consumer-data='{"id":"11111111", "name": "Alice"}' data-parentcategory="Home" data-subcategory="Consumer">
+<span class="halflings halflings-user" id="ctl00_payerSideNav_secondLevelMobileItems_ctrl0_lvMobileConsumerLines_ctrl0_spanIcon"></span>
+<span class="mobile-child-text">
+                                                    Alice
+                                                </span>
+<span class="halflings halflings-chevron-right pull-right"></span>
+</a>
+</div>
+<div id="ctl00_payerSideNav_secondLevelMobileItems_ctrl0_lvMobileConsumerLines_ctrl1_consumerNavItems">
+<a class="js-toggle-mobile-subcategory js-set-consumer-data" data-consumer-data='{"id":"22222222", "name": "Bob"}' data-parentcategory="Home" data-subcategory="Consumer">
+<span class="halflings halflings-user" id="ctl00_payerSideNav_secondLevelMobileItems_ctrl0_lvMobileConsumerLines_ctrl1_spanIcon"></span>
+<span class="mobile-child-text">
+                                                    Bob
+                                                </span>
+<span class="halflings halflings-chevron-right pull-right"></span>
+</a>
+</div>
+</li>
+</div>
+<div class="Home mobile-subcategory-items" id="liSecondLevelMobileItems">
+<li>
+<div id="ctl00_payerSideNav_secondLevelMobileItems_ctrl1_nonConsumerSecondaryNavItems">
+<a data-parentcategory="Home" data-subcategory="ActivePaymentItems" href="https://app.parentpay.com/V3Payer4W3/Home/PaymentItems/PaymentItems.aspx" id="ctl00_payerSideNav_secondLevelMobileItems_ctrl1_aSecondLevel">
+                                        Active Payment items
+                                        
+                                        
+                                    </a>
+</div>
+</li>
+<li>
+</li>
+</div>
+<div class="Home mobile-subcategory-items" id="liSecondLevelMobileItems">
+<li>
+<div id="ctl00_payerSideNav_secondLevelMobileItems_ctrl2_nonConsumerSecondaryNavItems">
+<a data-parentcategory="Home" data-subcategory="HistoricPaymentItems" href="https://app.parentpay.com/V3Payer4W3/Home/PaymentItems/PaymentItems.aspx?state=2" id="ctl00_payerSideNav_secondLevelMobileItems_ctrl2_aSecondLevel">
+                                        Historical Payment items
+                                        
+                                        
+                                    </a>
+</div>
+</li>
+<li>
+</li>
+</div>
+<div class="Home mobile-subcategory-items" id="liSecondLevelMobileItems">
+<li>
+<div id="ctl00_payerSideNav_secondLevelMobileItems_ctrl3_nonConsumerSecondaryNavItems">
+<a class="js-toggle-mobile-subcategory" data-parentcategory="Home" data-subcategory="TransactionHistory" id="ctl00_payerSideNav_secondLevelMobileItems_ctrl3_aSecondLevel">
+                                        Transaction History
+                                        <span class="halflings halflings-chevron-right pull-right" id="ctl00_payerSideNav_secondLevelMobileItems_ctrl3_secondLevelChevron"></span>
+</a>
+</div>
+</li>
+<li>
+</li>
+</div>
+<div class="Home mobile-subcategory-items" id="liSecondLevelMobileItems">
+<li>
+<div id="ctl00_payerSideNav_secondLevelMobileItems_ctrl4_nonConsumerSecondaryNavItems">
+<a data-parentcategory="Home" data-subcategory="AddConsumer" href="https://app.parentpay.com/V3Payer4W3/Payer/AddChild.aspx" id="ctl00_payerSideNav_secondLevelMobileItems_ctrl4_aSecondLevel">
+                                        Add a child
+                                        
+                                        
+                                    </a>
+</div>
+</li>
+<li>
+</li>
+</div>
+<div class="Home mobile-subcategory-items" id="liSecondLevelMobileItems">
+<li>
+<div id="ctl00_payerSideNav_secondLevelMobileItems_ctrl5_nonConsumerSecondaryNavItems">
+<a class="js-toggle-mobile-subcategory" data-parentcategory="Home" data-subcategory="ViewSchoolAndCaterer" id="ctl00_payerSideNav_secondLevelMobileItems_ctrl5_aSecondLevel">
+                                        View school and caterer
+                                        <span class="halflings halflings-chevron-right pull-right" id="ctl00_payerSideNav_secondLevelMobileItems_ctrl5_secondLevelChevron"></span>
+</a>
+</div>
+</li>
+<li>
+</li>
+</div>
+<div class="Help mobile-subcategory-items" id="liSecondLevelMobileItems">
+<li>
+<div id="ctl00_payerSideNav_secondLevelMobileItems_ctrl6_nonConsumerSecondaryNavItems">
+<a data-parentcategory="Help" data-subcategory="TakeTheTour" href="https://app.parentpay.com/V3Payer4W3/PostLogin/Guidance.aspx" id="ctl00_payerSideNav_secondLevelMobileItems_ctrl6_aSecondLevel">
+                                        Take the tour
+                                        
+                                        
+                                    </a>
+</div>
+</li>
+<li>
+</li>
+</div>
+<div class="Help mobile-subcategory-items" id="liSecondLevelMobileItems">
+<li>
+<div id="ctl00_payerSideNav_secondLevelMobileItems_ctrl7_nonConsumerSecondaryNavItems">
+<a data-parentcategory="Help" data-subcategory="BrowseHelpTopics" href="https://parenthelp.parentpaygroup.com/csp?id=ppg_emp_taxonomy_topic_customer&amp;topic_id=0769b1961b1b5a10dffc2f04b24bcb76&amp;in_context=true" id="ctl00_payerSideNav_secondLevelMobileItems_ctrl7_aSecondLevel" target="_blank">
+                                        Help and support
+                                        
+                                        <span class="halflings halflings-new-window pull-right" id="ctl00_payerSideNav_secondLevelMobileItems_ctrl7_spanHelpNewTab"></span>
+</a>
+</div>
+</li>
+<li>
+</li>
+</div>
+<div class="ParentAccount mobile-subcategory-items" id="liSecondLevelMobileItems">
+<li>
+<div id="ctl00_payerSideNav_secondLevelMobileItems_ctrl8_nonConsumerSecondaryNavItems">
+<a data-parentcategory="ParentAccount" data-subcategory="Statements" href="https://app.parentpay.com/V3Payer4W3/MyAccount/Statements/Statements.aspx" id="ctl00_payerSideNav_secondLevelMobileItems_ctrl8_aSecondLevel">
+                                        Statements
+                                        
+                                        
+                                    </a>
+</div>
+</li>
+<li>
+</li>
+</div>
+<div class="ParentAccount mobile-subcategory-items" id="liSecondLevelMobileItems">
+<li>
+<div id="ctl00_payerSideNav_secondLevelMobileItems_ctrl9_nonConsumerSecondaryNavItems">
+<a data-parentcategory="ParentAccount" data-subcategory="BankAccounts" href="/public/client/payer/#/parent-account/bank-transfer-mandate-process" id="ctl00_payerSideNav_secondLevelMobileItems_ctrl9_aSecondLevel">
+                                        Bank accounts
+                                        
+                                        
+                                    </a>
+</div>
+</li>
+<li>
+</li>
+</div>
+<div class="ParentAccount mobile-subcategory-items" id="liSecondLevelMobileItems">
+<li>
+<div id="ctl00_payerSideNav_secondLevelMobileItems_ctrl10_nonConsumerSecondaryNavItems">
+<a data-parentcategory="ParentAccount" data-subcategory="StoredCards" href="https://app.parentpay.com/V3Payer4W3/MyAccount/StoredCards/StoredCards.aspx" id="ctl00_payerSideNav_secondLevelMobileItems_ctrl10_aSecondLevel">
+                                        Stored cards
+                                        
+                                        
+                                    </a>
+</div>
+</li>
+<li>
+</li>
+</div>
+<div class="Communication mobile-subcategory-items" id="liSecondLevelMobileItems">
+<li>
+<div id="ctl00_payerSideNav_secondLevelMobileItems_ctrl11_nonConsumerSecondaryNavItems">
+<a data-parentcategory="Communication" data-subcategory="CommunicationHistory" href="https://app.parentpay.com/V3Payer4W3/Payer/Communications.aspx" id="ctl00_payerSideNav_secondLevelMobileItems_ctrl11_aSecondLevel">
+                                        Communication history
+                                        
+                                        
+                                    </a>
+</div>
+</li>
+<li>
+</li>
+</div>
+<div class="Communication mobile-subcategory-items" id="liSecondLevelMobileItems">
+<li>
+<div id="ctl00_payerSideNav_secondLevelMobileItems_ctrl12_nonConsumerSecondaryNavItems">
+<a data-parentcategory="Communication" data-subcategory="ContactSchools" href="https://app.parentpay.com/V3Payer4VBW3/Consumer/MS_Message.aspx" id="ctl00_payerSideNav_secondLevelMobileItems_ctrl12_aSecondLevel">
+                                        Contact schools
+                                        
+                                        
+                                    </a>
+</div>
+</li>
+<li>
+</li>
+</div>
+<div class="Communication mobile-subcategory-items" id="liSecondLevelMobileItems">
+<li>
+<div id="ctl00_payerSideNav_secondLevelMobileItems_ctrl13_nonConsumerSecondaryNavItems">
+<a data-parentcategory="Communication" data-subcategory="TextMessageBalance" href="https://app.parentpay.com/V3Payer4W3/Communication/TextMessageBalance.aspx" id="ctl00_payerSideNav_secondLevelMobileItems_ctrl13_aSecondLevel">
+                                        Text message balance
+                                        
+                                        
+                                    </a>
+</div>
+</li>
+<li>
+</li>
+</div>
+<div class="Communication mobile-subcategory-items" id="liSecondLevelMobileItems">
+<li>
+<div id="ctl00_payerSideNav_secondLevelMobileItems_ctrl14_nonConsumerSecondaryNavItems">
+<a data-parentcategory="Communication" data-subcategory="MyAlerts" href="https://app.parentpay.com/V3Payer4VBW3/Consumer/MS_MyAlerts.aspx" id="ctl00_payerSideNav_secondLevelMobileItems_ctrl14_aSecondLevel">
+                                        Alert settings
+                                        
+                                        
+                                    </a>
+</div>
+</li>
+<li>
+</li>
+</div>
+<div class="ProfileSettings mobile-subcategory-items" id="liSecondLevelMobileItems">
+<li>
+<div id="ctl00_payerSideNav_secondLevelMobileItems_ctrl15_nonConsumerSecondaryNavItems">
+<a data-parentcategory="ProfileSettings" data-subcategory="PersonalDetails" href="/public/client/payer/#/profile-settings/personal-details" id="ctl00_payerSideNav_secondLevelMobileItems_ctrl15_aSecondLevel">
+                                        Personal details
+                                        
+                                        
+                                    </a>
+</div>
+</li>
+<li>
+</li>
+</div>
+<div class="ProfileSettings mobile-subcategory-items" id="liSecondLevelMobileItems">
+<li>
+<div id="ctl00_payerSideNav_secondLevelMobileItems_ctrl16_nonConsumerSecondaryNavItems">
+<a data-parentcategory="ProfileSettings" data-subcategory="EmailAddresses" href="/public/client/payer/#/profile-settings/email-addresses" id="ctl00_payerSideNav_secondLevelMobileItems_ctrl16_aSecondLevel">
+                                        Email addresses
+                                        
+                                        
+                                    </a>
+</div>
+</li>
+<li>
+</li>
+</div>
+<div class="ProfileSettings mobile-subcategory-items" id="liSecondLevelMobileItems">
+<li>
+<div id="ctl00_payerSideNav_secondLevelMobileItems_ctrl17_nonConsumerSecondaryNavItems">
+<a data-parentcategory="ProfileSettings" data-subcategory="TelephoneNumbers" href="/public/client/payer/#/profile-settings/telephone-numbers" id="ctl00_payerSideNav_secondLevelMobileItems_ctrl17_aSecondLevel">
+                                        Telephone numbers
+                                        
+                                        
+                                    </a>
+</div>
+</li>
+<li>
+</li>
+</div>
+<div class="ProfileSettings mobile-subcategory-items" id="liSecondLevelMobileItems">
+<li>
+<div id="ctl00_payerSideNav_secondLevelMobileItems_ctrl18_nonConsumerSecondaryNavItems">
+<a data-parentcategory="ProfileSettings" data-subcategory="UserName" href="/public/client/payer/#/profile-settings/change-username" id="ctl00_payerSideNav_secondLevelMobileItems_ctrl18_aSecondLevel">
+                                        Login details
+                                        
+                                        
+                                    </a>
+</div>
+</li>
+<li>
+</li>
+</div>
+<div class="ProfileSettings mobile-subcategory-items" id="liSecondLevelMobileItems">
+<li>
+<div id="ctl00_payerSideNav_secondLevelMobileItems_ctrl19_nonConsumerSecondaryNavItems">
+<a data-parentcategory="ProfileSettings" data-subcategory="Password" href="/public/client/payer/#/profile-settings/change-password" id="ctl00_payerSideNav_secondLevelMobileItems_ctrl19_aSecondLevel">
+                                        Password
+                                        
+                                        
+                                    </a>
+</div>
+</li>
+<li>
+</li>
+</div>
+<div class="ProfileSettings mobile-subcategory-items" id="liSecondLevelMobileItems">
+<li>
+<div id="ctl00_payerSideNav_secondLevelMobileItems_ctrl20_nonConsumerSecondaryNavItems">
+<a data-parentcategory="ProfileSettings" data-subcategory="AccountRecovery" href="/public/client/payer/#/profile-settings/account-recovery" id="ctl00_payerSideNav_secondLevelMobileItems_ctrl20_aSecondLevel">
+                                        Account recovery
+                                        
+                                        
+                                    </a>
+</div>
+</li>
+<li>
+</li>
+</div>
+<div class="ProfileSettings mobile-subcategory-items" id="liSecondLevelMobileItems">
+<li>
+<div id="ctl00_payerSideNav_secondLevelMobileItems_ctrl21_nonConsumerSecondaryNavItems">
+<a data-parentcategory="ProfileSettings" data-subcategory="Mfa" href="/public/client/payer/#/profile-settings/mfa" id="ctl00_payerSideNav_secondLevelMobileItems_ctrl21_aSecondLevel">
+                                        Multi-factor authentication
+                                        
+                                        
+                                    </a>
+</div>
+</li>
+<li>
+</li>
+</div>
+</ul>
+<ul class="list-unstyled">
+<div class="TransactionHistory mobile-thirdcategory-items" id="liThirdLevelItem">
+<li>
+<div class="nonConsumerTertiaryNavItems">
+<a class="linkTagButton" href="https://app.parentpay.com/V3Payer4VBW3/Consumer/MS_Archive.aspx">
+<span class="PaymentHistory" data-consumer-url="https://app.parentpay.com/V3Payer4VBW3/Consumer/MS_Archive.aspx" data-data-item-id="PaymentHistory">
+<span class="consumerName_PaymentHistory"></span>Payment history
+                                        </span>
+</a>
+</div>
+</li>
+</div>
+<div class="TransactionHistory mobile-thirdcategory-items" id="liThirdLevelItem">
+<li>
+<div class="nonConsumerTertiaryNavItems">
+<a class="linkTagButton" href="https://app.parentpay.com/V3Payer4VBW3/Consumer/MS_Statement.aspx">
+<span class="BalanceHistory" data-consumer-url="https://app.parentpay.com/V3Payer4VBW3/Consumer/MS_Statement.aspx" data-data-item-id="BalanceHistory">
+<span class="consumerName_BalanceHistory"></span>Balance history
+                                        </span>
+</a>
+</div>
+</li>
+</div>
+<div class="ViewSchoolAndCaterer mobile-thirdcategory-items" id="liThirdLevelItem">
+<li>
+<div class="nonConsumerTertiaryNavItems">
+<a class="linkTagButton" href="https://app.parentpay.com/V3Payer4W3/Payer/SchoolSummary.aspx?id=99999">
+<span class="SchoolSummary" data-consumer-url="https://app.parentpay.com/V3Payer4W3/Payer/SchoolSummary.aspx?id=99999" data-data-item-id="SchoolSummary">
+<span class="consumerName_SchoolSummary"></span>Test School
+                                        </span>
+</a>
+</div>
+</li>
+</div>
+<div class="ViewSchoolAndCaterer mobile-thirdcategory-items" id="liThirdLevelItem">
+<li>
+<div class="nonConsumerTertiaryNavItems">
+<a class="linkTagButton" href="https://app.parentpay.com/V3Payer4W3/Payer/LeaSummary.aspx?id=4190">
+<span class="LeaSummary" data-consumer-url="https://app.parentpay.com/V3Payer4W3/Payer/LeaSummary.aspx?id=4190" data-data-item-id="LeaSummary">
+<span class="consumerName_LeaSummary"></span>Sutton
+                                        </span>
+</a>
+</div>
+</li>
+</div>
+</ul>
+<ul class="list-unstyled">
+<li>
+<div class="mobile-thirdcategory-items consumerTertiaryNavItems ci_11111111" id="ctl00_payerSideNav_consumerLevelMobileItems_ctrl0_divConsumerUrl">
+<a class="linkTagButton" href="https://app.parentpay.com/V3Payer4W3/Home/ChildSummary.aspx?ConsumerId=11111111" id="ctl00_payerSideNav_consumerLevelMobileItems_ctrl0_aConsumer">
+                                    Alice's Page
+                                    
+                                </a>
+</div>
+</li>
+<li>
+<div class="mobile-thirdcategory-items consumerTertiaryNavItems ci_11111111" id="ctl00_payerSideNav_consumerLevelMobileItems_ctrl1_divConsumerUrl">
+<a class="linkTagButton" href="https://app.parentpay.com/V3Payer4W3/Home/Child/ChildDetails/ChildDetails.aspx?ConsumerId=11111111" id="ctl00_payerSideNav_consumerLevelMobileItems_ctrl1_aConsumer">
+                                    Alice's Details
+                                    
+                                </a>
+</div>
+</li>
+<li>
+<div class="mobile-thirdcategory-items consumerTertiaryNavItems ci_11111111" id="ctl00_payerSideNav_consumerLevelMobileItems_ctrl2_divConsumerUrl">
+<a class="linkTagButton" href="https://app.parentpay.com/V3Payer4W3/Payer/MenusAndChoices.aspx?ConsumerId=11111111" id="ctl00_payerSideNav_consumerLevelMobileItems_ctrl2_aConsumer">
+                                    View taken meals and menus
+                                    
+                                </a>
+</div>
+</li>
+<li>
+<div class="mobile-thirdcategory-items consumerTertiaryNavItems ci_22222222" id="ctl00_payerSideNav_consumerLevelMobileItems_ctrl3_divConsumerUrl">
+<a class="linkTagButton" href="https://app.parentpay.com/V3Payer4W3/Home/ChildSummary.aspx?ConsumerId=22222222" id="ctl00_payerSideNav_consumerLevelMobileItems_ctrl3_aConsumer">
+                                    Bob's Page
+                                    
+                                </a>
+</div>
+</li>
+<li>
+<div class="mobile-thirdcategory-items consumerTertiaryNavItems ci_22222222" id="ctl00_payerSideNav_consumerLevelMobileItems_ctrl4_divConsumerUrl">
+<a class="linkTagButton" href="https://app.parentpay.com/V3Payer4W3/Home/Child/ChildDetails/ChildDetails.aspx?ConsumerId=22222222" id="ctl00_payerSideNav_consumerLevelMobileItems_ctrl4_aConsumer">
+                                    Bob's Details
+                                    
+                                </a>
+</div>
+</li>
+<li>
+<div class="mobile-thirdcategory-items consumerTertiaryNavItems ci_22222222" id="ctl00_payerSideNav_consumerLevelMobileItems_ctrl5_divConsumerUrl">
+<a class="linkTagButton" href="https://app.parentpay.com/V3Payer4W3/Payer/MenusAndChoices.aspx?ConsumerId=22222222" id="ctl00_payerSideNav_consumerLevelMobileItems_ctrl5_aConsumer">
+                                    View taken meals and menus
+                                    
+                                </a>
+</div>
+</li>
+</ul>
+</div>
+<div id="outAreanimblAdvert1"></div>
+</nav>
+</div>
+</div>
+<div class="nav-overlay" id="nav-overlay"></div>
+<!-- main content -->
+<div class="col-xs-12 col-md-9" id="mainContent">
+<h1 class="sr-only">ParentPay - Home</h1>
+<h2>Payment history</h2>
+<div class="panel panel-default">
+<div class="panel-body">
+<fieldset>
+<legend class="sr-only">Report filters</legend>
+<div class="row no-mg-bt">
+<div class="col-md-6">
+<div class="form-group">
+<label for="ctl00_selChoosePupil">Name</label>
+<select class="selectpicker form-control" id="ctl00_selChoosePupil" name="ctl00$selChoosePupil" onchange="javascript:setTimeout('__doPostBack(\'ctl00$selChoosePupil\',\'\')', 0)">
+<option selected="selected" value="0">All</option>
+<option value="11111111">Alice</option>
+<option value="22222222">Bob</option>
+</select>
+<!-- Select box with Pupil names (first and last name), if one child this is always preselected, option "All" only visible if more than one child assigned-->
+</div>
+<div class="form-group">
+<label for="ctl00_selChooseService">Payment item</label>
+<select class="form-control selectpicker" id="ctl00_selChooseService" name="ctl00$selChooseService">
+<option selected="selected" value="0">All payment items</option>
+<option value="9000001">Test School:School Meals for Test School</option>
+<option value="2873894">Test School:Student ID card (replacement)</option>
+<option value="2873897">Test School:Lanyard (REPLACEMENT ONLY) for Student ID Card</option>
+<option value="2875778">Test School:Art A Level Fine Art Year 12 - FA Sketchbooks (A3, A4 , A5)</option>
+<option value="2875787">Test School:Art A Level Fine Art Year 12 - Printer Code</option>
+<option value="2875795">Test School:Art A Level Fine Art Year 12 - Top-Up Printer Code</option>
+<option value="2875809">Test School:Art A Level Photography Year 12 - Folder</option>
+<option value="2875813">Test School:Art A Level Photography Year 12 - Sleeves (Pack of 10)</option>
+<option value="2875814">Test School:Art A Level Photography Year 12 - Printer Code</option>
+<option value="2875816">Test School:Art A Level Photography Year 12 - Specialist Paper</option>
+<option value="2875819">Test School:Art A Level Photography Year 12 - Top-Up Printer Code</option>
+<option value="2875820">Test School:Art A Level Photography Year 13 - Folder</option>
+<option value="2875824">Test School:Art A Level Photography Year 13 - Sleeves (Pack of 10)</option>
+<option value="2875828">Test School:Art A Level Photography Year 13 - Printer Code</option>
+<option value="2875830">Test School:Art A Level Photography Year 13 - Top-Up Printer Code</option>
+<option value="2875832">Test School:Art A Level Graphic Design Year 12 - Sketchbook (2)</option>
+<option value="2875835">Test School:Art A Level Graphic Design Year 12 - Printer Code</option>
+<option value="2875837">Test School:Art A Level Graphic Design Year 12 - Graphic Design Pack</option>
+<option value="2875839">Test School:English CGP Conflict Poetry Revision Guide</option>
+<option value="2875844">Test School:Art A Level Graphic Design Year 13 - Printer Code</option>
+<option value="2875845">Test School:Art A Level Graphic Design Year 13 - Top-Up Printer Code</option>
+<option value="2875847">Test School:English - GCSE English Language - Revision Guide</option>
+<option value="2875853">Test School:English CGP Unseen Poetry Revision Guide</option>
+<option value="2875920">Test School:English A Christmas Carol -  Complete Novel with Annotations</option>
+<option value="2875946">Test School:English Macbeth - The Complete Play</option>
+<option value="2875949">Test School:English - GCSE English Language - Workbook</option>
+<option value="2876095">Test School:Maths - Year 9 Set:H/S/A Workbook Foundation</option>
+<option value="2876100">Test School:Maths - Year 9 Set:H/S/A Study Guide Foundation</option>
+<option value="2876118">Test School:Maths - Years 10 &amp; 11 Set:1/2/C Practice Papers Higher</option>
+<option value="2876120">Test School:Maths - Years 10 &amp; 11 Set:1/2 Extension Book Higher</option>
+<option value="2876126">Test School:Maths - Years 10 &amp; 11 Set:1/2/C Rev WK-BK Higher</option>
+<option value="2876130">Test School:Maths - Years 10 &amp; 11 Set:1/2/C Rev Guide Higher</option>
+<option value="2876132">Test School:Maths - Years 10 &amp; 11 Set:H/S/A/T Rev Guide Foundation</option>
+<option value="2876134">Test School:Maths - Years 10 &amp; 11 Set:H/S/A/T Practice Papers Foundation</option>
+<option value="2876136">Test School:Maths - Years 10 &amp; 11 Set:1/2/C Rev Cards Higher</option>
+<option value="2876143">Test School:Maths - Years 10 &amp; 11 Set:H/S/A/T Rev WK-BK Foundation</option>
+<option value="2876145">Test School:Maths - Years 10 &amp; 11 Set:H/S/A/T Rev Cards Foundation</option>
+<option value="2876151">Test School:Maths - Years 10 &amp; 11 Set:H/S Booster Book Foundation</option>
+<option value="2876164">Test School:Maths - Year 11 Set:C/H Target 5 Shape &amp; Statistics</option>
+<option value="2876166">Test School:Maths - Year 11 Set:1 Target 9 Algebra</option>
+<option value="2876171">Test School:Maths - Year 11 Set:S/T/A Target 3 Algebra &amp; Shape Workbook</option>
+<option value="2876176">Test School:Maths - Year 11 Set:1/2/C Target 7 Algebra &amp; Shape</option>
+<option value="2876181">Test School:Maths - Year 11 Set:1 Grade 8-9 Target Exam Practice Workbook higher</option>
+<option value="2876186">Test School:Maths - Year 11 Set:1/2/C Target 7 Numbers &amp; Statistics</option>
+<option value="2876189">Test School:Maths - Year 11 Set:C/H Target 5 Number &amp; Algebra</option>
+<option value="2876195">Test School:Maths - Year 11 Set:S/T/A Target 3 Numbers &amp; Statistics</option>
+<option value="2876196">Test School:Maths - Year 11 Set:1 Target 9 Algebraic Techniques, Shape &amp; Statistics</option>
+<option value="2876205">Test School:Maths - Casio FX-83GT CW Scientific Calculator</option>
+<option value="2876259">Test School:Science - KS4 Foundation Combined Revision Guide</option>
+<option value="2888437">Test School:Gym Membership - Termly Fee</option>
+<option value="2903696">Test School:English A Christmas Carol Bundle - (revision cards, study guide, workbook)</option>
+<option value="2929282">Test School:Maths - Year 7 All Sets - Mastering Maths Develop &amp; Secure Practice Book 1</option>
+<option value="2929306">Test School:Maths - Year 7 Sets:1/2 - Mastering Maths Extend Practice Book 1</option>
+<option value="2929353">Test School:Maths - Year 8 All Sets - Mastering Maths Develop &amp; Secure Practice Book 2</option>
+<option value="2929370">Test School:Maths - Year 8 Sets: 1/2 - Mastering Maths Extend Practice Book 2</option>
+<option value="2929387">Test School:Maths - Year 9 All Sets - Mastering Maths Develop &amp; Secure Practice Book 3</option>
+<option value="2933629">Test School:English - CGP Key Stage 3 English - The Workbook</option>
+<option value="2981189">Test School:Gym Membership - Half Term Fee</option>
+<option value="3479325">Test School:English Year 7 Targeted Workbook</option>
+<option value="3479338">Test School:English KS3 Workbook</option>
+<option value="3479359">Test School:English KS3 Year 8 Targeted Workbook</option>
+<option value="3479368">Test School:English KS3 Year 9 Targeted Workbook</option>
+<option value="3484992">Test School:Art A Level Graphic Design Year 13 - Sketchbook</option>
+<option value="4252040">Test School:English -Macbeth Complete Bundle (Study Guide, Workbook and Revision Cards)</option>
+<option value="4595727">Test School:Year 7 Locker Rental 2025/26</option>
+<option value="4637512">Test School:English - An Inspector Calls - The Play</option>
+<option value="4637559">Test School:English - An Inspector Calls Revision Bundle (Cards, guide, workbook)</option>
+<option value="4647586">Test School:2025 - 26 School Fund Donation</option>
+<option value="4658966">Test School:Dance Club 2025/2026</option>
+<option value="4666323">Test School:Yr 7 Activity Days 2025 to 2026</option>
+<option value="4672896">Test School:Basketball Coaching - Autumn Term 2025</option>
+<option value="4709321">Test School:Year 7 Food Ingredients 2025/26</option>
+<option value="4857559">Test School:Basketball Coaching - Spring Term  2026</option>
+<option value="4891783">Test School:Dance Show 4th February 2026 - Adult Ticket</option>
+<option value="4891833">Test School:Dance Show 4th February 2026 - Child Ticket</option>
+<option value="4926010">Test School:Year 7 Medieval History Workshop on 24 March 2026</option>
+<option value="4931042">Test School:Year 7 &amp; 8 Number days-NSPCC Contribution</option>
+<option value="4995698">Test School:Paragon Racing Sponsorship</option>
+<option value="4998086">Test School:Golf Coaching - Summer Term 2026</option>
+<option value="5020675">Test School:Basketball Coaching - Summer Term 2026</option>
+<option value="2840296">Test School:Locker Rental 22/23</option>
+<option value="2856929">Test School:2022-23 School Fund Donation</option>
+<option value="2875786">Test School:Computing A Level Computer Science BTEC Revision Guide</option>
+<option value="2876107">Test School:Maths - Year 9 Set:1/2/C Study Guide Higher</option>
+<option value="2876110">Test School:Maths - Years 7 &amp; 8 Set:S/A - 3-5 Level Up H/W Book</option>
+<option value="2876114">Test School:Maths - Years 7 &amp; 8 Set:C/H/S - 4-6 Level Up H/ Book</option>
+<option value="2876116">Test School:Maths - Years 7 &amp; 8 Set: 1 - 6-8 Level Up H/W Book</option>
+<option value="2878618">Test School:Exam Fees (Only pay when instructed by Exam office)</option>
+<option value="2880069">Test School:Bike Permit</option>
+<option value="2884509">Test School:Year 7 Food Ingredients 2022/23</option>
+<option value="2920434">Test School:Dance Club</option>
+<option value="2929397">Test School:Maths - Year 9 Sets: 1/2 - Mastering Maths Extend Practice Book 3</option>
+<option value="2933382">Test School:Lost Library Book Charge</option>
+<option value="3087581">Test School:Mufti Day (16/12/22)</option>
+<option value="3123352">Test School:Basketball Club</option>
+<option value="3156402">Test School:Dance Show 8th March - Adult Ticket</option>
+<option value="3156456">Test School:Dance Show 8th March - Child Ticket</option>
+<option value="3214316">Test School:PE - Revision Edexcel GCSE (9-1) Revision Cards</option>
+<option value="3223475">Test School:Year 7 Interactive Workshop on Medieval History</option>
+<option value="3278870">Test School:PE - Training Top - 2XS</option>
+<option value="3278894">Test School:PE - Training Top - XS</option>
+<option value="3278918">Test School:PE - Training Top - S</option>
+<option value="3278940">Test School:PE - Training Top - M</option>
+<option value="3278956">Test School:PE - Training Top - L</option>
+<option value="3278976">Test School:PE - Training Top - XL</option>
+<option value="3278998">Test School:PE - Training Top - 2XL - 3XL</option>
+<option value="3294557">Test School:English Macbeth Bundle -  (revision cards, study guide &amp; workbook)</option>
+<option value="3325989">Test School:Basketball Club - Summer Term 2023</option>
+<option value="3380027">Test School:Sponsored Walk 23rd June 2023</option>
+<option value="3412048">Test School:Locker Rental 23/24</option>
+<option value="3440153">Test School:Mufti Day 21st July 2023</option>
+<option value="3453803">Test School:2023 -24 School Fund Donation</option>
+<option value="3496991">Test School:K BAND Hampton Court Trip 20th October 23</option>
+<option value="3503447">Test School:Crochet Club</option>
+<option value="3517890">Test School:Year 8 Food Ingredients 23/24</option>
+<option value="3528414">Test School:Locker Rental 2023/24.</option>
+<option value="3540874">Test School:Basketball Coaching - Yr 7 to Yr 10 (Autumn Term)</option>
+<option value="3669648">Test School:Basketball Coaching - Yr 7 - Yr 10 (Spring Term 2024)</option>
+<option value="3844936">Test School:Basketball Club - Summer Term 2024</option>
+<option value="3946041">Test School:PE - Training Top - 2XS</option>
+<option value="3946089">Test School:PE - Training Top - XS</option>
+<option value="3946103">Test School:PE - Training Top - S</option>
+<option value="3946116">Test School:PE - Training Top - M</option>
+<option value="3946161">Test School:PE - Training Top - L</option>
+<option value="3946179">Test School:PE - Training Top - XL</option>
+<option value="3946217">Test School:PE - Training Top - 2XL</option>
+<option value="3995487">Test School:Locker Rental 2024/25</option>
+<option value="3998821">Test School:Locker Rental 2024/25</option>
+<option value="4060072">Test School:2024 - 25 School Fund Donation</option>
+<option value="4063124">Test School:Dance Club 2024/25</option>
+<option value="4076528">Test School:Basketball Coaching - Autumn Term 2024</option>
+<option value="4166294">Test School:Year 9 Activity Days 2024 to 2025</option>
+<option value="4203892">Test School:PE - Revise Edexcel GCSE (9-1) Revision Guide</option>
+<option value="4279797">Test School:Basketball Coaching - Spring Term 2025</option>
+<option value="4342178">Test School:Dance Show 4th March 2025 - Adult Ticket</option>
+<option value="4342217">Test School:Dance Show 4th March 2025 - Child Ticket</option>
+<option value="4432773">Test School:Basketball Coaching - Summer Term 2025</option>
+<option value="4432845">Test School:Table Tennis Intermediate - Summer Term 2025</option>
+<option value="4438522">Test School:Golf Coaching</option>
+<option value="4438578">Test School:Golf Coaching - Summer Term 2025</option>
+<option value="4454515">Test School:Matt Dickinson-Author Visit-The Everest Files</option>
+<option value="4454563">Test School:Matt Dickinson-Author Visit-North Face</option>
+<option value="4454588">Test School:Matt Dickinson-Author Visit-Killer Storm</option>
+<option value="4454606">Test School:Matt Dickinson-Author Visit- Lie, Kill, Walk Away</option>
+<option value="4595726">Test School:Locker Rental 2025/26</option>
+<option value="4622973">Test School:Golf Coaching - Autumn Term 2025</option>
+<option value="4665705">Test School:Yr 10 Activity Days 2025 to 2026</option>
+<option value="4741842">Test School:English - A Christmas Carol Theatre Visit (Monday 3rd November)</option>
+<option value="4838421">Test School:Science - Year 10 Sets S/A: Foundation Combined Revision Guide</option>
+<option value="4838482">Test School:Science - Year 10 Sets S/A: Foundation Combined Revision &amp; Practice Guide</option>
+<option value="4838802">Test School:Science - Year 10 Sets 1/2/C/H: Higher Revision Guides (Single)</option>
+<option value="4838850">Test School:Science - Year 10 Sets 1/2/C/H: Higher Revision &amp; Practice Guides (Single)</option>
+<option value="62851">ParentPay Limited:Text message alerts</option>
+</select>
+<!-- Select box with service names, if one service for chosen child this is only service is preselected, option "All" only visible if more than one service for chosen child exists-->
+</div>
+</div>
+</div>
+<div class="row no-mg-bt">
+<div class="col-md-3">
+<div class="form-group">
+<label class="" for="ctl00_txtChooseStartDate" id="ctl00_lbStartDate">Start date</label>
+<div class="input-group">
+<input class="form-control" id="ctl00_txtChooseStartDate" name="ctl00$txtChooseStartDate" type="text" value="16/04/2026"/>
+<div class="input-group-addon">
+<input alt="Choose start date image" id="ctl00_cmdChooseStartDate" name="ctl00$cmdChooseStartDate" src="https://app.parentpay.com/V3Payer4W3/images/calendar.png" type="image"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row no-mg-bt">
+<div class="col-md-3">
+<div class="form-group">
+<label class="" for="ctl00_txtChooseEndDate" id="ctl00_lbEndDate">End date</label>
+<div class="input-group">
+<input class="form-control" id="ctl00_txtChooseEndDate" name="ctl00$txtChooseEndDate" type="text" value="17/04/2026"/>
+<div class="input-group-addon">
+<input alt="Choose end date image" id="ctl00_cmdChooseEndDate" name="ctl00$cmdChooseEndDate" src="https://app.parentpay.com/V3Payer4W3/images/calendar.png" type="image"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+</fieldset>
+</div>
+<div class="panel-footer full-width-btn">
+<input class="btn btn-primary" id="ctl00_cmdSearch" name="ctl00$cmdSearch" onclick='javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions("ctl00$cmdSearch", "", true, "", "", false, false))' type="submit" value="Search"/>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<h3>Report</h3>
+</div>
+<div class="panel-body">
+</div>
+<table class="table table-striped tbHistoryDesktop" summary="Payments">
+<caption>16 Apr 2026 - 17 Apr 2026</caption>
+<thead>
+<tr>
+<th scope="col">
+									        Pupil name</th>
+<th scope="col">
+									        Payment item</th>
+<th class="date-paid" scope="col">
+									        Date paid</th>
+<th class="hidden-xs" scope="col">
+									        Paid to</th>
+<th scope="col">
+									        Notes</th>
+<th scope="col">Status</th>
+<th class="text-right" scope="col">
+									         Amount</th>
+<th scope="col">
+									        Payment method</th>
+<th scope="col">
+									        View receipt</th>
+</tr>
+</thead>
+<tbody>
+<tr cid="11111111" class="">
+<td>
+                                                    Alice
+                                                   <img alt="Duplicate child" class="duplicate-image" id="payHistoryDuplicateImg" src="https://app.parentpay.com/V3Payer4W3/images/child-duplicate-no-background.png"/>
+</td>
+<td>Test Book B</td>
+<td>16 Apr 26</td>
+<td class="hidden-xs">Test School</td> <!-- service owner (Caterer/school name)-->
+<td></td>
+<td>Paid</td>
+<td class="text-right"><span class="">£3.35</span></td>
+<td>
+<span id="ctl00_rptTxns_ctl00_spanPaymentItem">
+												        Parent Account
+												        
+												        
+											        </span>
+</td>
+<td><a class="btn btn-sm btn-block btn-primary" href="https://app.parentpay.com/V3Payer4VBW3/Consumer/PaymentDetailsViewerFX.aspx?TID=1000000001&amp;U=2000000001 ">View receipt</a></td>
+</tr>
+<tr cid="11111111" class="">
+<td>
+                                                    Alice
+                                                   <img alt="Duplicate child" class="duplicate-image" id="payHistoryDuplicateImg" src="https://app.parentpay.com/V3Payer4W3/images/child-duplicate-no-background.png"/>
+</td>
+<td>Test Revision Bundle B</td>
+<td>16 Apr 26</td>
+<td class="hidden-xs">Test School</td> <!-- service owner (Caterer/school name)-->
+<td></td>
+<td>Paid</td>
+<td class="text-right"><span class="">£10.50</span></td>
+<td>
+<span id="ctl00_rptTxns_ctl01_spanPaymentItem">
+												        Parent Account
+												        
+												        
+											        </span>
+</td>
+<td><a class="btn btn-sm btn-block btn-primary" href="https://app.parentpay.com/V3Payer4VBW3/Consumer/PaymentDetailsViewerFX.aspx?TID=1000000001&amp;U=2000000001 ">View receipt</a></td>
+</tr>
+<tr cid="22222222" class="">
+<td>
+                                                    Bob
+                                                   <img alt="Duplicate child" class="duplicate-image" id="payHistoryDuplicateImg" src="https://app.parentpay.com/V3Payer4W3/images/child-duplicate-no-background.png"/>
+</td>
+<td>School Meals for Test School</td>
+<td>16 Apr 26</td>
+<td class="hidden-xs">Test School</td> <!-- service owner (Caterer/school name)-->
+<td>PIZZA SLICE</td>
+<td></td>
+<td class="text-right"><span class="">£-1.71</span></td>
+<td>
+<span id="ctl00_rptTxns_ctl02_spanPaymentItem">
+												        Meal
+												        
+												        
+											        </span>
+</td>
+<td></td>
+</tr>
+<tr cid="11111111" class="">
+<td>
+                                                    Alice
+                                                   <img alt="Duplicate child" class="duplicate-image" id="payHistoryDuplicateImg" src="https://app.parentpay.com/V3Payer4W3/images/child-duplicate-no-background.png"/>
+</td>
+<td>School Meals for Test School</td>
+<td>16 Apr 26</td>
+<td class="hidden-xs">Test School</td> <!-- service owner (Caterer/school name)-->
+<td>ROLL  BUTTER</td>
+<td></td>
+<td class="text-right"><span class="">£0.00</span></td>
+<td>
+<span id="ctl00_rptTxns_ctl03_spanPaymentItem">
+												        Meal
+												        
+												        
+											        </span>
+</td>
+<td></td>
+</tr>
+<tr class="info">
+<td colspan="6"><b>Total</b></td>
+<td class="text-right"><b>£12.14</b></td>
+<td class="text-right" colspan="2"></td>
+</tr>
+</tbody>
+</table>
+<table class="table table-striped tbHistoryMobile" summary="Payments">
+<caption>16 Apr 2026 - 17 Apr 2026</caption>
+<tbody class="paymentHistory">
+<tr cid="11111111" class="paymentHistory">
+<td class="paymentHistory">
+<p>Alice</p>
+<p>English Macbeth - The Complete Play</p>
+<p>16 Apr 26</p>
+<p></p>
+<p id="ctl00_rptTxns2_ctl00_spanPaymentItem2">
+												        Parent Account
+												        
+												        
+											        </p>
+</td>
+<td class="text-right paymentHistory">
+<p class="">£3.35</p>
+<p>Paid</p>
+</td>
+<td class="btnViewReceipt">
+<a class="btn btn-sm btn-block btn-primary" href="https://app.parentpay.com/V3Payer4VBW3/Consumer/PaymentDetailsViewerFX.aspx?TID=1000000001&amp;U=2000000001 ">View receipt</a>
+</td>
+</tr>
+<tr cid="11111111" class="paymentHistory">
+<td class="paymentHistory">
+<p>Alice</p>
+<p>English Macbeth Bundle -  (revision cards, study guide &amp; workbook)</p>
+<p>16 Apr 26</p>
+<p></p>
+<p id="ctl00_rptTxns2_ctl01_spanPaymentItem2">
+												        Parent Account
+												        
+												        
+											        </p>
+</td>
+<td class="text-right paymentHistory">
+<p class="">£10.50</p>
+<p>Paid</p>
+</td>
+<td class="btnViewReceipt">
+<a class="btn btn-sm btn-block btn-primary" href="https://app.parentpay.com/V3Payer4VBW3/Consumer/PaymentDetailsViewerFX.aspx?TID=1000000001&amp;U=2000000001 ">View receipt</a>
+</td>
+</tr>
+<tr cid="22222222" class="paymentHistory">
+<td class="paymentHistory">
+<p>Bob</p>
+<p>School Meals for Test School</p>
+<p>16 Apr 26</p>
+<p>PIZZA SLICE</p>
+<p id="ctl00_rptTxns2_ctl02_spanPaymentItem2">
+												        Meal
+												        
+												        
+											        </p>
+</td>
+<td class="text-right paymentHistory">
+<p class="">£-1.71</p>
+<p></p>
+</td>
+<td class="btnViewReceipt">
+</td>
+</tr>
+<tr cid="11111111" class="paymentHistory">
+<td class="paymentHistory">
+<p>Alice</p>
+<p>School Meals for Test School</p>
+<p>16 Apr 26</p>
+<p>ROLL  BUTTER</p>
+<p id="ctl00_rptTxns2_ctl03_spanPaymentItem2">
+												        Meal
+												        
+												        
+											        </p>
+</td>
+<td class="text-right paymentHistory">
+<p class="">£0.00</p>
+<p></p>
+</td>
+<td class="btnViewReceipt">
+</td>
+</tr>
+<tr class="info paymentHistory">
+<td class="paymentHistory"><b>Total</b></td>
+<td class="paymentHistory"><b class="pull-right">£12.14</b></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<!--Footer-->
+<footer>
+<div class="container-fluid">
+<div class="footer-social hidden-print">
+<ul class="list-inline text-center">
+<li>
+<a href="https://twitter.com/parentpay" target="_blank">
+<img alt="twitter logo" src="https://app.parentpay.com/V3Payer4W3/images/twitter42.png" title="Follow us on Twitter"/></a>
+</li>
+<li>
+<a href="https://www.facebook.com/ParentPay/" target="_blank">
+<img alt="facebook logo" src="https://app.parentpay.com/V3Payer4W3/images/facebook42.png" title="Find us on Facebook"/></a>
+</li>
+<li>
+<a class="last" href="https://www.linkedin.com/company/parentpay-ltd" target="_blank">
+<img alt="LinkedIn logo" src="https://app.parentpay.com/V3Payer4W3/images/linkedin42.png"/></a>
+</li>
+</ul>
+</div>
+<div class="footer-links hidden-print">
+<ul class="list-inline text-center">
+<li><a href="https://www.parentpay.com/terms-and-conditions" target="_blank">Terms &amp; conditions<span class="glyphicons glyphicons-new-window-alt"></span></a></li>
+<li><a href="https://www.parentpay.com/privacy-policy/" target="_blank">Privacy notice<span class="glyphicons glyphicons-new-window-alt"></span></a></li>
+<li><a href="https://www.surveymonkey.co.uk/r/JGY5M9H" target="_blank">Leave feedback<span class="glyphicons glyphicons-new-window-alt"></span></a></li>
+<li><a href="https://www.parentpay.com/use-of-cookies" target="_blank">Use of cookies<span class="glyphicons glyphicons-new-window-alt"></span></a></li>
+<li><a href="https://parenthelp.parentpaygroup.com/" target="_blank">Support<span class="glyphicons glyphicons-new-window-alt"></span></a></li>
+</ul>
+</div>
+<div class="copyright">
+<p class="text-center">
+                    © Copyright 2026. ParentPay Limited. All rights reserved. <span>
+                        PPCLVVPPCWWE23 - 4.210.7959.0</span>
+</p>
+</div>
+</div>
+</footer>
+<!-- 4.203.2533.0 -->
+<script type="text/javascript">
+//<![CDATA[
+var Page_ValidationSummaries =  new Array(document.getElementById("ctl00_Validationsummary1"));
+//]]>
+</script>
+<div class="aspNetHidden">
+<input id="__VIEWSTATEGENERATOR" name="__VIEWSTATEGENERATOR" type="hidden" value=""/>
+<input id="__EVENTVALIDATION" name="__EVENTVALIDATION" type="hidden" value=""/>
+</div></form>
+<script src="https://app.parentpay.com/V3Payer4W3/ClientScripts/bootstrap-select.min.js"></script>
+<link href="https://app.parentpay.com/V3Payer4W3/new-styles/Css/bootstrap-select.min.css" rel="stylesheet"/>
+<script>
+            $(document).ready(function () {
+                $('.duplicate-image').hide();
+                $('tr.duplicate').find('img').show();
+                
+                $('.btnViewReceipt').each(function () {
+                   $(this).text().length == 65 ?  $(this).hide() : $(this).show();
+                });
+
+                function flexTable() {
+                    if ($(window).width() < 768) {      
+                        $('.tbHistoryDesktop').each(function () {
+                            $(this).hide();
+                        });
+                        $('.tbHistoryMobile').each(function () {
+                            $(this).show();
+                        });    
+                    } else {
+                        $('.tbHistoryDesktop').each(function () {
+                            $(this).show();
+                        });
+
+                        $('.tbHistoryMobile').each(function () {
+                            $(this).hide();
+                        });      
+                    }
+                }
+
+                flexTable();
+
+                window.onresize = function(event) {
+                    flexTable();
+                };   
+            });
+        </script>
+</body>
+</html>
