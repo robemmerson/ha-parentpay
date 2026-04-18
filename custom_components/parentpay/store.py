@@ -24,17 +24,41 @@ def row_hash(row: ArchiveRow) -> str:
     return hashlib.sha1(payload.encode()).hexdigest()
 
 
+class _MigratingStore(Store[Any]):
+    """HA Store that drops prior-version data on any major-version change.
+
+    The default Store raises NotImplementedError when asked to migrate. For
+    our caches a clean wipe is the right policy — rows were keyed by
+    shapes that may have changed, and the next poll re-populates them.
+    """
+
+    async def _async_migrate_func(
+        self,
+        old_major_version: int,
+        old_minor_version: int,
+        old_data: Any,
+    ) -> Any:
+        _LOGGER.info(
+            "Dropping ParentPay store %s on migration from v%d.%d -> v%d",
+            self.key,
+            old_major_version,
+            old_minor_version,
+            self.version,
+        )
+        return None
+
+
 class ParentPayStore:
     """Owns meals + purchases persisted JSON."""
 
     def __init__(self, hass: HomeAssistant) -> None:
-        self._meals_store: Store[list[dict[str, Any]]] = Store(
+        self._meals_store: Store[list[dict[str, Any]]] = _MigratingStore(
             hass, STORE_VERSION, STORE_KEY_MEALS
         )
-        self._purchases_store: Store[list[dict[str, Any]]] = Store(
+        self._purchases_store: Store[list[dict[str, Any]]] = _MigratingStore(
             hass, STORE_VERSION, STORE_KEY_PURCHASES
         )
-        self._payment_details_store: Store[dict[str, dict[str, Any]]] = Store(
+        self._payment_details_store: Store[dict[str, dict[str, Any]]] = _MigratingStore(
             hass, STORE_VERSION, STORE_KEY_PAYMENT_DETAILS
         )
         self._meals: list[dict[str, Any]] = []
