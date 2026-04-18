@@ -8,8 +8,13 @@ from typing import Any
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.storage import Store
 
-from .const import STORE_KEY_MEALS, STORE_KEY_PURCHASES, STORE_VERSION
-from .models import ArchiveRow
+from .const import (
+    STORE_KEY_MEALS,
+    STORE_KEY_PAYMENT_DETAILS,
+    STORE_KEY_PURCHASES,
+    STORE_VERSION,
+)
+from .models import ArchiveRow, PaymentDetailItem
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -29,14 +34,46 @@ class ParentPayStore:
         self._purchases_store: Store[list[dict[str, Any]]] = Store(
             hass, STORE_VERSION, STORE_KEY_PURCHASES
         )
+        self._payment_details_store: Store[dict[str, dict[str, Any]]] = Store(
+            hass, STORE_VERSION, STORE_KEY_PAYMENT_DETAILS
+        )
         self._meals: list[dict[str, Any]] = []
         self._purchases: list[dict[str, Any]] = []
+        self._payment_details: dict[str, dict[str, Any]] = {}
         self._loaded = False
 
     async def async_load(self) -> None:
         self._meals = (await self._meals_store.async_load()) or []
         self._purchases = (await self._purchases_store.async_load()) or []
+        self._payment_details = (
+            await self._payment_details_store.async_load()
+        ) or {}
         self._loaded = True
+
+    def get_payment_detail(self, tid: str) -> dict[str, Any] | None:
+        """Return the cached detail for a TID, or None if not yet fetched."""
+        return self._payment_details.get(tid)
+
+    async def async_store_payment_details(
+        self, items: list[PaymentDetailItem]
+    ) -> None:
+        """Cache all line items from a receipt fetch, keyed by TID."""
+        if not self._loaded:
+            await self.async_load()
+        for it in items:
+            if not it.tid:
+                continue
+            self._payment_details[it.tid] = {
+                "tid": it.tid,
+                "payment_id": it.payment_id,
+                "child_id": it.child_id,
+                "child_name": it.child_name,
+                "item": it.item,
+                "amount_pence": it.amount_pence,
+                "date": it.date_paid.isoformat(),
+                "status": it.status,
+            }
+        await self._payment_details_store.async_save(self._payment_details)
 
     @property
     def meals(self) -> list[dict[str, Any]]:

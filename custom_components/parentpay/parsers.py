@@ -15,6 +15,7 @@ from .exceptions import ParentPayParseError
 from .models import (
     ArchiveRow,
     Balance,
+    PaymentDetailItem,
     PaymentItem,
 )
 
@@ -118,7 +119,10 @@ def parse_home_recent_meals(html: str) -> list[ArchiveRow]:
                 child_id=cid,
                 child_name=name_by_id.get(cid, cid),
                 date_paid=the_date,
-                item=label if price_m else "No meal",
+                # Home-page meal table only exposes the price, not the food name.
+                # Use a generic label here; the archive fetch supplies real names
+                # ("PIZZA SLICE" etc.) and the store dedup keeps the richer one.
+                item="No meal" if is_no_meal else "School meal",
                 amount_pence=amount_pence,
                 payment_method="Meal",
                 status=None,
@@ -320,3 +324,114 @@ def parse_payment_items(html: str) -> list[PaymentItem]:
     if not results:
         raise ParentPayParseError("No payment items found", snippet=html[:500])
     return results
+
+
+# --- PaymentDetailsViewerFX.aspx receipt page ------------------------------
+
+_RECEIPT_CODE_RE = re.compile(r"PP(\d+)")
+_DETAIL_DATE_RE = re.compile(r"(\d{1,2})\s+([A-Za-z]{3})\s+(\d{4})")
+_RECEIPT_URL_RE = re.compile(
+    r"[?&]TID=(?P<tid>\d+).*?[?&]U=(?P<u>\d+)"
+    r"|[?&]U=(?P<u2>\d+).*?[?&]TID=(?P<tid2>\d+)"
+)
+
+
+def extract_receipt_ids(url: str) -> tuple[str, str] | None:
+    """Return (tid, u) from a PaymentDetailsViewerFX URL, or None if unparseable."""
+    m = _RECEIPT_URL_RE.search(url)
+    if not m:
+        return None
+    tid = m.group("tid") or m.group("tid2") or ""
+    u = m.group("u") or m.group("u2") or ""
+    if not tid or not u:
+        return None
+    return tid, u
+
+
+def _parse_detail_date(text: str) -> date:
+    m = _DETAIL_DATE_RE.search(text)
+    if not m:
+        raise ParentPayParseError(f"Unparseable date: {text!r}")
+    day = int(m.group(1))
+    month_key = m.group(2).title()
+    if month_key not in _MONTHS:
+        raise ParentPayParseError(f"Unknown month in {text!r}")
+    return date(int(m.group(3)), _MONTHS[month_key], day)
+
+
+def parse_payment_detail(html: str) -> list[PaymentDetailItem]:
+    """Parse a PaymentDetailsViewerFX.aspx receipt page into line items.
+
+    One receipt can list multiple line items — each gets its own TID, and the
+    `PP{TID}` receipt codes are in the same positional order as the rows.
+    """
+    soup = _soup(html)
+    name_by_id = _build_child_name_map(soup)
+    # Map first name → consumer id for fuzzy lookup ("Lauren Emmerson" → "18416154")
+    first_name_to_cid = {name.split()[0].lower(): cid for cid, name in name_by_id.items()}
+
+    # Payment ID (the `U` query param, shared across all line items)
+    payment_id = ""
+    for dt_el in soup.find_all("dt"):
+        if dt_el.get_text(strip=True) == "Payment ID":
+            dd = dt_el.find_next("dd")
+            if dd is not None:
+                payment_id = dd.get_text(strip=True)
+            break
+
+    # Receipt codes → per-line TIDs in row order
+    tids: list[str] = []
+    for dt_el in soup.find_all("dt"):
+        if dt_el.get_text(strip=True) == "Receipt code":
+            dd = dt_el.find_next("dd")
+            if dd is not None:
+                tids = _RECEIPT_CODE_RE.findall(dd.get_text(" ", strip=True))
+            break
+
+    # Line-items table: <table summary="Account statements" class="...tbHistoryDesktop">
+    table = None
+    for t in soup.find_all("table"):
+        classes: list[str] = list(t.get("class") or [])
+        if t.get("summary") == "Account statements" and "tbHistoryDesktop" in classes:
+            table = t
+            break
+    if table is None:
+        raise ParentPayParseError(
+            "No line-items table found on receipt page", snippet=html[:500]
+        )
+
+    items: list[PaymentDetailItem] = []
+    body_rows = [tr for tr in table.find_all("tr") if tr.find("td")]
+    for idx, tr in enumerate(body_rows):
+        cells = tr.find_all("td")
+        if len(cells) < 7:
+            continue
+        date_text = cells[0].get_text(" ", strip=True)
+        pupil_name = cells[1].get_text(" ", strip=True)
+        item_name = cells[2].get_text(" ", strip=True)
+        amount_text = cells[5].get_text(" ", strip=True)
+        status_text = cells[6].get_text(" ", strip=True)
+        try:
+            the_date = _parse_detail_date(date_text)
+        except ParentPayParseError:
+            continue
+        first_name = pupil_name.split()[0] if pupil_name else ""
+        cid = first_name_to_cid.get(first_name.lower(), "")
+        tid = tids[idx] if idx < len(tids) else ""
+        items.append(
+            PaymentDetailItem(
+                tid=tid,
+                payment_id=payment_id,
+                child_id=cid,
+                child_name=name_by_id.get(cid, first_name),
+                item=item_name,
+                amount_pence=_amount_to_pence(amount_text),
+                date_paid=the_date,
+                status=status_text or None,
+            )
+        )
+    if not items:
+        raise ParentPayParseError(
+            "No line items parsed from receipt page", snippet=html[:500]
+        )
+    return items

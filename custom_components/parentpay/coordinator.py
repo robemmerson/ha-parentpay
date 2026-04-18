@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import logging
 from collections import defaultdict
-from datetime import time, timedelta
+from datetime import date, time, timedelta
 from typing import Any
 
 from homeassistant.core import HomeAssistant
@@ -24,6 +24,8 @@ from .const import (
     DOMAIN,
 )
 from .exceptions import ParentPayAuthError, ParentPayError
+from .models import ArchiveRow
+from .parsers import extract_receipt_ids
 from .store import ParentPayStore
 
 _LOGGER = logging.getLogger(__name__)
@@ -78,10 +80,14 @@ class ParentPayCoordinator(DataUpdateCoordinator[dict[str, Any]]):
             items = await self._client.fetch_payment_items()
             archive_rows = await self._client.fetch_archive()
 
+            enriched_payments = await self._enrich_recent_payments(
+                home.recent_payments
+            )
+
             # Merge meals from home page + archive into store; both tables produce
             # ArchiveRow instances, and the store dedups via row hash.
             await self.store.async_merge(home.recent_meals)
-            await self.store.async_merge(home.recent_payments)
+            await self.store.async_merge(enriched_payments)
             await self.store.async_merge(archive_rows)
 
             self._first_run_done = True
@@ -95,6 +101,55 @@ class ParentPayCoordinator(DataUpdateCoordinator[dict[str, Any]]):
             raise ConfigEntryAuthFailed(str(err)) from err
         except ParentPayError as err:
             raise UpdateFailed(str(err)) from err
+
+    async def _enrich_recent_payments(
+        self, rows: list[ArchiveRow]
+    ) -> list[ArchiveRow]:
+        """Replace truncated home-page payment rows with enriched detail.
+
+        The home-page "Recent payments" mini-table truncates item names and
+        doesn't expose child ids. We resolve each row via the receipt URL
+        (which points at PaymentDetailsViewerFX.aspx) and cache the result
+        by TID so each transaction is fetched at most once.
+
+        Rows that can't be enriched (no receipt URL, fetch fails, or the
+        receipt doesn't list the expected TID) are dropped rather than
+        polluting the store with truncated, unassigned entries.
+        """
+        out: list[ArchiveRow] = []
+        for row in rows:
+            if not row.receipt_url:
+                continue
+            ids = extract_receipt_ids(row.receipt_url)
+            if ids is None:
+                continue
+            tid, u = ids
+            cached = self.store.get_payment_detail(tid)
+            if cached is None:
+                try:
+                    details = await self._client.fetch_payment_detail(tid, u)
+                except ParentPayError as err:
+                    _LOGGER.debug(
+                        "Failed to enrich payment TID=%s U=%s: %s", tid, u, err
+                    )
+                    continue
+                await self.store.async_store_payment_details(details)
+                cached = self.store.get_payment_detail(tid)
+            if cached is None or not cached.get("child_id"):
+                continue
+            out.append(
+                ArchiveRow(
+                    child_id=str(cached["child_id"]),
+                    child_name=str(cached.get("child_name") or ""),
+                    date_paid=date.fromisoformat(str(cached["date"])),
+                    item=str(cached["item"]),
+                    amount_pence=int(cached["amount_pence"]),
+                    payment_method="Parent Account",
+                    status=cached.get("status"),
+                    receipt_url=row.receipt_url,
+                )
+            )
+        return out
 
     def meals_for_child(self, child_id: str) -> list[dict[str, Any]]:
         """Return one event dict per (child_id, date) with all item names concatenated."""

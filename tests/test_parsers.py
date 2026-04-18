@@ -11,11 +11,13 @@ import pytest
 
 from custom_components.parentpay.exceptions import ParentPayParseError
 from custom_components.parentpay.parsers import (
+    extract_receipt_ids,
     parse_archive,
     parse_home_balances,
     parse_home_recent_meals,
     parse_home_recent_payments,
     parse_login_response,
+    parse_payment_detail,
     parse_payment_items,
 )
 
@@ -127,3 +129,42 @@ def test_parse_home_recent_payments_is_parent_account_only() -> None:
     rows = parse_home_recent_payments(_load_text("balances.html"))
     # Home-page recent-payments table shows only parent-account rows
     assert all(r.payment_method == "Parent Account" for r in rows)
+
+
+def test_parse_home_recent_meals_uses_generic_item_label() -> None:
+    meals = parse_home_recent_meals(_load_text("balances.html"))
+    # Home-page meal table only exposes price, not food name — we use generic
+    # labels so downstream code doesn't show "£2.54" as the meal item.
+    assert all(m.item in {"School meal", "No meal"} for m in meals)
+
+
+def test_extract_receipt_ids() -> None:
+    url = (
+        "https://app.parentpay.com/V3Payer4VBW3/Consumer/"
+        "PaymentDetailsViewerFX.aspx?TID=1000000001&U=2000000001"
+    )
+    assert extract_receipt_ids(url) == ("1000000001", "2000000001")
+    assert extract_receipt_ids("https://x?TID=999&U=888") == ("999", "888")
+    assert extract_receipt_ids("https://x?U=888&TID=999") == ("999", "888")
+    assert extract_receipt_ids("https://x/no-ids") is None
+
+
+def test_parse_payment_detail_extracts_all_line_items() -> None:
+    items = parse_payment_detail(_load_text("payment_detail.html"))
+    # Fixture has 2 line items on one receipt
+    assert len(items) == 2
+    # Both share the same payment_id (the U query param)
+    assert {it.payment_id for it in items} == {"2000000001"}
+    # TIDs match the receipt-code positional ordering
+    assert [it.tid for it in items] == ["1000000001", "1000000002"]
+    # First-name match against sidebar data-consumer-data resolves child ids
+    assert {it.child_id for it in items} == {"11111111"}
+    assert {it.child_name for it in items} == {"Alice"}
+    # Full, un-truncated item names
+    assert "English Macbeth Bundle" in items[0].item
+    assert items[1].item == "English Macbeth - The Complete Play"
+    # Amounts as pence
+    assert items[0].amount_pence == 1050
+    assert items[1].amount_pence == 335
+    # Dates parse
+    assert items[0].date_paid == date(2026, 4, 16)

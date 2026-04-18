@@ -15,14 +15,19 @@ from .const import (
     PAYMENT_ITEMS_URL,
 )
 from .exceptions import ParentPayAuthError
-from .models import ArchiveRow, HomeSnapshot, PaymentItem
+from .models import ArchiveRow, HomeSnapshot, PaymentDetailItem, PaymentItem
 from .parsers import (
     parse_archive,
     parse_home_balances,
     parse_home_recent_meals,
     parse_home_recent_payments,
     parse_login_response,
+    parse_payment_detail,
     parse_payment_items,
+)
+
+_PAYMENT_DETAIL_URL = (
+    "https://app.parentpay.com/V3Payer4VBW3/Consumer/PaymentDetailsViewerFX.aspx"
 )
 
 _LOGGER = logging.getLogger(__name__)
@@ -133,6 +138,19 @@ class ParentPayClient:
     async def fetch_payment_items(self) -> list[PaymentItem]:
         body = await self._authed_get(PAYMENT_ITEMS_URL)
         return parse_payment_items(body)
+
+    async def fetch_payment_detail(
+        self, tid: str, u: str
+    ) -> list[PaymentDetailItem]:
+        """Fetch a single receipt page and return all its line items.
+
+        One receipt URL (TID + U) can list multiple line items sharing the
+        same parent payment. The caller should cache results by TID so each
+        transaction is fetched at most once.
+        """
+        url = f"{_PAYMENT_DETAIL_URL}?TID={tid}&U={u}"
+        body = await self._authed_get(url)
+        return parse_payment_detail(body)
 
     async def fetch_archive(self) -> list[ArchiveRow]:
         """Fetch the recent archive rows.

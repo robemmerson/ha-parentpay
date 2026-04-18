@@ -57,3 +57,17 @@ class HomeSnapshot:
     balances: list[Balance]
     recent_meals: list[ArchiveRow]
     recent_payments: list[ArchiveRow]
+
+
+@dataclass(frozen=True, slots=True)
+class PaymentDetailItem:
+    """One line item parsed from PaymentDetailsViewerFX.aspx."""
+
+    tid: str           # per-line transaction id (e.g. "1355911504")
+    payment_id: str    # shared parent-payment id (the ?U= query param)
+    child_id: str      # from first-name match against sidebar data-consumer-data
+    child_name: str
+    item: str          # full item name, e.g. "English Macbeth - The Complete Play"
+    amount_pence: int
+    date_paid: date
+    status: str | None
