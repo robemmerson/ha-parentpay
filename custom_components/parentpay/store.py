@@ -9,6 +9,7 @@ from homeassistant.core import HomeAssistant
 from homeassistant.helpers.storage import Store
 
 from .const import (
+    STORE_KEY_BACKFILL,
     STORE_KEY_DISMISSALS,
     STORE_KEY_MEALS,
     STORE_KEY_PAYMENT_DETAILS,
@@ -65,10 +66,14 @@ class ParentPayStore:
         self._dismissals_store: Store[dict[str, dict[str, Any]]] = _MigratingStore(
             hass, STORE_VERSION, STORE_KEY_DISMISSALS
         )
+        self._backfill_store: Store[dict[str, Any]] = _MigratingStore(
+            hass, STORE_VERSION, STORE_KEY_BACKFILL
+        )
         self._meals: list[dict[str, Any]] = []
         self._purchases: list[dict[str, Any]] = []
         self._payment_details: dict[str, dict[str, Any]] = {}
         self._dismissals: dict[str, dict[str, Any]] = {}
+        self._backfill: dict[str, Any] = {}
         self._loaded = False
 
     async def async_load(self) -> None:
@@ -78,6 +83,7 @@ class ParentPayStore:
             await self._payment_details_store.async_load()
         ) or {}
         self._dismissals = (await self._dismissals_store.async_load()) or {}
+        self._backfill = (await self._backfill_store.async_load()) or {}
         self._loaded = True
 
     def get_payment_detail(self, tid: str) -> dict[str, Any] | None:
@@ -192,3 +198,22 @@ class ParentPayStore:
                 continue
             counts[cid] = counts.get(cid, 0) + 1
         return counts
+
+    @property
+    def backfill_done(self) -> bool:
+        return bool(self._backfill.get("done"))
+
+    @property
+    def backfill_done_at(self) -> str | None:
+        value = self._backfill.get("done_at")
+        return str(value) if value is not None else None
+
+    async def async_mark_backfill_done(self) -> None:
+        if not self._loaded:
+            await self.async_load()
+        from datetime import UTC, datetime
+        self._backfill = {
+            "done": True,
+            "done_at": datetime.now(tz=UTC).isoformat(),
+        }
+        await self._backfill_store.async_save(self._backfill)

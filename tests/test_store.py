@@ -133,3 +133,19 @@ async def test_dismissal_count_per_child(store: ParentPayStore) -> None:
     await store.async_set_dismissed("22222222", "9000003", True)
     counts = store.dismissal_count_per_child()
     assert counts == {"11111111": 2, "22222222": 1}
+
+
+async def test_backfill_flag_starts_false(store: ParentPayStore) -> None:
+    await store.async_load()
+    assert store.backfill_done is False
+    assert store.backfill_done_at is None
+
+
+async def test_backfill_flag_round_trip(store: ParentPayStore) -> None:
+    await store.async_load()
+    await store.async_mark_backfill_done()
+    assert store.backfill_done is True
+    assert store.backfill_done_at is not None
+    # Survives a reload
+    await store.async_load()
+    assert store.backfill_done is True
