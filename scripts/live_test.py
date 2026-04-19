@@ -3,14 +3,17 @@
 Usage:
     cp .env.example .env
     # edit .env with real credentials
-    python scripts/live_test.py
+    python scripts/live_test.py             # standard smoke test
+    python scripts/live_test.py --backfill  # also exercise the 12-month archive POST
 """
 from __future__ import annotations
 
+import argparse
 import asyncio
 import os
 import pprint
 import sys
+from datetime import date, timedelta
 
 import aiohttp
 from dotenv import load_dotenv
@@ -22,6 +25,14 @@ from custom_components.parentpay.client import ParentPayClient
 
 
 async def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--backfill",
+        action="store_true",
+        help="Exercise fetch_archive_range(today - 365d, today) and print summary stats.",
+    )
+    args = parser.parse_args()
+
     load_dotenv()
     username = os.environ["PARENTPAY_USERNAME"]
     password = os.environ["PARENTPAY_PASSWORD"]
@@ -47,6 +58,21 @@ async def main() -> None:
         print(f"Archive rows (GET, recent): {len(rows)}")
         for r in rows[:10]:
             pprint.pp(r)
+
+        if args.backfill:
+            today = date.today()
+            start = today - timedelta(days=365)
+            print(f"\nBackfill POST: {start.isoformat()} -> {today.isoformat()}")
+            backfill_rows = await client.fetch_archive_range(start, today)
+            print(f"Backfill rows: {len(backfill_rows)}")
+            if backfill_rows:
+                child_ids = sorted({r.child_id for r in backfill_rows})
+                methods = sorted({r.payment_method for r in backfill_rows})
+                earliest = min(r.date_paid for r in backfill_rows)
+                latest = max(r.date_paid for r in backfill_rows)
+                print(f"  child_ids: {child_ids}")
+                print(f"  payment_methods: {methods}")
+                print(f"  date range: {earliest.isoformat()} -> {latest.isoformat()}")
 
 
 if __name__ == "__main__":
