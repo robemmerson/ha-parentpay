@@ -87,7 +87,10 @@ def _build_event(row: dict[str, Any], child_id: str) -> CalendarEvent:
     tz = dt_util.get_default_time_zone()
     start = datetime.combine(d, time(12, 0), tzinfo=tz)
     end = datetime.combine(d, time(13, 0), tzinfo=tz)
-    uid = hashlib.sha1(f"{child_id}|{row['date']}".encode()).hexdigest()
+    # UID for HA calendar event; not a security primitive.
+    uid = hashlib.sha1(
+        f"{child_id}|{row['date']}".encode(), usedforsecurity=False
+    ).hexdigest()
     return CalendarEvent(
         summary=row["summary"],
         start=start,

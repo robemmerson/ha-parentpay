@@ -23,7 +23,8 @@ _LOGGER = logging.getLogger(__name__)
 
 def row_hash(row: ArchiveRow) -> str:
     payload = f"{row.child_id}|{row.date_paid.isoformat()}|{row.item}|{row.amount_pence}"
-    return hashlib.sha1(payload.encode()).hexdigest()
+    # Dedup key, not a security primitive — collision resistance is adequate.
+    return hashlib.sha1(payload.encode(), usedforsecurity=False).hexdigest()
 
 
 class _MigratingStore(Store[Any]):
