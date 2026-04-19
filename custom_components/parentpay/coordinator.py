@@ -76,6 +76,8 @@ class ParentPayCoordinator(DataUpdateCoordinator[dict[str, Any]]):
             }
 
         try:
+            await self._maybe_run_backfill()
+
             home = await self._client.fetch_home()
             items = await self._client.fetch_payment_items()
             archive_rows = await self._client.fetch_archive()
@@ -98,6 +100,27 @@ class ParentPayCoordinator(DataUpdateCoordinator[dict[str, Any]]):
             raise ConfigEntryAuthFailed(str(err)) from err
         except ParentPayError as err:
             raise UpdateFailed(str(err)) from err
+
+    async def _maybe_run_backfill(self) -> None:
+        """Run the one-shot 12-month backfill if it hasn't succeeded yet.
+
+        On failure, log a warning and leave the done flag unset so the next
+        scheduled poll retries the whole sequence. No exponential backoff —
+        the poll interval already throttles retries.
+        """
+        if self.store.backfill_done:
+            return
+        today = dt_util.now().date()
+        start = today - timedelta(days=365)
+        try:
+            rows = await self._client.fetch_archive_range(start, today)
+        except ParentPayError as err:
+            _LOGGER.warning(
+                "Archive backfill failed, will retry next poll: %s", err
+            )
+            return
+        await self.store.async_merge(rows)
+        await self.store.async_mark_backfill_done()
 
     async def _enrich_recent_payments(
         self, rows: list[ArchiveRow]

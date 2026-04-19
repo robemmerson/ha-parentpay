@@ -1,13 +1,14 @@
 """Tests for ParentPayCoordinator."""
 from __future__ import annotations
 
-from datetime import date, datetime, time
+from datetime import date, datetime, time, timedelta
 from unittest.mock import AsyncMock, patch
 
 import pytest
 
 from custom_components.parentpay.coordinator import ParentPayCoordinator
-from custom_components.parentpay.models import HomeSnapshot
+from custom_components.parentpay.exceptions import ParentPayError
+from custom_components.parentpay.models import ArchiveRow, HomeSnapshot
 
 
 @pytest.fixture
@@ -18,6 +19,7 @@ def client() -> AsyncMock:
     )
     c.fetch_payment_items = AsyncMock(return_value=[])
     c.fetch_archive = AsyncMock(return_value=[])
+    c.fetch_archive_range = AsyncMock(return_value=[])
     return c
 
 
@@ -119,3 +121,73 @@ async def test_purchases_for_child_newest_first_and_trimmed(
     purchases = coordinator.purchases_for_child("11111111")
     assert len(purchases) == 1
     assert purchases[0]["item"] == "New"
+
+
+async def test_first_poll_runs_backfill_and_marks_done(
+    coordinator: ParentPayCoordinator,
+    client: AsyncMock,
+) -> None:
+    await coordinator._async_update_data()
+    assert client.fetch_archive_range.await_count == 1
+    assert coordinator.store.backfill_done is True
+
+
+async def test_backfill_uses_today_minus_365_days(
+    coordinator: ParentPayCoordinator,
+    client: AsyncMock,
+) -> None:
+    await coordinator._async_update_data()
+    args, _kwargs = client.fetch_archive_range.await_args
+    start, end = args
+    assert (end - start) == timedelta(days=365)
+
+
+async def test_second_poll_skips_backfill_when_done(
+    coordinator: ParentPayCoordinator,
+    client: AsyncMock,
+) -> None:
+    await coordinator._async_update_data()
+    assert client.fetch_archive_range.await_count == 1
+    await coordinator._async_update_data()
+    assert client.fetch_archive_range.await_count == 1  # no second call
+
+
+async def test_backfill_failure_leaves_flag_unset(
+    coordinator: ParentPayCoordinator,
+    client: AsyncMock,
+) -> None:
+    client.fetch_archive_range.side_effect = ParentPayError("boom")
+    await coordinator._async_update_data()
+    # Normal poll still completed
+    assert client.fetch_home.await_count == 1
+    # Flag stays False so the next poll retries
+    assert coordinator.store.backfill_done is False
+
+
+async def test_backfill_zero_rows_still_marks_done(
+    coordinator: ParentPayCoordinator,
+    client: AsyncMock,
+) -> None:
+    client.fetch_archive_range.return_value = []
+    await coordinator._async_update_data()
+    assert coordinator.store.backfill_done is True
+
+
+async def test_backfill_merges_rows_into_store(
+    coordinator: ParentPayCoordinator,
+    client: AsyncMock,
+) -> None:
+    client.fetch_archive_range.return_value = [
+        ArchiveRow(
+            child_id="11111111",
+            child_name="Alice",
+            date_paid=date(2025, 9, 1),
+            item="PIZZA SLICE",
+            amount_pence=-200,
+            payment_method="Meal",
+            status=None,
+            receipt_url=None,
+        )
+    ]
+    await coordinator._async_update_data()
+    assert any(m["item"] == "PIZZA SLICE" for m in coordinator.store.meals)
