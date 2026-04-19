@@ -84,9 +84,6 @@ class ParentPayCoordinator(DataUpdateCoordinator[dict[str, Any]]):
                 home.recent_payments
             )
 
-            # Merge meals from home page + archive into store; both tables produce
-            # ArchiveRow instances, and the store dedups via row hash.
-            await self.store.async_merge(home.recent_meals)
             await self.store.async_merge(enriched_payments)
             await self.store.async_merge(archive_rows)
 

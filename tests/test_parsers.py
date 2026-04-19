@@ -14,7 +14,6 @@ from custom_components.parentpay.parsers import (
     extract_receipt_ids,
     parse_archive,
     parse_home_balances,
-    parse_home_recent_meals,
     parse_home_recent_payments,
     parse_login_response,
     parse_payment_detail,
@@ -69,19 +68,6 @@ def test_parse_home_balances_returns_both_children() -> None:
     assert by_id["22222222"].amount == Decimal("39.37")
 
 
-def test_parse_home_recent_meals_picks_up_prices_and_no_meal() -> None:
-    meals = parse_home_recent_meals(_load_text("balances.html"))
-    assert len(meals) >= 1
-    priced = [m for m in meals if m.amount_pence and m.amount_pence > 0]
-    no_meal = [m for m in meals if m.amount_pence == 0]
-    assert priced, "expected at least one priced meal"
-    # "No meal" entries are retained (with zero amount) so downstream code
-    # knows the child was at school but did not take a meal
-    assert no_meal, "expected at least one No meal entry"
-    # Each meal row is tagged with a real ConsumerId
-    assert all(m.child_id in {"11111111", "22222222"} for m in meals)
-
-
 def test_parse_home_recent_payments_returns_parent_account_rows() -> None:
     payments = parse_home_recent_payments(_load_text("balances.html"))
     assert payments, "expected at least one recent payment"
@@ -130,13 +116,6 @@ def test_parse_home_recent_payments_is_parent_account_only() -> None:
     rows = parse_home_recent_payments(_load_text("balances.html"))
     # Home-page recent-payments table shows only parent-account rows
     assert all(r.payment_method == "Parent Account" for r in rows)
-
-
-def test_parse_home_recent_meals_uses_generic_item_label() -> None:
-    meals = parse_home_recent_meals(_load_text("balances.html"))
-    # Home-page meal table only exposes price, not food name — we use generic
-    # labels so downstream code doesn't show "£2.54" as the meal item.
-    assert all(m.item in {"School meal", "No meal"} for m in meals)
 
 
 def test_extract_receipt_ids() -> None:

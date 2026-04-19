@@ -100,7 +100,7 @@ async def test_fetch_raises_auth_error_if_retry_also_fails(
             await client._authed_get(HOME_URL)
 
 
-async def test_fetch_home_returns_balances_meals_and_payments(
+async def test_fetch_home_returns_balances_and_payments(
     http_session: aiohttp.ClientSession,
 ) -> None:
     client = ParentPayClient(http_session, username="u@example.com", password="pw")
@@ -109,8 +109,6 @@ async def test_fetch_home_returns_balances_meals_and_payments(
         m.get(HOME_URL, status=200, body=_load_text("balances.html"))
         snapshot = await client.fetch_home()
     assert {b.child_id for b in snapshot.balances} == {"11111111", "22222222"}
-    # Meals and payments may be empty if the fixture has none, but they must be lists
-    assert isinstance(snapshot.recent_meals, list)
     assert isinstance(snapshot.recent_payments, list)
 
 

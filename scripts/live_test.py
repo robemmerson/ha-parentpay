@@ -34,9 +34,6 @@ async def main() -> None:
         home = await client.fetch_home()
         print("Balances:")
         pprint.pp(home.balances)
-        print(f"Recent meals: {len(home.recent_meals)}")
-        for m in home.recent_meals[:5]:
-            pprint.pp(m)
         print(f"Recent payments (home page): {len(home.recent_payments)}")
         for p in home.recent_payments[:5]:
             pprint.pp(p)

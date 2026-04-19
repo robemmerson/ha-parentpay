@@ -21,8 +21,6 @@ from .models import (
 )
 
 _BALANCE_SPAN_RE = re.compile(r"£\s*(?P<amount>\d+\.\d{2})")
-_MEAL_DATE_RE = re.compile(r"Date=(?P<d>\d{4}-\d{2}-\d{2})")
-_MEAL_PRICE_RE = re.compile(r"£\s*(?P<amount>\d+\.\d{2})")
 
 
 def _soup(html: str) -> BeautifulSoup:
@@ -87,50 +85,6 @@ def parse_home_balances(html: str) -> list[Balance]:
     if not balances:
         raise ParentPayParseError("No balances found on home page", snippet=html[:500])
     return balances
-
-
-def parse_home_recent_meals(html: str) -> list[ArchiveRow]:
-    """Extract the 'Lunchtime meal activity' table rows from the home page.
-
-    Returns ArchiveRow entries with payment_method='Meal'. 'No meal' entries
-    are retained with amount_pence=0 so downstream code can render them.
-    Only anchors whose data-gtm-label is a price (£X.XX) or 'No meal' are
-    processed; 'Lunch time'/'Lunch' label anchors are skipped.
-    """
-    soup = _soup(html)
-    name_by_id = _build_child_name_map(soup)
-    rows: list[ArchiveRow] = []
-    for a in soup.find_all("a", href=re.compile(r"MenusAndChoices\.aspx\?ConsumerId=\d+&Date=")):
-        label = str(a.get("data-gtm-label") or "")
-        price_m = _MEAL_PRICE_RE.search(label)
-        is_no_meal = label == "No meal"
-        if not price_m and not is_no_meal:
-            # Skip "Lunch time" / "Lunch" label anchors
-            continue
-        href = str(a.get("href", ""))
-        cid_m = re.search(r"ConsumerId=(\d+)", href)
-        date_m = _MEAL_DATE_RE.search(href)
-        if not cid_m or not date_m:
-            continue
-        cid = cid_m.group(1)
-        the_date = date.fromisoformat(date_m.group("d"))
-        amount_pence = round(Decimal(price_m.group("amount")) * 100) if price_m else 0
-        rows.append(
-            ArchiveRow(
-                child_id=cid,
-                child_name=name_by_id.get(cid, cid),
-                date_paid=the_date,
-                # Home-page meal table only exposes the price, not the food name.
-                # Use a generic label here; the archive fetch supplies real names
-                # ("PIZZA SLICE" etc.) and the store dedup keeps the richer one.
-                item="No meal" if is_no_meal else "School meal",
-                amount_pence=amount_pence,
-                payment_method="Meal",
-                status=None,
-                receipt_url=None,
-            )
-        )
-    return rows
 
 
 def parse_home_recent_payments(html: str) -> list[ArchiveRow]:
