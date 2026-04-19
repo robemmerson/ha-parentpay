@@ -17,6 +17,7 @@ from .models import (
     Balance,
     PaymentDetailItem,
     PaymentItem,
+    WebFormsState,
 )
 
 _BALANCE_SPAN_RE = re.compile(r"£\s*(?P<amount>\d+\.\d{2})")
@@ -435,3 +436,24 @@ def parse_payment_detail(html: str) -> list[PaymentDetailItem]:
             "No line items parsed from receipt page", snippet=html[:500]
         )
     return items
+
+
+def parse_webforms_state(html: str) -> WebFormsState:
+    """Extract __VIEWSTATE, __VIEWSTATEGENERATOR, __EVENTVALIDATION from a WebForms page.
+
+    All three tokens must be present — the search POST will be rejected without
+    them — so a missing token is a parse error, not an empty-default.
+    """
+    soup = _soup(html)
+    fields: dict[str, str] = {}
+    for name in ("__VIEWSTATE", "__VIEWSTATEGENERATOR", "__EVENTVALIDATION"):
+        el = soup.find("input", {"name": name})
+        if el is None:
+            raise ParentPayParseError(f"Missing WebForms hidden field: {name}")
+        value = el.get("value")
+        fields[name] = str(value) if value is not None else ""
+    return WebFormsState(
+        viewstate=fields["__VIEWSTATE"],
+        viewstategenerator=fields["__VIEWSTATEGENERATOR"],
+        eventvalidation=fields["__EVENTVALIDATION"],
+    )
