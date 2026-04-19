@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import logging
+from datetime import date
 
 import aiohttp
 
@@ -23,6 +24,7 @@ from .parsers import (
     parse_login_response,
     parse_payment_detail,
     parse_payment_items,
+    parse_webforms_state,
 )
 
 _PAYMENT_DETAIL_URL = (
@@ -156,11 +158,31 @@ class ParentPayClient:
         return parse_payment_detail(body)
 
     async def fetch_archive(self) -> list[ArchiveRow]:
-        """Fetch the recent archive rows.
-
-        v1 uses the default GET (no date range), which returns ~the last 8 rows.
-        A future v2 can add an `fetch_archive(start, end)` POST path using the
-        ASP.NET WebForms calendar postback.
-        """
+        """Fetch the recent archive rows via plain GET (~last 8 rows)."""
         body = await self._authed_get(ARCHIVE_URL)
+        return parse_archive(body)
+
+    async def fetch_archive_range(
+        self, start: date, end: date
+    ) -> list[ArchiveRow]:
+        """Fetch the archive grid filtered to a date range.
+
+        Two HTTP calls: GET to scrape the WebForms hidden state, then POST
+        with __EVENTTARGET=ctl00$cmdSearch and the date strings to trigger the
+        server-side filter. Returns the rows parsed from the POST response.
+        """
+        get_body = await self._authed_get(ARCHIVE_URL)
+        state = parse_webforms_state(get_body)
+        post_body = {
+            "__EVENTTARGET": "ctl00$cmdSearch",
+            "__EVENTARGUMENT": "",
+            "__VIEWSTATE": state.viewstate,
+            "__VIEWSTATEGENERATOR": state.viewstategenerator,
+            "__EVENTVALIDATION": state.eventvalidation,
+            "ctl00$selChoosePupil": "0",
+            "ctl00$selChooseService": "0",
+            "ctl00$txtChooseStartDate": start.strftime("%d/%m/%Y"),
+            "ctl00$txtChooseEndDate": end.strftime("%d/%m/%Y"),
+        }
+        body = await self._authed_post(ARCHIVE_URL, data=post_body)
         return parse_archive(body)
