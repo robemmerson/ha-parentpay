@@ -9,6 +9,7 @@ from homeassistant.core import HomeAssistant
 from homeassistant.helpers.storage import Store
 
 from .const import (
+    STORE_KEY_DISMISSALS,
     STORE_KEY_MEALS,
     STORE_KEY_PAYMENT_DETAILS,
     STORE_KEY_PURCHASES,
@@ -61,9 +62,13 @@ class ParentPayStore:
         self._payment_details_store: Store[dict[str, dict[str, Any]]] = _MigratingStore(
             hass, STORE_VERSION, STORE_KEY_PAYMENT_DETAILS
         )
+        self._dismissals_store: Store[dict[str, dict[str, Any]]] = _MigratingStore(
+            hass, STORE_VERSION, STORE_KEY_DISMISSALS
+        )
         self._meals: list[dict[str, Any]] = []
         self._purchases: list[dict[str, Any]] = []
         self._payment_details: dict[str, dict[str, Any]] = {}
+        self._dismissals: dict[str, dict[str, Any]] = {}
         self._loaded = False
 
     async def async_load(self) -> None:
@@ -72,6 +77,7 @@ class ParentPayStore:
         self._payment_details = (
             await self._payment_details_store.async_load()
         ) or {}
+        self._dismissals = (await self._dismissals_store.async_load()) or {}
         self._loaded = True
 
     def get_payment_detail(self, tid: str) -> dict[str, Any] | None:
@@ -153,3 +159,36 @@ class ParentPayStore:
         _LOGGER.warning(
             "Purchase uid %s not found when setting completed=%s", uid, completed
         )
+
+    @staticmethod
+    def _dismissal_key(child_id: str, payment_item_id: str) -> str:
+        return f"{child_id}:{payment_item_id}"
+
+    def is_dismissed(self, child_id: str, payment_item_id: str) -> bool:
+        return self._dismissal_key(child_id, payment_item_id) in self._dismissals
+
+    async def async_set_dismissed(
+        self, child_id: str, payment_item_id: str, dismissed: bool
+    ) -> None:
+        if not self._loaded:
+            await self.async_load()
+        key = self._dismissal_key(child_id, payment_item_id)
+        if dismissed:
+            from datetime import UTC, datetime
+            self._dismissals[key] = {
+                "child_id": child_id,
+                "payment_item_id": payment_item_id,
+                "dismissed_at": datetime.now(tz=UTC).isoformat(),
+            }
+        else:
+            self._dismissals.pop(key, None)
+        await self._dismissals_store.async_save(self._dismissals)
+
+    def dismissal_count_per_child(self) -> dict[str, int]:
+        counts: dict[str, int] = {}
+        for entry in self._dismissals.values():
+            cid = str(entry.get("child_id") or "")
+            if not cid:
+                continue
+            counts[cid] = counts.get(cid, 0) + 1
+        return counts
