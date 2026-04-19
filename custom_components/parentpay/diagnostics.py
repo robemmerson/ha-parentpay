@@ -17,12 +17,16 @@ async def async_get_config_entry_diagnostics(
     hass: HomeAssistant, entry: ConfigEntry
 ) -> dict[str, Any]:
     coordinator: ParentPayCoordinator = hass.data[DOMAIN][entry.entry_id]
+    store = coordinator.store
     return {
         "entry": async_redact_data(
             {"data": entry.data, "options": entry.options}, TO_REDACT
         ),
         "store": {
-            "meals_count": len(coordinator.store.meals),
-            "purchases_count": len(coordinator.store.purchases),
+            "meals_count": len(store.meals),
+            "purchases_count": len(store.purchases),
+            "backfill_done": store.backfill_done,
+            "backfill_done_at": store.backfill_done_at,
+            "dismissal_count_per_child": store.dismissal_count_per_child(),
         },
     }
