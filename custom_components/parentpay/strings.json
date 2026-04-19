@@ -36,5 +36,15 @@
         }
       }
     }
+  },
+  "entity": {
+    "todo": {
+      "available_to_purchase": {
+        "name": "Available to purchase"
+      },
+      "parent_purchases": {
+        "name": "Parent purchases"
+      }
+    }
   }
 }
