@@ -3,10 +3,12 @@ from __future__ import annotations
 
 import json
 import pathlib
+from datetime import date
 
 import aiohttp
 import pytest
 from aioresponses import aioresponses
+from yarl import URL
 
 from custom_components.parentpay.client import ParentPayClient
 from custom_components.parentpay.const import (
@@ -133,3 +135,66 @@ async def test_fetch_archive_returns_recent_rows(
         m.get(ARCHIVE_URL, status=200, body=_load_text("archive_initial.html"))
         rows = await client.fetch_archive()
     assert len(rows) > 0
+
+
+def _archive_post_body(m: aioresponses) -> dict[str, str]:
+    """Pull the form body out of the most recent POST against ARCHIVE_URL."""
+    calls = m.requests.get(("POST", URL(ARCHIVE_URL))) or []
+    assert calls, "expected at least one POST against the archive URL"
+    data = calls[-1].kwargs.get("data")
+    assert isinstance(data, dict), f"expected dict body, got {type(data)!r}"
+    return data
+
+
+async def test_fetch_archive_range_does_get_then_post(
+    http_session: aiohttp.ClientSession,
+) -> None:
+    client = ParentPayClient(http_session, username="u@example.com", password="pw")
+    with aioresponses() as m:
+        m.post(LOGIN_URL, status=200, payload=_load_json("login_success.json"))
+        m.get(ARCHIVE_URL, status=200, body=_load_text("archive_initial.html"))
+        m.post(ARCHIVE_URL, status=200, body=_load_text("archive_sample.html"))
+        rows = await client.fetch_archive_range(
+            date(2025, 4, 19), date(2026, 4, 19)
+        )
+        body = _archive_post_body(m)
+    assert body["__EVENTTARGET"] == "ctl00$cmdSearch"
+    assert body["__EVENTARGUMENT"] == ""
+    assert body["__VIEWSTATE"] == "TESTVIEWSTATE_INITIAL"
+    assert body["__VIEWSTATEGENERATOR"] == "TESTGEN_INITIAL"
+    assert body["__EVENTVALIDATION"] == "TESTEV_INITIAL"
+    assert body["ctl00$selChoosePupil"] == "0"
+    assert body["ctl00$selChooseService"] == "0"
+    assert body["ctl00$txtChooseStartDate"] == "19/04/2025"
+    assert body["ctl00$txtChooseEndDate"] == "19/04/2026"
+    assert len(rows) > 900
+
+
+async def test_fetch_archive_range_uses_ddmm_date_format(
+    http_session: aiohttp.ClientSession,
+) -> None:
+    client = ParentPayClient(http_session, username="u@example.com", password="pw")
+    with aioresponses() as m:
+        m.post(LOGIN_URL, status=200, payload=_load_json("login_success.json"))
+        m.get(ARCHIVE_URL, status=200, body=_load_text("archive_initial.html"))
+        m.post(ARCHIVE_URL, status=200, body=_load_text("archive_sample.html"))
+        await client.fetch_archive_range(date(2026, 1, 5), date(2026, 12, 31))
+        body = _archive_post_body(m)
+    # DD/MM/YYYY — single-digit days/months are zero-padded
+    assert body["ctl00$txtChooseStartDate"] == "05/01/2026"
+    assert body["ctl00$txtChooseEndDate"] == "31/12/2026"
+
+
+async def test_fetch_archive_range_returns_parsed_rows(
+    http_session: aiohttp.ClientSession,
+) -> None:
+    client = ParentPayClient(http_session, username="u@example.com", password="pw")
+    with aioresponses() as m:
+        m.post(LOGIN_URL, status=200, payload=_load_json("login_success.json"))
+        m.get(ARCHIVE_URL, status=200, body=_load_text("archive_initial.html"))
+        m.post(ARCHIVE_URL, status=200, body=_load_text("archive_sample.html"))
+        rows = await client.fetch_archive_range(
+            date(2025, 4, 19), date(2026, 4, 19)
+        )
+    assert {r.child_id for r in rows} == {"11111111", "22222222"}
+    assert {r.payment_method for r in rows} >= {"Meal", "Parent Account"}
