@@ -219,11 +219,20 @@ def _parse_archive_rows(html: str, *, only_parent_account: bool = False) -> list
 
 
 def parse_archive(html: str) -> list[ArchiveRow]:
-    """Parse the payment-history (archive) page into ArchiveRow instances."""
+    """Parse the payment-history (archive) page into ArchiveRow instances.
+
+    Empty-but-valid is distinguished from broken. ParentPay's cmdSearch POST
+    returns ``<table summary="Payments">`` even when the date range contains
+    no transactions — we treat that as a legitimate empty list. A response
+    without the payments scaffold (auth redirect, UI change, server error)
+    still raises so regressions don't silently swallow missing data.
+    """
     rows = _parse_archive_rows(html, only_parent_account=False)
-    if not rows:
-        raise ParentPayParseError("No archive rows parsed", snippet=html[:500])
-    return rows
+    if rows:
+        return rows
+    if 'summary="Payments"' in html:
+        return []
+    raise ParentPayParseError("No archive rows parsed", snippet=html[:500])
 
 
 _PRICE_RE = re.compile(r"£\s*(?P<amount>-?\d+(?:\.\d{2})?)")

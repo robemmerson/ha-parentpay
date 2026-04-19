@@ -126,15 +126,24 @@ async def test_fetch_payment_items_returns_parsed_items(
     assert all(it.payment_item_id for it in items)
 
 
-async def test_fetch_archive_returns_recent_rows(
+async def test_fetch_archive_posts_rolling_30_day_window(
     http_session: aiohttp.ClientSession,
 ) -> None:
+    """fetch_archive() is a 30-day rolling cmdSearch POST (ParentPay 2026 UI)."""
     client = ParentPayClient(http_session, username="u@example.com", password="pw")
     with aioresponses() as m:
         m.post(LOGIN_URL, status=200, payload=_load_json("login_success.json"))
         m.get(ARCHIVE_URL, status=200, body=_load_text("archive_initial.html"))
+        m.post(ARCHIVE_URL, status=200, body=_load_text("archive_sample.html"))
         rows = await client.fetch_archive()
+        body = _archive_post_body(m)
     assert len(rows) > 0
+    assert body["__EVENTTARGET"] == "ctl00$cmdSearch"
+    # Start date is ~30 days before end date (dd/mm/yyyy)
+    from datetime import datetime
+    start = datetime.strptime(body["ctl00$txtChooseStartDate"], "%d/%m/%Y").date()
+    end = datetime.strptime(body["ctl00$txtChooseEndDate"], "%d/%m/%Y").date()
+    assert (end - start).days == 30
 
 
 def _archive_post_body(m: aioresponses) -> dict[str, str]:

@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 import logging
-from datetime import date
+from datetime import date, timedelta
 
 import aiohttp
 
@@ -158,9 +158,15 @@ class ParentPayClient:
         return parse_payment_detail(body)
 
     async def fetch_archive(self) -> list[ArchiveRow]:
-        """Fetch the recent archive rows via plain GET (~last 8 rows)."""
-        body = await self._authed_get(ARCHIVE_URL)
-        return parse_archive(body)
+        """Fetch the last ~30 days of archive rows.
+
+        As of 2026, ParentPay's raw GET of MS_Archive.aspx returns an empty
+        "No results found" panel — rows only come back after a cmdSearch POST
+        with a date range. This method posts a 30-day rolling window so the
+        coordinator still picks up new meals + purchases between polls.
+        """
+        today = date.today()
+        return await self.fetch_archive_range(today - timedelta(days=30), today)
 
     async def fetch_archive_range(
         self, start: date, end: date

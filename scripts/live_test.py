@@ -55,7 +55,7 @@ async def main() -> None:
             pprint.pp(it)
 
         rows = await client.fetch_archive()
-        print(f"Archive rows (GET, recent): {len(rows)}")
+        print(f"Archive rows (last 30 days, POST): {len(rows)}")
         for r in rows[:10]:
             pprint.pp(r)
 

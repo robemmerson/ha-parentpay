@@ -106,10 +106,39 @@ def test_parse_archive_extracts_meal_and_parent_account_rows() -> None:
 
 
 def test_parse_archive_initial_get_returns_recent_rows() -> None:
-    """Default GET returns only the last ~8 rows but the parser must handle it."""
+    """Old-style default-GET capture still parses — preserved as regression coverage."""
     rows = parse_archive(_load_text("archive_initial.html"))
     assert 0 < len(rows) <= 20
     assert all(r.child_id.isdigit() for r in rows)
+
+
+def test_parse_archive_returns_empty_for_valid_empty_window() -> None:
+    """POST response with the payments table scaffold but zero rows = legit empty.
+
+    ParentPay's search POST returns `<table summary="Payments">` even when the date
+    range has no transactions. parse_archive must treat that as an empty list rather
+    than raising, so polls don't fail during quiet periods.
+    """
+    empty_scaffold = """
+    <html><body>
+      <table summary="Payments" class="table table-striped tbHistoryDesktop">
+        <thead>
+          <tr><th>Pupil</th><th>Item</th><th>Date</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </body></html>
+    """
+    assert parse_archive(empty_scaffold) == []
+
+
+def test_parse_archive_raises_when_no_scaffold() -> None:
+    """Truly garbled / auth-redirect responses (no payments scaffold at all) still raise.
+
+    This is the guard that alerted us to the 2026 UI change — don't weaken it.
+    """
+    with pytest.raises(ParentPayParseError):
+        parse_archive("<html><body><p>Please log in</p></body></html>")
 
 
 def test_parse_home_recent_payments_is_parent_account_only() -> None:
