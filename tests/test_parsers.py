@@ -168,3 +168,11 @@ def test_parse_payment_detail_extracts_all_line_items() -> None:
     assert items[1].amount_pence == 335
     # Dates parse
     assert items[0].date_paid == date(2026, 4, 16)
+
+
+def test_parse_archive_handles_full_history_response() -> None:
+    """archive_sample.html is the POST response — should hold the full 12-month grid."""
+    rows = parse_archive(_load_text("archive_sample.html"))
+    assert len(rows) >= 900
+    assert {r.child_id for r in rows} >= {"11111111", "22222222"}
+    assert {r.payment_method for r in rows} >= {"Meal", "Parent Account"}
