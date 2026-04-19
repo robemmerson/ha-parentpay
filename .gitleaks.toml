@@ -1,0 +1,20 @@
+# Extend the default gitleaks config — keep all upstream rules, just add allowlists for
+# known false-positives from the `generic-api-key` rule.
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Allow HA storage keys and PII-scrubbed fixture values"
+
+# parentpay.meals_v1, parentpay.purchases_v1, parentpay.payment_details_v1,
+# parentpay.dismissals_v1, parentpay.backfill_v1 — these are HA Store keys
+# (const.STORE_KEY_*). They trigger generic-api-key because of their entropy.
+regexes = [
+    '''parentpay\.(meals|purchases|payment_details|dismissals|backfill)_v\d+''',
+]
+
+# Scope: tests + v2 planning docs are where these show up.
+paths = [
+    '''docs/superpowers/.*\.md$''',
+    '''tests/test_store\.py$''',
+]
