@@ -19,6 +19,7 @@ from custom_components.parentpay.parsers import (
     parse_login_response,
     parse_payment_detail,
     parse_payment_items,
+    parse_webforms_state,
 )
 
 FIXTURES = pathlib.Path(__file__).parent / "fixtures"
@@ -176,3 +177,35 @@ def test_parse_archive_handles_full_history_response() -> None:
     assert len(rows) >= 900
     assert {r.child_id for r in rows} >= {"11111111", "22222222"}
     assert {r.payment_method for r in rows} >= {"Meal", "Parent Account"}
+
+
+def test_parse_webforms_state_extracts_three_tokens() -> None:
+    html = """
+    <html><body><form>
+      <input id="__VIEWSTATE" name="__VIEWSTATE" type="hidden" value="STATEV"/>
+      <input id="__VIEWSTATEGENERATOR" name="__VIEWSTATEGENERATOR" type="hidden" value="GENV"/>
+      <input id="__EVENTVALIDATION" name="__EVENTVALIDATION" type="hidden" value="EVV"/>
+    </form></body></html>
+    """
+    state = parse_webforms_state(html)
+    assert state.viewstate == "STATEV"
+    assert state.viewstategenerator == "GENV"
+    assert state.eventvalidation == "EVV"
+
+
+def test_parse_webforms_state_reads_archive_initial_fixture() -> None:
+    state = parse_webforms_state(_load_text("archive_initial.html"))
+    assert state.viewstate == "TESTVIEWSTATE_INITIAL"
+    assert state.viewstategenerator == "TESTGEN_INITIAL"
+    assert state.eventvalidation == "TESTEV_INITIAL"
+
+
+def test_parse_webforms_state_raises_when_token_missing() -> None:
+    html = """
+    <html><body><form>
+      <input id="__VIEWSTATE" name="__VIEWSTATE" type="hidden" value="X"/>
+      <input id="__VIEWSTATEGENERATOR" name="__VIEWSTATEGENERATOR" type="hidden" value="Y"/>
+    </form></body></html>
+    """
+    with pytest.raises(ParentPayParseError):
+        parse_webforms_state(html)
