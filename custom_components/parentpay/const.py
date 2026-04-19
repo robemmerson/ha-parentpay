@@ -53,4 +53,6 @@ CONF_PURCHASES_LIST_DEPTH: Final = "purchases_list_depth"
 STORE_KEY_MEALS: Final = "parentpay.meals_v1"
 STORE_KEY_PURCHASES: Final = "parentpay.purchases_v1"
 STORE_KEY_PAYMENT_DETAILS: Final = "parentpay.payment_details_v1"
-STORE_VERSION: Final = 2  # bumped to drop v1 stores polluted by un-enriched rows
+STORE_KEY_DISMISSALS: Final = "parentpay.dismissals_v1"
+STORE_KEY_BACKFILL: Final = "parentpay.backfill_v1"
+STORE_VERSION: Final = 3  # v3: adds dismissals + backfill flag, drops home-page meal cache pollution
