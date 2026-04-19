@@ -71,3 +71,12 @@ class PaymentDetailItem:
     amount_pence: int
     date_paid: date
     status: str | None
+
+
+@dataclass(frozen=True, slots=True)
+class WebFormsState:
+    """ASP.NET WebForms hidden state tokens needed to round-trip a postback."""
+
+    viewstate: str
+    viewstategenerator: str
+    eventvalidation: str
