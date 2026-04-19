@@ -108,3 +108,28 @@ async def test_store_v3_migration_wipes_v2_data(hass, hass_storage) -> None:
     assert store.meals == []
     assert store.purchases == []
     assert store.get_payment_detail("old-tid") is None
+
+
+async def test_dismissal_round_trip(store: ParentPayStore) -> None:
+    await store.async_load()
+    assert store.is_dismissed("11111111", "9000001") is False
+    await store.async_set_dismissed("11111111", "9000001", True)
+    assert store.is_dismissed("11111111", "9000001") is True
+    await store.async_set_dismissed("11111111", "9000001", False)
+    assert store.is_dismissed("11111111", "9000001") is False
+
+
+async def test_dismissal_distinguishes_children(store: ParentPayStore) -> None:
+    await store.async_load()
+    await store.async_set_dismissed("11111111", "9000001", True)
+    assert store.is_dismissed("11111111", "9000001") is True
+    assert store.is_dismissed("22222222", "9000001") is False
+
+
+async def test_dismissal_count_per_child(store: ParentPayStore) -> None:
+    await store.async_load()
+    await store.async_set_dismissed("11111111", "9000001", True)
+    await store.async_set_dismissed("11111111", "9000002", True)
+    await store.async_set_dismissed("22222222", "9000003", True)
+    counts = store.dismissal_count_per_child()
+    assert counts == {"11111111": 2, "22222222": 1}
