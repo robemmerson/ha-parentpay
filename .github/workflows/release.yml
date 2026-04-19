@@ -1,0 +1,37 @@
+name: Release
+on:
+  push:
+    tags:
+      - "v[0-9]+.[0-9]+"
+
+permissions:
+  contents: read
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # create the GitHub Release
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
+        with:
+          fetch-depth: 0
+
+      - name: Verify manifest version matches tag
+        env:
+          TAG_NAME: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          manifest_version=$(python -c "import json; print(json.load(open('custom_components/parentpay/manifest.json'))['version'])")
+          expected="${TAG_NAME#v}"
+          if [ "$manifest_version" != "$expected" ]; then
+            echo "::error::manifest.json version '$manifest_version' does not match tag '$TAG_NAME' (expected '$expected')"
+            exit 1
+          fi
+          echo "manifest version '$manifest_version' matches tag '$TAG_NAME'"
+
+      - uses: softprops/action-gh-release@b4309332981a82ec1c5618f44dd2e27cc8bfbfda  # v3.0.0
+        with:
+          generate_release_notes: true
+          # HACS pulls source from the tag archive — no extra assets required.
+          fail_on_unmatched_files: false

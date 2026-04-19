@@ -1,0 +1,39 @@
+name: pip-audit
+on:
+  push:
+    branches: [main]
+    paths:
+      - requirements-dev.txt
+      - custom_components/parentpay/manifest.json
+      - .github/workflows/pip-audit.yml
+  pull_request:
+    paths:
+      - requirements-dev.txt
+      - custom_components/parentpay/manifest.json
+      - .github/workflows/pip-audit.yml
+  schedule:
+    - cron: "5 5 * * 1"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
+      - uses: pypa/gh-action-pip-audit@1220774d901786e6f652ae159f7b6bc8fea6d266  # v1.1.0
+        with:
+          inputs: requirements-dev.txt
+          # Runtime dep is pinned inside manifest.json (beautifulsoup4 only); pip-audit
+          # needs an explicit requirements-style file, so we audit the dev bundle.
+          # Ignore known unfixable transitives:
+          #   GHSA-6w46-j5rx-g56g — pytest /tmp race; pytest-HA pins pytest==9.0.0 exactly.
+          #   GHSA-752w-5fwx-jx9f — pyjwt crit-header; transitive via homeassistant.
+          ignore-vulns: |
+            GHSA-6w46-j5rx-g56g
+            GHSA-752w-5fwx-jx9f
