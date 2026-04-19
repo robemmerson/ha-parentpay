@@ -14,7 +14,7 @@ from custom_components.parentpay.models import HomeSnapshot
 def client() -> AsyncMock:
     c = AsyncMock()
     c.fetch_home = AsyncMock(
-        return_value=HomeSnapshot(balances=[], recent_meals=[], recent_payments=[])
+        return_value=HomeSnapshot(balances=[], recent_payments=[])
     )
     c.fetch_payment_items = AsyncMock(return_value=[])
     c.fetch_archive = AsyncMock(return_value=[])

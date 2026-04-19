@@ -55,7 +55,6 @@ class HomeSnapshot:
     """Result of a single GET against the ParentPay home page."""
 
     balances: list[Balance]
-    recent_meals: list[ArchiveRow]
     recent_payments: list[ArchiveRow]
 
 

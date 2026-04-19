@@ -19,7 +19,6 @@ from .models import ArchiveRow, HomeSnapshot, PaymentDetailItem, PaymentItem
 from .parsers import (
     parse_archive,
     parse_home_balances,
-    parse_home_recent_meals,
     parse_home_recent_payments,
     parse_login_response,
     parse_payment_detail,
@@ -127,11 +126,15 @@ class ParentPayClient:
         return _AUTHENTICATED_MARKER in body
 
     async def fetch_home(self) -> HomeSnapshot:
-        """One-shot fetch: balances + recent meals + recent parent-account payments."""
+        """One-shot fetch: balances + recent parent-account payments.
+
+        The home page also lists today's meal price as a generic placeholder, but
+        v2 ignores that — meal data comes from the archive store (backfill plus
+        ongoing GETs) so we always have real item names.
+        """
         body = await self._authed_get(HOME_URL)
         return HomeSnapshot(
             balances=parse_home_balances(body),
-            recent_meals=parse_home_recent_meals(body),
             recent_payments=parse_home_recent_payments(body),
         )
 
