@@ -7,4 +7,4 @@ pytest-homeassistant-custom-component>=0.13.325
 aioresponses>=0.7.8
 ruff>=0.15.12
 mypy>=1.15
-python-dotenv>=1.2
+python-dotenv>=1.2.2
