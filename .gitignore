@@ -26,3 +26,5 @@ venv/
 # HA runtime (if running HA locally for smoke tests)
 config/
 .claude/
+
+CLAUDE.md
