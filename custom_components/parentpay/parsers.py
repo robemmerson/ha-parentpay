@@ -4,12 +4,12 @@ from __future__ import annotations
 
 import json
 import re
-from collections.abc import Mapping
+from collections.abc import Callable, Mapping
 from datetime import date
 from decimal import Decimal
 from typing import Any
 
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, Tag
 
 from .exceptions import ParentPayParseError
 from .models import (
@@ -25,6 +25,16 @@ _BALANCE_SPAN_RE = re.compile(r"£\s*(?P<amount>\d+\.\d{2})")
 
 def _soup(html: str) -> BeautifulSoup:
     return BeautifulSoup(html, "html.parser")
+
+
+def _has_attr(name: str) -> Callable[[Tag], bool]:
+    """Tag filter for "has this attribute at all".
+
+    The equivalent `attrs={name: True}` form no longer type-checks: bs4 4.15 declares
+    `attrs` as an invariant `dict`, so a `dict[str, bool]` literal is rejected even
+    though `bool` is in the value union.
+    """
+    return lambda tag: tag.has_attr(name)
 
 
 def parse_login_response(*, status: int, payload: Mapping[str, Any]) -> tuple[bool, str | None]:
@@ -49,7 +59,7 @@ def parse_login_response(*, status: int, payload: Mapping[str, Any]) -> tuple[bo
 def _build_child_name_map(soup: BeautifulSoup) -> dict[str, str]:
     """ConsumerId → name, from sidebar data-consumer-data attributes."""
     out: dict[str, str] = {}
-    for el in soup.find_all(attrs={"data-consumer-data": True}):
+    for el in soup.find_all(_has_attr("data-consumer-data")):
         try:
             raw = str(el.get("data-consumer-data") or "").replace("'", '"')
             obj = json.loads(raw)
@@ -248,7 +258,7 @@ def parse_payment_items(html: str) -> list[PaymentItem]:
     name_by_id = _build_child_name_map(soup)
     results: list[PaymentItem] = []
     for container in soup.select("div.well.payment-item"):
-        ids_el = container.find(attrs={"data-payment-item-id": True})
+        ids_el = container.find(_has_attr("data-payment-item-id"))
         if ids_el is None:
             continue
         raw_item_id = ids_el.get("data-payment-item-id") or ""
