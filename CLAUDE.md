@@ -5,7 +5,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 ```bash
-# Setup (requires Python 3.14 — HA 2026.4 dropped 3.13)
+# Setup (requires Python 3.14 — HA 2026.3 dropped 3.13)
 python3.14 -m venv .venv && source .venv/bin/activate
 pip install -r requirements-dev.txt
 
