@@ -13,6 +13,12 @@ updates:
       - python
     commit-message:
       prefix: "chore(deps)"
+    ignore:
+      # pytest-homeassistant-custom-component pins pytest exactly (currently
+      # pytest==9.0.3). Bumping the pytest floor past that pin makes the
+      # install unresolvable and fails CI, so pytest is upgraded only as a
+      # side effect of upgrading pytest-homeassistant-custom-component.
+      - dependency-name: pytest
 
   - package-ecosystem: github-actions
     directory: "/"
