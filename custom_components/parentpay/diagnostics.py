@@ -22,6 +22,9 @@ async def async_get_config_entry_diagnostics(
         "entry": async_redact_data(
             {"data": entry.data, "options": entry.options}, TO_REDACT
         ),
+        # Supplementary fetches that failed on the most recent poll and fell
+        # back to stale/empty data. Empty list = a fully healthy poll.
+        "degraded_legs": coordinator.degraded_legs,
         "store": {
             "meals_count": len(store.meals),
             "purchases_count": len(store.purchases),

@@ -2,13 +2,16 @@
 from __future__ import annotations
 
 from datetime import date, datetime, time, timedelta
+from decimal import Decimal
 from unittest.mock import AsyncMock, patch
 
 import pytest
+from homeassistant.exceptions import ConfigEntryAuthFailed
+from homeassistant.helpers.update_coordinator import UpdateFailed
 
 from custom_components.parentpay.coordinator import ParentPayCoordinator
-from custom_components.parentpay.exceptions import ParentPayError
-from custom_components.parentpay.models import ArchiveRow, HomeSnapshot
+from custom_components.parentpay.exceptions import ParentPayAuthError, ParentPayError
+from custom_components.parentpay.models import ArchiveRow, Balance, HomeSnapshot, PaymentItem
 
 
 @pytest.fixture
@@ -191,3 +194,102 @@ async def test_backfill_merges_rows_into_store(
     ]
     await coordinator._async_update_data()
     assert any(m["item"] == "PIZZA SLICE" for m in coordinator.store.meals)
+
+
+async def test_archive_failure_does_not_discard_balances_and_items(
+    coordinator: ParentPayCoordinator,
+    client: AsyncMock,
+) -> None:
+    """A failing archive leg must not take the whole poll down with it.
+
+    This is the 2026-08-22 outage in miniature: the archive fetch raised, the
+    coordinator turned it into UpdateFailed, and every entity went unavailable
+    — including balances and payment items, whose fetches had succeeded.
+    """
+    balance = Balance(child_id="11111111", child_name="Alice", amount=Decimal("12.34"))
+    item = PaymentItem(
+        child_id="11111111",
+        child_name="Alice",
+        payment_item_id="42",
+        name="Alice - School Meals",
+        price=Decimal("2.75"),
+        availability=None,
+        is_new=False,
+    )
+    client.fetch_home.return_value = HomeSnapshot(
+        balances=[balance], recent_payments=[]
+    )
+    client.fetch_payment_items.return_value = [item]
+    client.fetch_archive.side_effect = ParentPayError("No archive rows parsed")
+
+    data = await coordinator._async_update_data()
+
+    assert data["balances"] == [balance]
+    assert data["items"] == [item]
+    assert coordinator.degraded_legs == ["archive"]
+
+
+async def test_payment_items_failure_falls_back_to_previous_items(
+    coordinator: ParentPayCoordinator,
+    client: AsyncMock,
+) -> None:
+    """A failed payment-items fetch serves the last known list, not an empty one."""
+    item = PaymentItem(
+        child_id="11111111",
+        child_name="Alice",
+        payment_item_id="42",
+        name="Alice - School Meals",
+        price=Decimal("2.75"),
+        availability=None,
+        is_new=False,
+    )
+    client.fetch_payment_items.return_value = [item]
+    first = await coordinator._async_update_data()
+    assert first["items"] == [item]
+    coordinator.async_set_updated_data(first)
+
+    client.fetch_payment_items.side_effect = ParentPayError("boom")
+    second = await coordinator._async_update_data()
+
+    assert second["items"] == [item]  # stale, not dropped
+    assert coordinator.degraded_legs == ["payment_items"]
+
+
+async def test_home_failure_is_still_fatal(
+    coordinator: ParentPayCoordinator,
+    client: AsyncMock,
+) -> None:
+    """Balances have no store fallback, so a home failure is a real poll failure."""
+    client.fetch_home.side_effect = ParentPayError("home exploded")
+    with pytest.raises(UpdateFailed):
+        await coordinator._async_update_data()
+
+
+async def test_auth_error_in_optional_leg_still_triggers_reauth(
+    coordinator: ParentPayCoordinator,
+    client: AsyncMock,
+) -> None:
+    """A dead session must reach HA as ConfigEntryAuthFailed, not be swallowed.
+
+    Degrading on ParentPayError must not silently absorb ParentPayAuthError —
+    otherwise an expired login would serve stale data forever with no reauth
+    prompt.
+    """
+    client.fetch_archive.side_effect = ParentPayAuthError("session dead")
+    with pytest.raises(ConfigEntryAuthFailed):
+        await coordinator._async_update_data()
+
+
+async def test_degraded_legs_resets_on_a_healthy_poll(
+    coordinator: ParentPayCoordinator,
+    client: AsyncMock,
+) -> None:
+    """degraded_legs reflects the latest poll only — it must not accumulate."""
+    client.fetch_archive.side_effect = ParentPayError("boom")
+    await coordinator._async_update_data()
+    assert coordinator.degraded_legs == ["archive"]
+
+    client.fetch_archive.side_effect = None
+    client.fetch_archive.return_value = []
+    await coordinator._async_update_data()
+    assert coordinator.degraded_legs == []

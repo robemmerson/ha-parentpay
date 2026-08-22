@@ -3,8 +3,9 @@ from __future__ import annotations
 
 import logging
 from collections import defaultdict
+from collections.abc import Coroutine
 from datetime import date, time, timedelta
-from typing import Any
+from typing import Any, TypeVar
 
 from homeassistant.core import HomeAssistant
 from homeassistant.exceptions import ConfigEntryAuthFailed
@@ -30,6 +31,8 @@ from .store import ParentPayStore
 
 _LOGGER = logging.getLogger(__name__)
 
+_T = TypeVar("_T")
+
 
 class ParentPayCoordinator(DataUpdateCoordinator[dict[str, Any]]):
     def __init__(
@@ -51,6 +54,9 @@ class ParentPayCoordinator(DataUpdateCoordinator[dict[str, Any]]):
         self._options = options
         self.store = ParentPayStore(hass)
         self._first_run_done = False
+        # Names of supplementary fetches that failed on the most recent
+        # poll and fell back to stale/empty data. Surfaced in diagnostics.
+        self.degraded_legs: list[str] = []
 
     async def async_setup(self) -> None:
         await self.store.async_load()
@@ -75,12 +81,30 @@ class ParentPayCoordinator(DataUpdateCoordinator[dict[str, Any]]):
                 "purchases": [],
             }
 
+        previous = self.data or {}
+        self.degraded_legs = []
+
         try:
             await self._maybe_run_backfill()
 
+            # Home is the primary leg — balances have no persistent store to
+            # fall back on, so a failure here is a genuine poll failure.
             home = await self._client.fetch_home()
-            items = await self._client.fetch_payment_items()
-            archive_rows = await self._client.fetch_archive()
+
+            # Supplementary legs degrade independently. A ParentPay-side
+            # failure in one must not discard what the others returned: that
+            # is what turned a single empty archive window into a blackout of
+            # every entity, balances included (see CLAUDE.md, 2026-08-22).
+            items = await self._fetch_optional(
+                self._client.fetch_payment_items(),
+                leg="payment_items",
+                fallback=previous.get("items", []),
+            )
+            archive_rows = await self._fetch_optional(
+                self._client.fetch_archive(),
+                leg="archive",
+                fallback=[],
+            )
 
             enriched_payments = await self._enrich_recent_payments(
                 home.recent_payments
@@ -100,6 +124,34 @@ class ParentPayCoordinator(DataUpdateCoordinator[dict[str, Any]]):
             raise ConfigEntryAuthFailed(str(err)) from err
         except ParentPayError as err:
             raise UpdateFailed(str(err)) from err
+
+    async def _fetch_optional(
+        self,
+        coro: Coroutine[Any, Any, _T],
+        *,
+        leg: str,
+        fallback: _T,
+    ) -> _T:
+        """Await a supplementary fetch, degrading to ``fallback`` on failure.
+
+        Auth errors are re-raised: those mean the session is genuinely dead and
+        HA should start a reauth flow rather than quietly serve stale data.
+        Every other ParentPay error is logged at WARNING (every poll, unlike
+        HA's coordinator-level error which logs only on the first failure) and
+        the rest of the poll continues.
+        """
+        try:
+            return await coro
+        except ParentPayAuthError:
+            raise
+        except ParentPayError as err:
+            self.degraded_legs.append(leg)
+            _LOGGER.warning(
+                "ParentPay %s fetch failed, continuing with the rest of the poll: %s",
+                leg,
+                err,
+            )
+            return fallback
 
     async def _maybe_run_backfill(self) -> None:
         """Run the one-shot 12-month backfill if it hasn't succeeded yet.
