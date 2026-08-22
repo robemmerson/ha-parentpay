@@ -8,6 +8,7 @@ import aiohttp
 
 from .const import (
     ARCHIVE_URL,
+    ARCHIVE_WINDOW_DAYS,
     DEFAULT_USER_AGENT,
     HOME_URL,
     LOGIN_FIELD_PASSWORD,
@@ -158,15 +159,23 @@ class ParentPayClient:
         return parse_payment_detail(body)
 
     async def fetch_archive(self) -> list[ArchiveRow]:
-        """Fetch the last ~30 days of archive rows.
+        """Fetch the last ~60 days of archive rows.
 
         As of 2026, ParentPay's raw GET of MS_Archive.aspx returns an empty
         "No results found" panel — rows only come back after a cmdSearch POST
-        with a date range. This method posts a 30-day rolling window so the
+        with a date range. This method posts a rolling window so the
         coordinator still picks up new meals + purchases between polls.
+
+        The window is 60 days rather than 30 so it still overlaps real data
+        across a long school holiday (the summer break runs ~7.5 weeks). An
+        empty window is handled gracefully by ``parse_archive`` regardless —
+        the wider window is about keeping the rolling poll useful, not about
+        avoiding a crash.
         """
         today = date.today()
-        return await self.fetch_archive_range(today - timedelta(days=30), today)
+        return await self.fetch_archive_range(
+            today - timedelta(days=ARCHIVE_WINDOW_DAYS), today
+        )
 
     async def fetch_archive_range(
         self, start: date, end: date

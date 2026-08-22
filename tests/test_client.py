@@ -11,6 +11,7 @@ import pytest
 from custom_components.parentpay.client import ParentPayClient
 from custom_components.parentpay.const import (
     ARCHIVE_URL,
+    ARCHIVE_WINDOW_DAYS,
     HOME_URL,
     LOGIN_URL,
     PAYMENT_ITEMS_URL,
@@ -126,10 +127,14 @@ async def test_fetch_payment_items_returns_parsed_items(
     assert all(it.payment_item_id for it in items)
 
 
-async def test_fetch_archive_posts_rolling_30_day_window(
+async def test_fetch_archive_posts_rolling_window(
     http_session: aiohttp.ClientSession,
 ) -> None:
-    """fetch_archive() is a 30-day rolling cmdSearch POST (ParentPay 2026 UI)."""
+    """fetch_archive() is a rolling cmdSearch POST (ParentPay 2026 UI).
+
+    The window is ARCHIVE_WINDOW_DAYS (60) rather than 30 so it still overlaps
+    real transactions across the ~7.5-week summer holiday.
+    """
     client = ParentPayClient(http_session, username="u@example.com", password="pw")
     with mock_http() as m:
         m.post(LOGIN_URL, status=200, payload=_load_json("login_success.json"))
@@ -139,11 +144,31 @@ async def test_fetch_archive_posts_rolling_30_day_window(
         body = _archive_post_body(m)
     assert len(rows) > 0
     assert body["__EVENTTARGET"] == "ctl00$cmdSearch"
-    # Start date is ~30 days before end date (dd/mm/yyyy)
+    # Start date is ARCHIVE_WINDOW_DAYS before end date (dd/mm/yyyy)
     from datetime import datetime
     start = datetime.strptime(body["ctl00$txtChooseStartDate"], "%d/%m/%Y").date()
     end = datetime.strptime(body["ctl00$txtChooseEndDate"], "%d/%m/%Y").date()
-    assert (end - start).days == 30
+    assert (end - start).days == ARCHIVE_WINDOW_DAYS
+    assert ARCHIVE_WINDOW_DAYS >= 53, "must span a 7.5-week summer holiday"
+
+
+async def test_fetch_archive_survives_empty_window(
+    http_session: aiohttp.ClientSession,
+) -> None:
+    """A holiday window with zero transactions returns [] instead of raising.
+
+    This is the end-to-end shape of the 2026-08-22 outage: the POST succeeds and
+    is authenticated, but the search finds nothing, so ParentPay renders only a
+    "No results found" panel. fetch_archive() must return [] so the coordinator
+    poll survives and balances/payment items still reach HA.
+    """
+    client = ParentPayClient(http_session, username="u@example.com", password="pw")
+    with mock_http() as m:
+        m.post(LOGIN_URL, status=200, payload=_load_json("login_success.json"))
+        m.get(ARCHIVE_URL, status=200, body=_load_text("archive_initial.html"))
+        m.post(ARCHIVE_URL, status=200, body=_load_text("archive_empty.html"))
+        rows = await client.fetch_archive()
+    assert rows == []
 
 
 def _archive_post_body(m: MockHTTP) -> dict[str, str]:

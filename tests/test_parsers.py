@@ -132,6 +132,22 @@ def test_parse_archive_returns_empty_for_valid_empty_window() -> None:
     assert parse_archive(empty_scaffold) == []
 
 
+def test_parse_archive_returns_empty_for_no_results_panel() -> None:
+    """Zero-result searches render no payments table at all — just an alert panel.
+
+    Captured live on 2026-08-22 with a 60-day window during the 7.5-week summer
+    holiday: the last transaction was 2026-07-15, so the window held nothing and
+    ParentPay returned `<div class="alert alert-danger">No results found</div>`
+    with no `<table summary="Payments">` scaffold. Treating that as broken made
+    every coordinator poll raise UpdateFailed, taking all entities down.
+    """
+    html = _load_text("archive_empty.html")
+    # Guard the premise: this fixture really has no payments scaffold.
+    assert 'summary="Payments"' not in html
+    assert "No results found" in html
+    assert parse_archive(html) == []
+
+
 def test_parse_archive_raises_when_no_scaffold() -> None:
     """Truly garbled / auth-redirect responses (no payments scaffold at all) still raise.
 

@@ -30,6 +30,10 @@ DEFAULT_USER_AGENT: Final = (
     "Chrome/145.0.0.0 Safari/537.36"
 )
 
+# Rolling window for the per-poll archive search. Wide enough to still
+# overlap real transactions across the ~7.5-week summer holiday.
+ARCHIVE_WINDOW_DAYS: Final = 60
+
 DEFAULT_POLL_INTERVAL_MIN: Final = 30
 DEFAULT_POLL_WINDOW_START: Final = "08:00"
 DEFAULT_POLL_WINDOW_END: Final = "16:00"
