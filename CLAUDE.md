@@ -5,7 +5,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 ```bash
-# Setup (requires Python 3.14 — HA 2026.3 dropped 3.13)
+# Setup (requires Python 3.14 — HA 2026.4 dropped 3.13)
 python3.14 -m venv .venv && source .venv/bin/activate
 pip install -r requirements-dev.txt
 
@@ -34,7 +34,7 @@ All endpoints documented in `docs/endpoints.md` if present, otherwise reverse-en
 
 ### Data flow per poll (`coordinator._async_update_data`)
 
-Three GETs: home page (173 KB — balances + recent meals + recent payments in one fetch), payment items page, archive page (GET-only returns ~last 8 rows). Then an enrichment step for recent payments (see below). Everything merges into a dedup store keyed by row hash; history accumulates across polls.
+Three GETs (home page for balances + recent payments, payment items page, archive page for ~last 8 rows) plus a one-shot backfill POST against the archive page on the first successful poll. The backfill exercises `__EVENTTARGET=ctl00$cmdSearch` with a 12-month date range to pull all historical rows in a single round-trip; the success flag is persisted in `parentpay.backfill_v1`. Then an enrichment step for recent payments (see below). Everything merges into a dedup store keyed by row hash; history accumulates across polls.
 
 Poll-window gating skips everything except the first tick after HA restart.
 
@@ -56,16 +56,31 @@ Bumping `STORE_VERSION` triggers HA's migration path. The default `Store` raises
 
 - `child_id` is always the numeric ParentPay `ConsumerId` as `str` (e.g. `"11111111"` in scrubbed fixtures, real 8-digit id in production).
 - `payment_method` is exactly `"Meal"` or `"Parent Account"` (with the space) — `ArchiveRow.is_meal` / `is_parent_payment` compare literal strings.
-- Home-page meal rows carry only a **price**, not the food name — parser emits `"School meal"` / `"No meal"`. Real food names like `"PIZZA SLICE"` come from the archive GET only and are deduped into the same store.
 - Amounts are stored as `int` pence, not `Decimal`.
 
 ### Fixtures are PII-scrubbed
 
 `tests/fixtures/*.html` are real captures with PII replaced (`Lauren`→`Alice`, `Bethany`→`Bob`, `18416154`→`11111111`, `23176880`→`22222222`, `Cheam High School`→`Test School`, all `TID=` collapsed, all `U=` collapsed to `2000000001`, ASP.NET `__VIEWSTATE`/`__EVENTVALIDATION` values blanked). When tests assert on fixture content, use the **scrubbed** values. If you add a new fixture, apply the same scrub — including base64-decoding `__VIEWSTATE` to verify no PII leaks through the blob.
 
-### v1 scope — archive is GET-only
+### Archive backfill — `cmdSearch` POST, not the calendar postback
 
-The archive page's full date-range query uses ASP.NET WebForms postback (`__EVENTTARGET=ctl00$calChooseStartDate`, opaque `__EVENTARGUMENT=V{int}` day keys scraped from calendar DOM, plus `__VIEWSTATE`/`__VIEWSTATEGENERATOR`/`__EVENTVALIDATION` round-trip). **Deferred to v2.** Don't add `fetch_archive(start, end)` or backfill logic; historical rows accumulate naturally via the 8-row GET.
+`MS_Archive.aspx` is a plain ASP.NET WebForms search form. The CLAUDE.md v1 hint about a `__EVENTTARGET=ctl00$calChooseStartDate` calendar postback was wrong — the actual mechanic is much simpler:
+
+1. GET `MS_Archive.aspx` → parse `__VIEWSTATE`, `__VIEWSTATEGENERATOR`, `__EVENTVALIDATION` via `parsers.parse_webforms_state`.
+2. POST `MS_Archive.aspx` with `__EVENTTARGET=ctl00$cmdSearch`, the three state tokens echoed back, `ctl00$selChoosePupil=0` ("All"), `ctl00$selChooseService=0` ("All payment items"), and `ctl00$txtChooseStartDate` / `ctl00$txtChooseEndDate` in `DD/MM/YYYY` format.
+3. Pass the response through `parse_archive`.
+
+`tests/fixtures/archive_initial.html` is an older GET-with-rows capture kept for parser regression coverage; `tests/fixtures/archive_sample.html` is the POST response (1988 rows across two children). Both are scrubbed; state-token values were replaced with deterministic placeholders (`TESTVIEWSTATE_INITIAL`, etc.) so the round-trip tests can assert the POST body echoes them back.
+
+The coordinator runs the backfill on every poll until it succeeds, then never again (flag stored in `parentpay.backfill_v1`). On failure it logs at WARNING and continues with the normal poll.
+
+**Recent rows use the same POST (v2.2+).** As of 2026 ParentPay's raw GET of `MS_Archive.aspx` returns an empty "No results found" panel — there is no GET-only "last ~8 rows" path any more. `client.fetch_archive()` is a thin wrapper around `fetch_archive_range(today - ARCHIVE_WINDOW_DAYS, today)`, where `ARCHIVE_WINDOW_DAYS = 60` (const.py). The window is 60 rather than 30 days so it still overlaps real transactions across the ~7.5-week summer holiday.
+
+**Two distinct empty shapes (v2.3+).** `parse_archive` soft-fails (returns `[]`) for *both*:
+1. `<table summary="Payments">` present with no data rows.
+2. **No table at all**, just `<div class="alert alert-danger">No results found</div>` — this is what ParentPay actually returns for a zero-result search, and the original v2.2 assumption that shape (1) always appeared was wrong. It caused a total outage on 2026-08-22: the 30-day window fell entirely inside the summer holiday (last transaction 2026-07-15), `parse_archive` raised, the coordinator turned that into `UpdateFailed`, and *every* entity went unavailable — balances and payment items included, even though those fetches had succeeded. HA logs it only once (`update_coordinator` gates the error log on `last_update_success`), so it looks silent. Fixture: `tests/fixtures/archive_empty.html`.
+
+A response with neither marker still raises, so the next UI change doesn't silently swallow all data.
 
 ## Conventions
 
