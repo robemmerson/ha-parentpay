@@ -6,7 +6,11 @@ homeassistant>=2026.8.3
 # PRs fail CI for this reason and are ignored in .github/dependabot.yml.
 pytest>=9.0.3
 pytest-asyncio>=1.4.0
-pytest-homeassistant-custom-component>=0.13.356
+# pytest-homeassistant-custom-component is held at 0.13.357, the last release
+# that pins a stable Home Assistant (2026.8.3). 0.13.358+ pin 2026.9.0 betas and
+# SQLAlchemy 2.0.52, which conflicts with the homeassistant floor above; raise
+# both together once 2026.9.0 ships as stable.
+pytest-homeassistant-custom-component>=0.13.357
 ruff>=0.16.5
 mypy>=2.3.1
 python-dotenv>=1.2.3
