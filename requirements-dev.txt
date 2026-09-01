@@ -1,6 +1,6 @@
 beautifulsoup4>=4.15.0
 aiohttp>=3.14.3
-homeassistant>=2026.8.2
+homeassistant>=2026.8.3
 # pytest is held at 9.0.3: pytest-homeassistant-custom-component pins pytest==9.0.3
 # exactly, so a higher floor makes the install unresolvable. Dependabot's pytest
 # PRs fail CI for this reason and are ignored in .github/dependabot.yml.
