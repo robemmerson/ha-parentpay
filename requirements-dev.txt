@@ -11,6 +11,6 @@ pytest-asyncio>=1.4.0
 # SQLAlchemy 2.0.52, which conflicts with the homeassistant floor above; raise
 # both together once 2026.9.0 ships as stable.
 pytest-homeassistant-custom-component>=0.13.357
-ruff>=0.16.5
+ruff>=0.16.9
 mypy>=2.3.1
 python-dotenv>=1.2.3
