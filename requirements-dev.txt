@@ -12,5 +12,5 @@ pytest-asyncio>=1.4.0
 # both together once 2026.9.0 ships as stable.
 pytest-homeassistant-custom-component>=0.13.357
 ruff>=0.16.5
-mypy>=2.3.1
+mypy>=2.4.0
 python-dotenv>=1.2.3
